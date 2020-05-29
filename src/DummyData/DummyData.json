@@ -32,6 +32,50 @@
       "country": "Russia",
       "password": "1234abcd!",
       "role": [{ "id": "3", "name": "attendee" }]
+    },
+    {
+      "id": "4",
+      "email": "uhuhuhu@huhuh.com",
+      "firstname": "Francois",
+      "lastname": "Fav student",
+      "company": "WCS",
+      "position": "student",
+      "country": "France",
+      "password": "1234abcd!",
+      "role": [{ "id": "3", "name": "attendee" }]
+    },
+    {
+      "id": "5",
+      "email": "ahahah@ahah.com",
+      "firstname": "Connor",
+      "lastname": "Todd",
+      "company": "WCS",
+      "position": "Teacher",
+      "country": "UK",
+      "password": "1234abcd!",
+      "role": [{ "id": "3", "name": "attendee" }]
+    },
+    {
+      "id": "6",
+      "email": "tytytytyt@tyty.com",
+      "firstname": "John",
+      "lastname": "Smith",
+      "company": "Microsoft",
+      "position": "Software Engineer",
+      "country": "Germany",
+      "password": "1234abcd?",
+      "role": [{ "id": "2", "name": "speaker" }]
+    },
+    {
+      "id": "7",
+      "email": "popopo@po.com",
+      "firstname": "Mike",
+      "lastname": "Grenier",
+      "company": "Google",
+      "position": "Junior Developer",
+      "country": "Belgium",
+      "password": "1234abcd!",
+      "role": [{ "id": "3", "name": "attendee" }]
     }
   ],
 
