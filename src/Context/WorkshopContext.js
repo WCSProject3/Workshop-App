@@ -15,9 +15,10 @@ const WorkshopContextProvider = () => {
 
 return ( 
     <div>
-        <WorkshopContext.Provider value={{workshops}}>
-            {this.props.children}
-        </WorkshopContext.Provider>
+       <WorkshopContext.Provider
+       value={workshops}>
+           {this.PaymentResponse.children}
+       </WorkshopContext.Provider>
     </div>
 );
 }
