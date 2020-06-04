@@ -1,12 +1,9 @@
 import React from 'react';
+import WorkshopList from './AllWorkshopsSubComponents/WorkshopList';
 
 const AllWorkshops = () => {
     return ( 
-        <WorkshopContextProvider>
-            <WorkshopFilters />
-            <WorkshopList />
-            <WorkshopInfo /> 
-        </WorkshopContextProvider>
+         <WorkshopList /> 
      );
 }
  

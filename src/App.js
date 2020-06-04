@@ -1,10 +1,13 @@
 import React from 'react';
-import WorkshopContextProvider from './Context/WorkshopContext'
+import AllWorkshops from './Components/Admin/AllWorkshops';
+import WorkshopContextProvider from './Context/WorkshopContext';
 
 function App() {
   return (
     <div className="App">
-      <WorkshopContextProvider />
+      <WorkshopContextProvider>
+        <AllWorkshops /> 
+      </WorkshopContextProvider>
     </div>
   );
 }
