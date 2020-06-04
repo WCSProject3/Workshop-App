@@ -4,13 +4,15 @@ const WorkshopDetails = () => {
 
         return (
             <div>
+                {workshops.map(workshop => (
                     <div>
-                        <p>Title: {}</p>
-                        <p>Status: {}</p>
-                        <p>Date: {}</p>
-                        <p>Description: {}</p>
-                        <p>Room: {}</p>
+                        <p>{workshop.id}</p>
+                        <p>{workshop.title}</p>
+                        <p>{workshop.status_open}</p>
+                        <p>{workshop.description}</p>           
+                        <p>{workshop.room.}</p>
                     </div>
+                ))} 
             </div>
         );
 }
