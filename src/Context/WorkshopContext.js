@@ -5,7 +5,7 @@ export const WorkshopContext = createContext();
 
 const WorkshopContextProvider = (props) => {
 
-    const [ workshops, setWorkshops ] = React.useState([]);
+    const [ workshops, setWorkshops ] = useState([]);
 
     useEffect(() => {
     axios.get('dummyData.json')
@@ -15,12 +15,11 @@ const WorkshopContextProvider = (props) => {
 
 return ( 
     <div>
-       <WorkshopContext.Provider
-       value={{workshops}}>
+       <WorkshopContext.Provider value={{workshops}}>
            {props.children}
        </WorkshopContext.Provider>
     </div>
-);
+)
 }
  
 export default WorkshopContextProvider;
