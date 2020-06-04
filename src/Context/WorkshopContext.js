@@ -17,7 +17,7 @@ return (
     <div>
        <WorkshopContext.Provider
        value={workshops}>
-           {this.PaymentResponse.children}
+           {this.props.children}
        </WorkshopContext.Provider>
     </div>
 );
