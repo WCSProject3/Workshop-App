@@ -30,34 +30,16 @@ const WorkshopContextProvider = (props) => {
                 setWorkshops(filterdResult)
                 setAllWorkshops(response.data.workshops)
             }
-        }
-            
-
-           
-        )
-        // axios.get('dummyData.json')
-        // .then(response => {
-        //     if (
-
-        //     ) 
-        //     return 
-        //     else if (
-            
-        //     )
-        //     return
-        // })
+        })
     }
-    
 
-
-
-return ( 
-    <div>
-       <WorkshopContext.Provider value={{allWorkshops, workshops, handleFilterDate}}>
-           {props.children}
-       </WorkshopContext.Provider>
-    </div>
-)
+    return ( 
+        <div>
+        <WorkshopContext.Provider value={{allWorkshops, workshops, handleFilterDate}}>
+            {props.children}
+        </WorkshopContext.Provider>
+        </div>
+    )
 }
  
 export default WorkshopContextProvider;
