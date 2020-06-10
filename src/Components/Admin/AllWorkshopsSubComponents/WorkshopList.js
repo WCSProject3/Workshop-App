@@ -9,11 +9,12 @@ const WorkshopList = () => {
 
         return (
             <div>
-                {workshops.map(workshop => {
+                {workshops
+                .map(workshop => {
                     return <WorkshopDetails 
-                        {...workshop} 
-                        key={workshop.id} /> 
-                })}  
+                        key={workshop.id} 
+                        {...workshop} /> 
+                })} 
             </div>
         );
 }

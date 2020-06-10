@@ -1,9 +1,13 @@
 import React from 'react';
 import WorkshopList from './AllWorkshopsSubComponents/WorkshopList';
+import WorkshopFilters from '../SharedComponents/WorkshopFilters';
 
-const AllWorkshops = () => {
+const AllWorkshops = (date) => {
     return ( 
-         <WorkshopList /> 
+        <div>
+            <WorkshopFilters date={date} />
+            <WorkshopList /> 
+        </div>
      );
 }
  

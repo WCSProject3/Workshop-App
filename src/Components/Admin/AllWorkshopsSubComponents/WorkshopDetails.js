@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
-import { WorkshopContext } from '../../../Context/WorkshopContext';
-
+import React from 'react';
 
 const WorkshopDetails = (workshop) => {
 
@@ -10,6 +8,7 @@ const WorkshopDetails = (workshop) => {
                 <p>{workshop.status_open}</p>
                 <p>{workshop.date}</p>
                 <p>{workshop.description}</p>
+                <p>{workshop.room_id}</p>
             </div>
         );
 }
