@@ -1,14 +1,11 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import NavBar from './Components/SharedComponents/NavBar';
+import Admin from './Components/Admin/Admin';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className='App'>
-        <NavBar />
-      </div>
-    </BrowserRouter>
+    <div className='App'>
+      <Admin />
+    </div>
   );
 }
 
