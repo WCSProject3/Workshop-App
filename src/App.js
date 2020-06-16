@@ -1,10 +1,14 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import NavBar from './Components/SharedComponents/NavBar';
 
 function App() {
   return (
-    <div className="App">
-    
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <NavBar />
+      </div>
+    </BrowserRouter>
   );
 }
 
