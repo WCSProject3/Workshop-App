@@ -11,7 +11,7 @@ const AttendeeDetails = (attendee) => {
                 <p>{attendee.company}</p>
                 <p>{attendee.position}</p>
                 <p>{attendee.country}</p>
-                <p>{attendee.role.name}</p>
+                <p>{attendee.role[0].name}</p>
             </div>
         );
 }

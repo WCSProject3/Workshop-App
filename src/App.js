@@ -1,13 +1,10 @@
 import React from 'react';
-import WorkshopAttendees from './Components/Admin/WorkshopAttendees';
-import AttendeeContextProvider from './Context/AttendeeContext';
+import Admin from './Components/Admin/Admin';
 
 function App() {
   return (
     <div className="App">
-      <AttendeeContextProvider>
-      <WorkshopAttendees /> 
-      </AttendeeContextProvider>
+        <Admin /> 
     </div>
   );
 }

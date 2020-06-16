@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { attendeeContext } from '../../../Context/attendeeContext';
-import AttendeeDetails from './attendeeDetails';
+import { AttendeeContext } from '../../../Context/AttendeeContext';
+import AttendeeDetails from './AttendeeDetails';
 
 
-const attendeeList = () => {
+const AttendeeList = () => {
 
-    const { attendees } = useContext(attendeeContext);
+    const { attendees } = useContext(AttendeeContext);
 
         return (
             <div>
@@ -19,4 +19,4 @@ const attendeeList = () => {
         );
 }
 
-export default attendeeList;
+export default AttendeeList;

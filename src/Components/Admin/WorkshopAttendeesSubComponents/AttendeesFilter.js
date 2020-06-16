@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { attendeeContext } from '../../Context/attendeeContext';
+import { AttendeeContext } from '../../../Context/AttendeeContext';
 
-const attendeeFilters = () => {
+const AttendeesFilter = () => {
 
-    const { allattendees, handleFilterAttendee } = useContext(attendeeContext);
+    const { allAttendees, handleFilterAttendee } = useContext(AttendeeContext);
 
         return (  
             <div>
@@ -13,13 +13,13 @@ const attendeeFilters = () => {
                         value={'All attendees'}>
                         All attendees
                     </option>
-                    {allattendees.map(attendee => {
+                    {allAttendees.map(attendee => {
                             return ( 
                             <option
                             key={attendee.id}
-                            value={attendee.role.name}
+                            value={attendee.role[0].name}
                             >
-                                {attendee.role.name}
+                                {attendee.role[0].name}
                             </option>
                             )
                     })}
@@ -29,4 +29,4 @@ const attendeeFilters = () => {
 }
 
  
-export default attendeeFilters;
+export default AttendeesFilter;

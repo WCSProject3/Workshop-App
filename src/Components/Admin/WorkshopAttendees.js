@@ -1,11 +1,11 @@
 import React from 'react';
 import AttendeesList from './WorkshopAttendeesSubComponents/AttendeesList';
-import AttendeesFilters from './WorkshopAttendeesSubComponents/AttendeesFilters';
+import AttendeesFilter from './WorkshopAttendeesSubComponents/AttendeesFilter';
 
 const WorkshopAttendees = (role) => {
     return ( 
         <div>
-            <AttendeesFilters role={role} />
+            <AttendeesFilter role={role} />
             <AttendeesList /> 
         </div>
     );
