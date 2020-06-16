@@ -9,12 +9,7 @@
       "position": "Software Engineer",
       "country": "Japan",
       "password": "1234abcd!",
-      "role": [
-        {
-          "id": "1",
-          "name": "admin"
-        }
-      ]
+      "role": [{ "id": "1", "name": "admin" }]
     },
     {
       "id": "2",
@@ -25,12 +20,7 @@
       "position": "CEO",
       "country": "Brazil",
       "password": "1234abcd?",
-      "role": [
-        {
-          "id": "2",
-          "name": "speaker"
-        }
-      ]
+      "role": [{ "id": "2", "name": "speaker" }]
     },
     {
       "id": "3",
@@ -41,12 +31,7 @@
       "position": "Integration Specialist",
       "country": "Russia",
       "password": "1234abcd!",
-      "role": [
-        {
-          "id": "3",
-          "name": "attendee"
-        }
-      ]
+      "role": [{ "id": "3", "name": "attendee" }]
     },
     {
       "id": "4",
@@ -57,12 +42,7 @@
       "position": "Student",
       "country": "France",
       "password": "1234abcd!",
-      "role": [
-        {
-          "id": "3",
-          "name": "attendee"
-        }
-      ]
+      "role": [{ "id": "3", "name": "attendee" }]
     },
     {
       "id": "5",
@@ -73,12 +53,7 @@
       "position": "Teacher",
       "country": "UK",
       "password": "1234abcd!",
-      "role": [
-        {
-          "id": "3",
-          "name": "attendee"
-        }
-      ]
+      "role": [{ "id": "3", "name": "attendee" }]
     },
     {
       "id": "6",
@@ -89,12 +64,7 @@
       "position": "Software Engineer",
       "country": "Germany",
       "password": "1234abcd?",
-      "role": [
-        {
-          "id": "2",
-          "name": "speaker"
-        }
-      ]
+      "role": [{ "id": "2", "name": "speaker" }]
     },
     {
       "id": "7",
@@ -105,14 +75,10 @@
       "position": "Junior Developer",
       "country": "Belgium",
       "password": "1234abcd!",
-      "role": [
-        {
-          "id": "3",
-          "name": "attendee"
-        }
-      ]
+      "role": [{ "id": "3", "name": "attendee" }]
     }
   ],
+
   "workshops": [
     {
       "id": "1",

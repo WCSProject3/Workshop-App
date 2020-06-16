@@ -1,9 +1,9 @@
-import React from 'react';
-import Admin from './Components/Admin/Admin';
+import React from "react";
+import Admin from "./Components/Admin/Admin";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Admin />
     </div>
   );
