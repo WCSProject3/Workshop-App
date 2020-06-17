@@ -6,6 +6,7 @@ const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([
@@ -28,6 +29,15 @@ const WorkshopContextProvider = (props) => {
       .get("dummyData.json")
       .then((response) => setAllWorkshops(response.data.workshops));
   }, []);
+
+  const tempHandleChange = (newObject) => {
+    setTempWorkshop([{ newObject }]);
+  };
+
+  const editTempWorkshop = (event, newObject) => {
+    event.preventDefault();
+    setTempWorkshop([{ newObject }]);
+  };
 
   function handleFilterDate(date) {
     axios.get("dummyData.json").then((response) => {
@@ -53,8 +63,11 @@ const WorkshopContextProvider = (props) => {
           addTempWorkshop,
           confirmWorkshop,
           allWorkshops,
-          workshops,
           handleFilterDate,
+          editMode,
+          setEditMode,
+          tempHandleChange,
+          editTempWorkshop,
         }}
       >
         {props.children}
