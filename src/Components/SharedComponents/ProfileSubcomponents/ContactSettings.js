@@ -7,9 +7,8 @@ const ContactSettings = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-        //edit user in the database
+        //update user contact settings in the database
     }
-
 
     return(
         <div>

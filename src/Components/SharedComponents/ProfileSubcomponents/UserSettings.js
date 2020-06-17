@@ -7,7 +7,7 @@ const UserSettings = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-        //edit user in the database
+        //update user settings in the database
     }
     
     return(
