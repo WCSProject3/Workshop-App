@@ -53,7 +53,6 @@ const WorkshopContextProvider = (props) => {
           addTempWorkshop,
           confirmWorkshop,
           allWorkshops,
-          workshops,
           handleFilterDate,
         }}
       >
