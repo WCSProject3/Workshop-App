@@ -9,21 +9,21 @@ const NotificationForm = () => {
 
     const onSubmit = (data) => {
         const newObject = {
-        id: uuid(),
-        users_emails: data.users_emails,
-        subject: data.subject,
-        template: data.template,
-        date: data.date
-        };
+            id: uuid(),
+            users_emails: data.users_emails,
+            subject: data.subject,
+            content: data.content,
+            date: data.date
+            };
         addTempNotification(newObject);
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="email" placeholder="Email" name="Email" ref={register} />
-            <input type="text" placeholder="Subject" name="Subject" ref={register} />
-            <input type="text" placeholder="Template" name="Template" ref={register} />
-            <input type="date" placeholder="Date" name="Date" ref={register} />
+            <input type="email" placeholder="Email" name="emails_users" ref={register} />
+            <input type="text" placeholder="Subject" name="subject" ref={register} />
+            <input type="text" placeholder="Content" name="content" ref={register} />
+            <input type="date" placeholder="Date" name="date" ref={register} />
             <input type="submit" value="Create" />
         </form>
     );

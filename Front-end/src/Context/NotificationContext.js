@@ -8,17 +8,18 @@ const [notifications, setNotifications] = useState([]);
 const [tempNotifications, setTempNotifications] = useState([]);
 const [allNotifications, setAllNotifications] = useState([]);
 
+console.log('hi');
+
 const addTempNotification = (newObject) => {
     setTempNotifications([
-    ...tempNotifications,
-    {
-        newObject,
-    },
+        ...tempNotifications, newObject 
     ]);
 };
 
 const confirmNotification = (newObject) => {
-    setNotifications([...notifications, { newObject }]);
+    setNotifications([
+        ...notifications, newObject
+    ]);
 };
 
 useEffect(() => {

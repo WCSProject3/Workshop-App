@@ -126,21 +126,21 @@
       "id": "1",
       "users_emails": "list of emails",
       "subject": "notification about xxx",
-      "template": "template",
+      "content": "template1",
       "date": "1990-01-01"
     },
     {
       "id": "2",
       "users_emails": "list of emails",
       "subject": "notification about Workshop.id",
-      "template": "template",
+      "content": "template2",
       "date": "2000-01-01"
     },
     {
       "id": "3",
       "users_emails": "list of emails",
       "subject": "notification about Workshop.id",
-      "template": "template",
+      "content": "template3",
       "date": "2100-01-01"
     }
   ],

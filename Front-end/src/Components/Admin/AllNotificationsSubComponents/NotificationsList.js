@@ -10,6 +10,7 @@ const NotificationsList = () => {
             <div>
             {notifications.map(notification => {
                 return <NotificationDetails 
+                    notification={notification}
                     key={notification.id} 
                     {...notification} /> 
             })} 

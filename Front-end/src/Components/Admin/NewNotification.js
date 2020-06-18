@@ -1,11 +1,24 @@
 import React from 'react';
 import NotificationForm from "./NewNotificationSubComponents/NotificationForm";
 import TempNotification from "./NewNotificationSubComponents/TempNotification";
+import { useContext } from 'react';
+import { NotificationContext } from '../../Context/NotificationContext';
 
 const NewNotification = () => {
+
+    const { tempNotifications } = useContext(NotificationContext);
+
     return ( 
         <div>
-            <TempNotification />
+            <ul>
+            {tempNotifications.map(tempNotification => {
+                return (
+            <TempNotification 
+                    key={tempNotification.id}
+                    tempNotification={tempNotification}
+            />)
+            })}
+            </ul>
             <NotificationForm />
         </div>
      );

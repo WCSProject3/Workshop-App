@@ -3,7 +3,9 @@ import NotificationsList from './AllNotificationsSubComponents/NotificationsList
 
 const AllNotifications = () => {
     return ( 
-        <NotificationsList />
+        <div>
+            <NotificationsList />
+        </div>
      );
 }
  
