@@ -77,10 +77,10 @@ const NavBar = () => {
           </ul>
         </div>
         <div className='item'>
-          <Link to='/'>ALL DATA</Link>
+          <Link to='/all-registrations'>ALL DATA</Link>
         </div>
         <div className='item'>
-          <Link to='/'>NOTIFICATIONS</Link>
+          <Link to='/notifications-list'>NOTIFICATIONS</Link>
         </div>
       </div>
     </div>

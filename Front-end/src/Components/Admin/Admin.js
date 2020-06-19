@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NewWorkshop from "./NewWorkshop";
 import NotificationContextProvider from "../../Context/NotificationContext";
 import WorkshopContextProvider from "../../Context/WorkshopContext";
@@ -15,24 +15,24 @@ import Header from '../SharedComponents/Header';
 const Admin = () => {
   return (
     <BrowserRouter>
-      <div>
-        <NotificationContextProvider>
-          <AttendeeContextProvider>
-            <WorkshopContextProvider>
-              <RoomContextProvider>
-                <Header />
-                <NavBar />
-                <NewWorkshop />
-                <WorkshopAttendees />
-                <AllNotifications />
-                <AllWorkshops />
-                <NewNotification />
-              </RoomContextProvider>
-            </WorkshopContextProvider>
-          </AttendeeContextProvider>
-        </NotificationContextProvider>
-      </div>
-    </BrowserRouter>
+    <div>
+      <AttendeeContextProvider>
+        <WorkshopContextProvider>
+          <RoomContextProvider>
+            <NavBar />
+            <Header />
+            <Switch>
+              <Route path="/" exact component={AllWorkshops} />
+              <Route path="/new-workshop" component={NewWorkshop} />
+              <Route path="/workshop-attendees" component={WorkshopAttendees} />
+              {/*<Route path="/notifications-list" component={NotificationsList} />
+              <Route path="/all-registrations" component={AllRegistrations} />*/}
+            </Switch>
+          </RoomContextProvider>
+        </WorkshopContextProvider>
+      </AttendeeContextProvider>
+    </div>
+   </BrowserRouter>
   );
 };
 
