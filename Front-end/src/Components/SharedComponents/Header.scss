@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.header {
+  margin: 0 0 0 20%;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  background-color: #f0f0f0;
+}
+
+.header input,
+.header p,
+.header img {
+  display: inline-flex;
+}

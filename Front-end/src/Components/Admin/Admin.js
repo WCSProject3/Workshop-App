@@ -8,8 +8,9 @@ import AttendeeContextProvider from "../../Context/AttendeeContext";
 import WorkshopAttendees from "./WorkshopAttendees";
 import AllNotifications from "./AllNotifications";
 import AllWorkshops from "./AllWorkshops";
-import NavBar from "../SharedComponents/NavBar";
 import NewNotification from "./NewNotification";
+import NavBar from '../SharedComponents/NavBar';
+import Header from '../SharedComponents/Header';
 
 const Admin = () => {
   return (
@@ -19,6 +20,7 @@ const Admin = () => {
           <AttendeeContextProvider>
             <WorkshopContextProvider>
               <RoomContextProvider>
+                <Header />
                 <NavBar />
                 <NewWorkshop />
                 <WorkshopAttendees />
