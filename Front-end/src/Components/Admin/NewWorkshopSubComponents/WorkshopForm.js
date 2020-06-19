@@ -18,8 +18,8 @@ const WorkshopForm = () => {
       speaker: data.speaker,
       room: data.room,
     };
-    console.log(rooms);
     addTempWorkshop(newObject);
+    console.log(newObject);
   };
 
   return (
