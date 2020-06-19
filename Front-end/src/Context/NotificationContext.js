@@ -8,8 +8,6 @@ const [notifications, setNotifications] = useState([]);
 const [tempNotifications, setTempNotifications] = useState([]);
 const [allNotifications, setAllNotifications] = useState([]);
 
-console.log('hi');
-
 const addTempNotification = (newObject) => {
     setTempNotifications([
         ...tempNotifications, newObject 
@@ -17,6 +15,25 @@ const addTempNotification = (newObject) => {
 };
 
 const confirmNotification = (newObject) => {
+    setNotifications([
+        ...notifications, newObject
+    ]);
+};
+
+const confirmModification = (data) => {
+    setTempNotifications([
+        data
+    ]);
+};
+
+const deleteNotification = (id) => {
+    setTempNotifications([
+            notifications.filter(notification => notification.id !== id)
+    ]);
+    
+};
+
+const editNotification = (newObject) => {
     setNotifications([
         ...notifications, newObject
     ]);
@@ -40,6 +57,9 @@ return (
         addTempNotification,
         confirmNotification,
         allNotifications,
+        deleteNotification,
+        editNotification,
+        confirmModification
         }}
     >
         {props.children}
