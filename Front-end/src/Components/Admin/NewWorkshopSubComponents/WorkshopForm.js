@@ -13,13 +13,12 @@ const WorkshopForm = () => {
     const newObject = {
       id: uuid(),
       title: data.title,
-      status_open: data.status,
       date: data.date,
       speaker: data.speaker,
       room: data.room,
     };
-    console.log(rooms);
     addTempWorkshop(newObject);
+    console.log(newObject);
   };
 
   return (

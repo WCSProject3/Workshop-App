@@ -8,12 +8,7 @@ const WorkshopContextProvider = (props) => {
   const [allWorkshops, setAllWorkshops] = useState([]);
 
   const addTempWorkshop = (newObject) => {
-    setTempWorkshop([
-      ...tempWorkshops,
-      {
-        newObject,
-      },
-    ]);
+    setTempWorkshop([...tempWorkshops, newObject]);
   };
 
   const confirmWorkshop = (newObject) => {
@@ -44,6 +39,13 @@ const WorkshopContextProvider = (props) => {
     });
   }
 
+  const editTempWorkshop = (newObject) => {
+    const workshopsList = tempWorkshops;
+    const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
+    workshopsList.splice(i, 1, newObject);
+    setTempWorkshop(workshopsList);
+  };
+
   return (
     <div>
       <WorkshopContext.Provider
@@ -53,8 +55,8 @@ const WorkshopContextProvider = (props) => {
           addTempWorkshop,
           confirmWorkshop,
           allWorkshops,
-          workshops,
           handleFilterDate,
+          editTempWorkshop,
         }}
       >
         {props.children}
