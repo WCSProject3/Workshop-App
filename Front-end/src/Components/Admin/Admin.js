@@ -1,11 +1,14 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import NewWorkshop from './NewWorkshop';
-import WorkshopContextProvider from '../../Context/WorkshopContext';
-import RoomContextProvider from '../../Context/RoomContext';
-import AttendeeContextProvider from '../../Context/AttendeeContext';
-import WorkshopAttendees from './WorkshopAttendees';
-import AllWorkshops from './AllWorkshops';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import NewWorkshop from "./NewWorkshop";
+import NotificationContextProvider from "../../Context/NotificationContext";
+import WorkshopContextProvider from "../../Context/WorkshopContext";
+import RoomContextProvider from "../../Context/RoomContext";
+import AttendeeContextProvider from "../../Context/AttendeeContext";
+import WorkshopAttendees from "./WorkshopAttendees";
+import AllNotifications from "./AllNotifications";
+import AllWorkshops from "./AllWorkshops";
+import NewNotification from "./NewNotification";
 import NavBar from '../SharedComponents/NavBar';
 import Header from '../SharedComponents/Header';
 
@@ -13,17 +16,21 @@ const Admin = () => {
   return (
     <BrowserRouter>
       <div>
-        <AttendeeContextProvider>
-          <WorkshopContextProvider>
-            <RoomContextProvider>
-              <Header />
-              <NavBar />
-              <NewWorkshop />
-              <WorkshopAttendees />
-              <AllWorkshops />
-            </RoomContextProvider>
-          </WorkshopContextProvider>
-        </AttendeeContextProvider>
+        <NotificationContextProvider>
+          <AttendeeContextProvider>
+            <WorkshopContextProvider>
+              <RoomContextProvider>
+                <Header />
+                <NavBar />
+                <NewWorkshop />
+                <WorkshopAttendees />
+                <AllNotifications />
+                <AllWorkshops />
+                <NewNotification />
+              </RoomContextProvider>
+            </WorkshopContextProvider>
+          </AttendeeContextProvider>
+        </NotificationContextProvider>
       </div>
     </BrowserRouter>
   );

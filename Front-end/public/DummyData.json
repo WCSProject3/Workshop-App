@@ -124,24 +124,24 @@
   "notifications": [
     {
       "id": "1",
-      "content": "Blabla",
-      "date": "1990-01-01",
-      "state_date": "1990-01-02",
-      "state": "Scheduled"
+      "users_emails": "list of emails",
+      "subject": "notification about xxx",
+      "content": "template1",
+      "date": "1990-01-01"
     },
     {
       "id": "2",
-      "content": "ohohohoh",
-      "date": "2000-01-01",
-      "state_date": "2000-01-02",
-      "state": "Draft"
+      "users_emails": "list of emails",
+      "subject": "notification about Workshop.id",
+      "content": "template2",
+      "date": "2000-01-01"
     },
     {
       "id": "3",
-      "content": "ihihihihi",
-      "date": "2100-01-01",
-      "state_date": "2100-01-02",
-      "state": "Send"
+      "users_emails": "list of emails",
+      "subject": "notification about Workshop.id",
+      "content": "template3",
+      "date": "2100-01-01"
     }
   ],
   "room": [
