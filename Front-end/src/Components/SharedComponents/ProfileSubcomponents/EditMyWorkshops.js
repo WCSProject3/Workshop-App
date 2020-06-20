@@ -4,7 +4,7 @@ import React from 'react';
 const EditMyWorkshops = () => {
     return(
         <div className="edit-myWorkshops">
-            <div className="title">My Workshops</div>
+            <h2 className="edit-myWorkshops-title">My Workshops</h2>
             {/* TO DO : MY WORKSHOP DETAILS*/}
             <button>More</button>
         </div>
