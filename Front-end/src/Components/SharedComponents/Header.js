@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className='header'>
       {/* Tranform into useForm // Can be called as separate component? */}
-      <form>
+      <form className="search-form"> 
         <input id="searchbar" type='search' placeholder='Search for ...' />
         <input id="searchbtn" type='submit' value='&#128269;&#xFE0E;' />
       </form>

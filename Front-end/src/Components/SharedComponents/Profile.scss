@@ -1,67 +1,141 @@
 @import "../../styles/variables.scss";
 
-.profile{
-    background-color: #FEFEFE;
+/***** PAGE TITLE *****/
+
+h1{
+    @include page-title;
+}
+
+/***** BODY LAYOUT *****/
+
+.profile-body{
     display: flex;
 }
 
-.left,
+.left{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
 .right{
     display: flex;
     flex-direction: column;
+    width: 60%;
 }
 
 /***** CHANGE PHOTO *****/
 
 .change-photo{
-    background-color: white;
-    border-radius: 5px;
-    width: 400px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
+    @include edit-profile-box(90%);
+    height: 40%;
+    margin-left: 20px;
     align-items: center;
-    justify-content:space-evenly;
-    box-shadow: 5px 5px 8px rgba(53, 53, 53, .2);
+    justify-content:center;
 
     img{
       width: 150px;
       height: 150px;
       border-radius: 50%;
     }
-
-    button{
-        background-color: $blue;
-        color: white;
-        height: 30px;
-        outline: none;
-        padding: 5px 15px;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-    }
 }
 
 /***** MY WORKSHOPS *****/
 
 .edit-myWorkshops{
-    position: relative;
-    background-color: white;
-    border-radius: 5px;
-    width: 400px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
+    @include edit-profile-box(90%);
+    height: 30%;
+    margin: 20px 0 0 20px;
     align-items: center;
-    box-shadow: 5px 5px 8px rgba(53, 53, 53, .2);
+}
 
-    .title{
-        position: absolute;
-        top: 0;
-        width: 100%;
-        background-color: grey;
-        border-radius: 5px 5px 0 0;
-        padding: 10px 0 10px 0px;
+.edit-myWorkshops-title{
+    @include edit-profile-title;
+}
+
+/***** USER SETTINGS *****/
+
+.user-settings{
+    @include edit-profile-box(97%);
+    margin-bottom: 20px;
+}
+
+.user-settings-title{
+    @include edit-profile-title;
+}
+
+.user-settings-form{
+    @include edit-profile-form;
+
+    label{
+        @include edit-profile-label;
+    }
+
+    input{
+        @include edit-profile-input
     }
 }
 
+.password-form{
+    @include edit-profile-form;
+
+    label{
+        @include edit-profile-label;
+    }
+
+    input{
+        @include edit-profile-input
+    }
+}
+
+.username-email,
+.name,
+.password{
+    display: flex;
+}
+
+/***** CONTACT SETTINGS *****/
+
+.contact-settings{
+    @include edit-profile-box(97%);
+    margin-bottom: 20px;
+}
+
+.contact-settings-title{
+    @include edit-profile-title;
+}
+
+.contact-settings-form{
+    @include edit-profile-form;
+
+    label{
+        @include edit-profile-label;
+    }
+
+    input{
+        @include edit-profile-input
+    }
+
+    select{
+        @include edit-profile-select
+    }
+}
+
+.country-company,
+.position-role{
+    display: flex;
+}
+
+/***** FORM LABLEL/INPUT LAYOUT *****/
+
+.label-input{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+/***** BUTTONS *****/
+
+button{
+    @include button;
+}

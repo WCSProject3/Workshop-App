@@ -7,17 +7,20 @@ import ContactSettings from './ProfileSubcomponents/ContactSettings';
 
 const Profile = () => {
     return(
-        <div className="profile">
-            <div className="left">
-              <ChangePhoto />
-              <EditMyWorkshops />
-            </div>
-            <div className="right">
-              <UserSettings />
-              <ContactSettings />
-            </div>
-            
+      <div className="profile"> 
+        <h1>Profile</h1>
+        <div className="profile-body">
+          <div className="left">
+            <ChangePhoto />
+            <EditMyWorkshops />
+          </div>
+          <div className="right">
+            <UserSettings />
+            <ContactSettings />
+          </div>
         </div>
+      </div>
+       
     )
 }
 

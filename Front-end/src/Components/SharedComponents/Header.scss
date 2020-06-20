@@ -6,20 +6,23 @@
   width: 100%;
   height: 80px;
   display: flex;
-  background-color: #f0f0f0;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-form{
+.search-form{
   height: 50%;
   width: 35%;
   margin-left: 20px;
+  display: flex;
+  align-items: center;
 
   #searchbar{
     width: 90%;
     height: 100%;
+    background-color: $grey;
     outline: none;
     border:none;
     padding: 5px;
