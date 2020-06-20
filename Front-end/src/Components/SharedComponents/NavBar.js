@@ -80,7 +80,7 @@ const NavBar = () => {
           <Link to='/all-registrations'>ALL DATA</Link>
         </div>
         <div className='item'>
-          <Link to='/notifications-list'>NOTIFICATIONS</Link>
+          <Link to='/all-notifications'>NOTIFICATIONS</Link>
         </div>
       </div>
     </div>

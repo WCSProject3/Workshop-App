@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NewWorkshop from "./NewWorkshop";
-import NotificationContextProvider from "../../Context/NotificationContext";
+import NotificationContextProvider, { NotificationContext } from "../../Context/NotificationContext";
 import WorkshopContextProvider from "../../Context/WorkshopContext";
 import RoomContextProvider from "../../Context/RoomContext";
 import AttendeeContextProvider from "../../Context/AttendeeContext";
@@ -19,15 +19,19 @@ const Admin = () => {
       <AttendeeContextProvider>
         <WorkshopContextProvider>
           <RoomContextProvider>
-            <NavBar />
-            <Header />
-            <Switch>
-              <Route path="/" exact component={AllWorkshops} />
-              <Route path="/new-workshop" component={NewWorkshop} />
-              <Route path="/workshop-attendees" component={WorkshopAttendees} />
-              {/*<Route path="/notifications-list" component={NotificationsList} />
-              <Route path="/all-registrations" component={AllRegistrations} />*/}
-            </Switch>
+            <NotificationContextProvider>
+              <NavBar />
+              <Header />
+              <Switch>
+                <Route path="/" exact component={AllWorkshops} />
+                <Route path="/new-workshop" component={NewWorkshop} />
+                <Route path="/workshop-attendees" component={WorkshopAttendees} />
+                <Route path="/all-notifications" component={AllNotifications} />
+                <Route path="/new-notification" component={NewNotification} />
+                {/*<Route path="/notifications-list" component={NotificationsList} />
+                <Route path="/all-registrations" component={AllRegistrations} />*/}
+              </Switch>
+            </NotificationContextProvider>
           </RoomContextProvider>
         </WorkshopContextProvider>
       </AttendeeContextProvider>
