@@ -9,23 +9,36 @@ const AttendeeContextProvider = (props) => {
   const [speakers, setSpeakers] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('dummyData.json')
-      .then((response) => console.log(response.data.user));
-    axios
-      .get('dummyData.json')
-      .then((response) => response.data.user)
-      .then((usersList) => {
-        setAllattendees(usersList);
-        getSpeakers(usersList);
-      });
+    getSpeakers();
+    getAttendees();
+    getAllUsers();
   }, []);
 
-  const getSpeakers = (users) => {
-    const filteredSpeakers = users.filter(
-      (speaker) => speaker.role[0].name === 'speaker'
-    );
-    setSpeakers(filteredSpeakers);
+  const getSpeakers = () => {
+    axios
+      .get('/users/speakers')
+      .then((response) => response.data)
+      .then((speakersList) => {
+        setSpeakers(speakersList)
+      })
+  };
+
+  const getAttendees = () => {
+    axios
+      .get('/users/attendees')
+      .then((response) => response.data)
+      .then((attendeesList) => {
+        setAttendees(attendeesList)
+      })
+  };
+
+  const getAllUsers = () => {
+    axios
+      .get('/users')
+      .then((response) => response.data)
+      .then((allUsersList) => {
+        setAllattendees(allUsersList)
+      })
   };
 
   function handleFilterAttendee(role) {
