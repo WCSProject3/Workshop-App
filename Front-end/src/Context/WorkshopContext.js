@@ -2,10 +2,12 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const WorkshopContext = createContext();
+
 const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
+  const [workshopId, setWorkshopId] = useState();
 
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
@@ -24,6 +26,10 @@ const WorkshopContextProvider = (props) => {
       .then((response) => setAllWorkshops(response.data));
   }, []);
 
+  useEffect(() => {
+    console.log(props)
+  });
+
   function handleFilterDate(date) {
     axios.get("/workshops").then((response) => {
       if (date === "All workshops") {
@@ -37,6 +43,14 @@ const WorkshopContextProvider = (props) => {
         setWorkshops(filterdResult);
         setAllWorkshops(response.data);
       }
+    });
+  }
+
+  function getWorkshopId() {
+    setWorkshopId(this.props.match.params.id);
+    console.log(this.props.match.params.id)
+    axios.get(`/workshops/${workshopId}`).then((response) => {
+        setWorkshops(response.data);
     });
   }
 
@@ -58,6 +72,8 @@ const WorkshopContextProvider = (props) => {
           allWorkshops,
           handleFilterDate,
           editTempWorkshop,
+          getWorkshopId,
+          workshopId
         }}
       >
         {props.children}
