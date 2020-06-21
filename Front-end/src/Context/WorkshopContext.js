@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { response } from "express";
 
 export const WorkshopContext = createContext();
 const WorkshopContextProvider = (props) => {
@@ -23,7 +22,11 @@ const WorkshopContextProvider = (props) => {
   };
 
   const confirmWorkshop = (newObject) => {
-    console.log(newObject)
+    axios
+      .post('/workshops', newObject)
+      .then((response) => console.log(response))
+
+    getWorkshops();
   };
 
   function handleFilterDate(date) {

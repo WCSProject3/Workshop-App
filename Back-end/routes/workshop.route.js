@@ -19,6 +19,33 @@ router.get('/', (req, res) => {
     })
 });
 
+router.post('/', (req, res) => {
+
+  const formData = req.body;
+
+  console.log(formData)
+
+  return connection.query('INSERT INTO workshops SET ?' , [formData], (err, results) => {
+      if(err) {
+          return res.status(500).json({
+              error: err.message,
+              sql: err.sql,
+          });
+      }
+      return connection.query('SELECT * FROM workshops WHERE id = ?', results.insertId, (err2, records) => {
+          if(err2){
+              return res.status(500).json({
+                  error: err2.message,
+                  sql: err2.sql,
+              });
+          }
+          const InsertedWorkshop = records[0];
+          return res.status(201)
+          .json(InsertedWorkshop)
+      });
+  });
+});
+
 
 
 
