@@ -49,6 +49,7 @@ const WorkshopContextProvider = (props) => {
     const workshopsList = tempWorkshops;
     const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
     workshopsList.splice(i, 1, newObject);
+    console.log(workshopsList)
     setTempWorkshop(workshopsList);
   };
   
