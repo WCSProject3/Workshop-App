@@ -38,6 +38,10 @@ h1{
       height: 150px;
       border-radius: 50%;
     }
+
+    button{
+        @include button(30px, $blue);
+    }
 }
 
 /***** MY WORKSHOPS *****/
@@ -47,10 +51,14 @@ h1{
     height: 30%;
     margin: 20px 0 0 20px;
     align-items: center;
+
+    button{
+        @include button(30px, $blue);
+    }
 }
 
 .edit-myWorkshops-title{
-    @include edit-profile-title;
+    @include edit-profile-title(40px);
 }
 
 /***** USER SETTINGS *****/
@@ -58,10 +66,14 @@ h1{
 .user-settings{
     @include edit-profile-box(97%);
     margin-bottom: 20px;
+
+    button{
+        @include button(30px, $blue);
+    }
 }
 
 .user-settings-title{
-    @include edit-profile-title;
+    @include edit-profile-title(40px);
 }
 
 .user-settings-form{
@@ -99,10 +111,14 @@ h1{
 .contact-settings{
     @include edit-profile-box(97%);
     margin-bottom: 20px;
+
+    button{
+        @include button(30px, $blue);
+    }
 }
 
 .contact-settings-title{
-    @include edit-profile-title;
+    @include edit-profile-title(40px);
 }
 
 .contact-settings-form{
@@ -117,7 +133,7 @@ h1{
     }
 
     select{
-        @include edit-profile-select
+        @include edit-profile-select(29px, 90%)
     }
 }
 
@@ -134,8 +150,3 @@ h1{
     width: 90%;
 }
 
-/***** BUTTONS *****/
-
-button{
-    @include button;
-}

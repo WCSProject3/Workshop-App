@@ -7,18 +7,27 @@ const RoomContextProvider = (props) => {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("dummyData.json")
-      .then((response) => setRooms(response.data.room));
   }, []);
 
+  {/*const getRooms = () => {
+    axios
+      .get("/rooms")
+      .then((response) => response.data)
+      .then((roomList) => {
+        console.log(roomList)
+        setRooms(roomList)
+      });
+  }*/}
+
   const addRoom = (newObject) => {
-    setRooms([
+    console.log(newObject)
+    
+    {/*setRooms([
       ...rooms,
       {
         ...newObject,
       },
-    ]);
+    ]);*/}
   };
 
   return (

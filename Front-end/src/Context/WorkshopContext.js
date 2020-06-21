@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { response } from "express";
 
 export const WorkshopContext = createContext();
 const WorkshopContextProvider = (props) => {
@@ -7,22 +8,23 @@ const WorkshopContextProvider = (props) => {
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
 
+  useEffect(() => {
+    getWorkshops();
+  }, []);
+
+  const getWorkshops = () => {
+    axios
+      .get("/workshops")
+      .then((response) => setWorkshops(response.data));
+  }
+
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
   };
 
   const confirmWorkshop = (newObject) => {
-    setWorkshops([...workshops, { newObject }]);
+    console.log(newObject)
   };
-
-  useEffect(() => {
-    axios
-      .get("dummyData.json")
-      .then((response) => setWorkshops(response.data.workshops));
-    axios
-      .get("dummyData.json")
-      .then((response) => setAllWorkshops(response.data.workshops));
-  }, []);
 
   function handleFilterDate(date) {
     axios.get("dummyData.json").then((response) => {

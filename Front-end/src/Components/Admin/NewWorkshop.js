@@ -19,7 +19,7 @@ const NewWorkshop = () => {
         })}
       </ul>
       <WorkshopForm />
-      <NewRoomForm />
+      {/*<NewRoomForm />*/}
     </div>
   );
 };
