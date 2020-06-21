@@ -31,34 +31,46 @@ const WorkshopForm = () => {
   console.log(speakers)
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="date" placeholder="date" name="date" ref={register} />
-      <input type="text" placeholder="Title" name="title" ref={register} />
-      <select name="speaker" ref={register}>
-        {speakers.map(speaker => {
-          return <option value={`${speaker.firstname} ${speaker.lastname}`}>{`${speaker.firstname} ${speaker.lastname}`}</option>
-        })}
-      </select>
-      <input type="text" placeholder="Description" name="description" ref={register} />
-      <input type="text" placeholder="Room" name="room" ref={register} />
-      <input type="text" placeholder="Room Manager" name="room_manager" ref={register} />
-      <select name="room_type" ref={register}>
-            <option value="Banquet">Banquet</option>
-            <option value="Classroom">Classroom</option>
-      </select>
-      <select name="room_capacity" ref={register}>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
-            <option value="60">60</option>
-      </select>
-      <select name="status_open" ref={register}>
-            <option value="1">Open</option>
-            <option value="0">Closed</option>
-      </select>
-      <input type="submit" value="Create" />
+    <form className="new-workshop-form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="new-workshop-form-header">
+        <input type="datetime-local" placeholder="date" name="date" ref={register} />
+      </div>
+      <div className="new-workshop-form-body">
+        <div className="new-workshop-form-left">
+          <input type="text" placeholder="Title" name="title" ref={register} />
+          <select name="speaker" ref={register}>
+            {speakers.map(speaker => {
+              return <option value={`${speaker.firstname} ${speaker.lastname}`}>{`${speaker.firstname} ${speaker.lastname}`}</option>
+            })}
+          </select>
+          <input type="text" placeholder="Description" name="description" ref={register} />
+        </div>
+        <div className="new-workshop-form-right"> 
+          <input type="text" placeholder="Room" name="room" ref={register} />
+          <input type="text" placeholder="Room Manager" name="room_manager" ref={register} />
+          <div className="new-workshop-form-selects">
+            <select name="room_type" ref={register}>
+                  <option value="Banquet">Banquet</option>
+                  <option value="Classroom">Classroom</option>
+            </select>
+            <select name="room_capacity" ref={register}>
+                  <option value="10">10 pax</option>
+                  <option value="20">20 pax</option>
+                  <option value="30">30 pax</option>
+                  <option value="40">40 pax</option>
+                  <option value="50">50 pax</option>
+                  <option value="60">60 pax</option>
+            </select>
+            <select name="status_open" ref={register}>
+                  <option value="1">Open</option>
+                  <option value="0">Closed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className="new-workshop-form-footer">
+        <button type="submit">Create</button>
+      </div>
     </form>
   );
 };
