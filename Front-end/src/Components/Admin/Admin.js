@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NewWorkshop from "./NewWorkshop";
-import NotificationContextProvider, { NotificationContext } from "../../Context/NotificationContext";
+import NotificationContextProvider from "../../Context/NotificationContext";
 import WorkshopContextProvider from "../../Context/WorkshopContext";
 import RoomContextProvider from "../../Context/RoomContext";
 import AttendeeContextProvider from "../../Context/AttendeeContext";

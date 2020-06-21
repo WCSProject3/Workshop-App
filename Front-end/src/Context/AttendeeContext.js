@@ -42,16 +42,16 @@ const AttendeeContextProvider = (props) => {
   };
 
   function handleFilterAttendee(role) {
-    axios.get('dummyData.json').then((response) => {
+    axios.get('/users/attendees').then((response) => {
       if (role === 'All attendees') {
-        setAttendees(response.data.user);
+        setAttendees(response.data);
         return attendees;
       } else {
         const filterdResult = allAttendees.filter((attendee) => {
           return attendee.role[0].name === role;
         });
         setAttendees(filterdResult);
-        setAllattendees(response.data.user);
+        setAllattendees(response.data);
       }
     });
   }

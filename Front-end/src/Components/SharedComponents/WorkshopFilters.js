@@ -14,12 +14,13 @@ const WorkshopFilters = () => {
                         All workshops
                     </option>
                     {allWorkshops.map(workshop => {
+                            const workshopDate = workshop.date.substring(0, 10);
                             return ( 
                             <option
                             key={workshop.id}
-                            value={workshop.date}
+                            value={workshopDate}
                             >
-                                {workshop.date}
+                                {workshopDate}
                             </option>
                             )
                     })}
