@@ -7,22 +7,27 @@ const WorkshopContextProvider = (props) => {
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
 
+  useEffect(() => {
+    getWorkshops();
+  }, []);
+
+  const getWorkshops = () => {
+    axios
+      .get("/workshops")
+      .then((response) => setWorkshops(response.data));
+  }
+
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
   };
 
   const confirmWorkshop = (newObject) => {
-    setWorkshops([...workshops, { newObject }]);
-  };
+    axios
+      .post('/workshops', newObject)
+      .then((response) => console.log(response))
 
-  useEffect(() => {
-    axios
-      .get("/workshops")
-      .then((response) => setWorkshops(response.data));
-    axios
-      .get("/workshops")
-      .then((response) => setAllWorkshops(response.data));
-  }, []);
+    getWorkshops();
+  };
 
   function handleFilterDate(date) {
     axios.get("/workshops").then((response) => {

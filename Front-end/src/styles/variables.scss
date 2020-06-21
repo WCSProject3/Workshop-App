@@ -17,9 +17,9 @@ $darkgrey: #8f8f8f;
   box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
 }
 
-@mixin edit-profile-title {
+@mixin edit-profile-title( $height ) {
   width: 100%;
-  height: 40px;
+  height: $height;
   background-color: $grey;
   box-sizing: border-box;
   display: flex;
@@ -59,9 +59,9 @@ $darkgrey: #8f8f8f;
   color: $darkgrey;
 }
 
-@mixin edit-profile-select {
-  height: 29px;
-  width: 90%;
+@mixin edit-profile-select( $height, $width ) {
+  height: $height;
+  width: $width;
   outline: none;
   border: 2px solid $grey;
   border-radius: 5px;
@@ -70,10 +70,10 @@ $darkgrey: #8f8f8f;
 
 /****** general mixins ******/
 
-@mixin button {
-  background-color: $blue;
+@mixin button ( $height, $color ) {
+  background-color: $color;
   color: white;
-  height: 30px;
+  height: $height;
   outline: none;
   padding: 5px 15px;
   border: none;

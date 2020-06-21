@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.workshops-table{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    margin: auto;
+    width: 97%;
+
+    td, th{
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+        color: $darkgrey;
+    }
+
+    td{
+        background-color: white;
+    }
+
+    th{
+        border-top: 1px solid #ddd;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: white;
+    }
+
+    .title-col{
+        width: 40%;
+    }
+}

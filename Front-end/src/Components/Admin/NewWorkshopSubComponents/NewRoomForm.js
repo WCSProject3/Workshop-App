@@ -8,13 +8,13 @@ const NewRoomForm = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
+    const roomTypeId = data.roomType === "Banquet" ? 1 : 2;
     const newObject = {
-      id: uuid(),
       name: data.name,
       status_open: data.status,
       capacity: data.capacity,
       room_manager: data.room_manager,
-      roomType: data.roomType,
+      room_type_id: roomTypeId,
     };
     console.log(newObject);
     addRoom(newObject);
