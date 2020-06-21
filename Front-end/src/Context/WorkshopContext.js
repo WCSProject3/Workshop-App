@@ -30,16 +30,17 @@ const WorkshopContextProvider = (props) => {
   };
 
   function handleFilterDate(date) {
-    axios.get("dummyData.json").then((response) => {
+    axios.get("/workshops").then((response) => {
       if (date === "All workshops") {
-        setWorkshops(response.data.workshops);
+        setWorkshops(response.data);
         return workshops;
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
-          return workshop.date === date;
+          const workshopDate = workshop.date.substring(0, 10);
+          return workshopDate === date;
         });
         setWorkshops(filterdResult);
-        setAllWorkshops(response.data.workshops);
+        setAllWorkshops(response.data);
       }
     });
   }
