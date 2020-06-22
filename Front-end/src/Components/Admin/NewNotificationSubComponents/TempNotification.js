@@ -6,7 +6,7 @@ import uuid from "react-uuid";
 
 const TempNotification = ( { tempNotification } ) => {
 
-    const { editNotification, deleteNotification, confirmNotification } = useContext(NotificationContext);
+    const { editNotification, deleteTempNotification, confirmNotification } = useContext(NotificationContext);
     const [editMode, setEditMode] = useState(false);
     const { register, handleSubmit } = useForm();
 
@@ -16,9 +16,30 @@ const TempNotification = ( { tempNotification } ) => {
     };
 
     const handleConfirmNotification = () => {
-        
+        let to_id = null
+
+         switch(tempNotification.to){
+            case "All":
+                to_id = 1;
+                break;
+            case "All Attendees":
+                to_id = 2;
+                break;
+            case "All Speakers":
+                to_id = 3;
+                break;
+        }
+
+        const newObject = {
+            subject: tempNotification.subject,
+            content: tempNotification.content,
+            state: tempNotification.state,
+            send_to_id: to_id,
+            date: tempNotification.date
+        }
     
-        confirmNotification(/*newObject*/);
+        confirmNotification(newObject);
+        deleteTempNotification(tempNotification.id)
       }
 
       console.log(tempNotification)
@@ -31,7 +52,7 @@ const TempNotification = ( { tempNotification } ) => {
                     <div>{tempNotification.date}</div>
                     <div className="temp-notification-info-header-btns">
                         <button onClick={() => setEditMode(!editMode)}>Edit Notification</button>
-                        <button onClick={() => deleteNotification(tempNotification.id)}>Delete Notification</button>
+                        <button onClick={() => deleteTempNotification(tempNotification.id)}>Delete Notification</button>
                     </div>
                 </div>
                 <div className="temp-notification-info-body">
@@ -52,6 +73,7 @@ const TempNotification = ( { tempNotification } ) => {
                     </div>
                     <div className="new-notification-form-body">
                         <select name="to" defaultValue={tempNotification.to} ref={register}>
+                            <option value="All">All</option>
                             <option value="All Attendees">All Attendees</option>
                             <option value="All Speakers">All Speakers</option>
                         </select>

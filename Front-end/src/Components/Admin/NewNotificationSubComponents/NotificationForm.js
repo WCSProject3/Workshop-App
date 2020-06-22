@@ -33,6 +33,7 @@ const NotificationForm = () => {
             </div>
             <div className="new-notification-form-body">
                 <select name="to" ref={register}>
+                    <option value="All">All</option>
                     <option value="All Attendees">All Attendees</option>
                     <option value="All Speakers">All Speakers</option>
                 </select>

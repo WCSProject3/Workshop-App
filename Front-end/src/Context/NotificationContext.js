@@ -32,7 +32,7 @@ const addTempNotification = (newObject) => {
 
 const confirmNotification = (newObject) => {
     axios
-      .post('/workshops', newObject)
+      .post('/notifications', newObject)
       .then((response) => console.log(response))
 
     getNotifications();
@@ -46,7 +46,7 @@ const editNotification = (newObject) => {
     setTempNotifications(notificationsList);
   };
 
-const deleteNotification = (id) => {
+const deleteTempNotification = (id) => {
     const notificationList = tempNotifications.filter(notification => notification.id !== id)
     setTempNotifications(notificationList);
 };
@@ -60,7 +60,7 @@ return (
         addTempNotification,
         confirmNotification,
         allNotifications,
-        deleteNotification,
+        deleteTempNotification,
         editNotification,
         }}
     >

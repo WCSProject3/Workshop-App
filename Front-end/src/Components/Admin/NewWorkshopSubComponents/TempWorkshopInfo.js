@@ -48,6 +48,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
     };
 
     confirmWorkshop(newObject);
+    deleteTempWorkshop(tempWorkshop.id)
   }
 
   console.log(tempWorkshop)
