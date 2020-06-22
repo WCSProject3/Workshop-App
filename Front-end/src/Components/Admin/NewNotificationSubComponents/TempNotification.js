@@ -10,18 +10,21 @@ const TempNotification = ( { tempNotification } ) => {
     const { register, handleSubmit } = useForm();
 
     const editMode = () => {
+        console.log(editToggle)
         setEditToggle(!editToggle);
     }
 
     const onSubmit = (data) => {
         confirmModification(data);
+        console.log("clicked")
+        editMode();
     };
 
     return (
         <div>
             <li>
                 <button onClick={() => editMode()}>Edit Notification</button>
-                <div>{tempNotification.users_emails}</div>
+                <div>{tempNotification.emails_users}</div>
                 <div>{tempNotification.subject}</div>
                 <div>{tempNotification.content}</div>
                 <div>{tempNotification.date}</div>
@@ -31,9 +34,9 @@ const TempNotification = ( { tempNotification } ) => {
             {editToggle &&
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input type="text" placeholder="emails_users" name="emails_users" defaultValue={tempNotification.emails_users} ref={register} />
-                    <input type="text" placeholder="Subject" name="subject" ref={tempNotification.register} />
-                    <input type="text" placeholder="Content" name="content" ref={tempNotification.register} />
-                    <input type="date" placeholder="Date" name="date" ref={tempNotification.register} />
+                    <input type="text" placeholder="Subject" name="subject" defaultValue={tempNotification.subject} ref={register} />
+                    <input type="text" placeholder="Content" name="content" defaultValue={tempNotification.content} ref={register} />
+                    <input type="date" placeholder="Date" name="date" defaultValue={tempNotification.date} ref={register} />
                     <input type="submit" value="Save" />
                 </form>
             }

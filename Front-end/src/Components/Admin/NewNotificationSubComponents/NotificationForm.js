@@ -5,25 +5,24 @@ import uuid from "react-uuid";
 
 const NotificationForm = () => {
     const { addTempNotification } = useContext(NotificationContext);
-    const { register, handleSubmit } = useForm({
-        defaultValues: {
-            users_emails: "",
-            subject: "",
-            content: "",
-            date: ""
-        }});
+    const { register, handleSubmit, reset } = useForm();
 
-    const onSubmit = (data, e) => {
-        console.log("Submit event", e);
+    const onSubmit = (data) => {
 
         const newObject = {
             id: uuid(),
-            users_emails: data.users_emails,
+            emails_users: data.emails_users,
             subject: data.subject,
             content: data.content,
             date: data.date
             };
         addTempNotification(newObject);
+        reset({
+            emails_users: "",
+            subject: "",
+            content: "",
+            date: ""
+        });
 
     };
 

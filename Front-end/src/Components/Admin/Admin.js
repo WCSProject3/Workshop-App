@@ -28,7 +28,7 @@ const Admin = () => {
                   <Switch>
                     <Route path="/" exact component={AllWorkshops} />
                     <Route path="/new-workshop" component={NewWorkshop} />
-                    <Route path="/workshop-attendees/:id" component={WorkshopAttendees} />
+                    <Route path="/workshop-attendees" component={WorkshopAttendees} />
                     <Route path="/all-notifications" component={AllNotifications} />
                     <Route path="/new-notification" component={NewNotification} />
                     <Route path="/profile" component={Profile} />

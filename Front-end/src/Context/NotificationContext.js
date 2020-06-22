@@ -9,6 +9,7 @@ const [tempNotifications, setTempNotifications] = useState([]);
 const [allNotifications, setAllNotifications] = useState([]);
 
 const addTempNotification = (newObject) => {
+    console.log(newObject.id)
     setTempNotifications([
         ...tempNotifications, newObject 
     ]);
@@ -21,15 +22,16 @@ const confirmNotification = (newObject) => {
 };
 
 const confirmModification = (data) => {
-    setTempNotifications([
+    setNotifications([
         data
     ]);
 };
 
 const deleteNotification = (id) => {
-    setTempNotifications([
-            notifications.filter(notification => notification.id !== id)
-    ]);
+
+    const deleteTempNotification = tempNotifications.filter(tempNotification => tempNotification.id !== id);
+
+    setTempNotifications( deleteTempNotification );
     
 };
 
