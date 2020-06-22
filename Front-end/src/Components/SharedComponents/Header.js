@@ -15,9 +15,9 @@ const Header = () => {
 
       {/* To be generated dynamicaly, connected to login state */}
       <div className="user">
-        <p>Zé Arnaldo</p>
+        <p>John Doe</p>
         <Link to='/Profile'>
-          <img src='avatar5.jpeg' alt='Zé Arnaldo' />
+          <img src='avatar5.jpeg' alt='user avatar' />
         </Link>
       </div>
     </div>

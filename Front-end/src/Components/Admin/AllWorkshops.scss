@@ -27,11 +27,6 @@
     box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
 }
 
-.all-workshops-title{
-    @include edit-profile-title(60px);
-    padding-left: 1.5%;
-}
-
 .workshop-filters{
     display: flex;
     justify-content: space-between;

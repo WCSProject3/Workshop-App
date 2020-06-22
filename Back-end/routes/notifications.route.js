@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT * FROM notification', (err, results) => {
+    connection.query('SELECT n.id, n.subject, n.content, n.state, n.date, s.role FROM notification n JOIN send_to s ON n.send_to_id=s.id', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
