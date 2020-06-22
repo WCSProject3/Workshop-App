@@ -2,10 +2,9 @@ import React from 'react';
 
 const WorkshopDetails = (workshop) => {
 
-    const workshopDate = workshop.date.substring(0, 10);
+    const workshopDate = workshop.date;
 
         return (
-            
             <div>
                 <p>Title: {workshop.title}</p>
                 <p>Open: {workshop.status_open}</p>

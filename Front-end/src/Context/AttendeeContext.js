@@ -42,13 +42,13 @@ const AttendeeContextProvider = (props) => {
   };
 
   function handleFilterAttendee(role) {
-    axios.get('/users/attendees').then((response) => {
+    axios.get('/users').then((response) => {
       if (role === 'All attendees') {
         setAttendees(response.data);
         return attendees;
       } else {
         const filterdResult = allAttendees.filter((attendee) => {
-          return attendee.role[0].name === role;
+          return attendee.role_id === role;
         });
         setAttendees(filterdResult);
         setAllattendees(response.data);

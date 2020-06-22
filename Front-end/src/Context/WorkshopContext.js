@@ -7,7 +7,7 @@ const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
-  const [workshopId, setWorkshopId] = useState();
+
 
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
@@ -45,14 +45,6 @@ const WorkshopContextProvider = (props) => {
     });
   }
 
-  function getWorkshopId() {
-    setWorkshopId(this.props.match.params.id);
-    console.log(this.props.match.params.id)
-    axios.get(`/workshops/${workshopId}`).then((response) => {
-        setWorkshops(response.data);
-    });
-  }
-
   const editTempWorkshop = (newObject) => {
     const workshopsList = tempWorkshops;
     const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
@@ -70,9 +62,7 @@ const WorkshopContextProvider = (props) => {
           confirmWorkshop,
           allWorkshops,
           handleFilterDate,
-          editTempWorkshop,
-          getWorkshopId,
-          workshopId
+          editTempWorkshop
         }}
       >
         {props.children}

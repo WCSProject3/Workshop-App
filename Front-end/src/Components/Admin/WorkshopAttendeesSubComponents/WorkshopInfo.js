@@ -1,20 +1,25 @@
-import React, { useContext } from 'react';
-import { WorkshopContext } from '../../../Context/WorkshopContext';
+import React, { useState, useEffect } from 'react';
 import WorkshopDetails from '../AllWorkshopsSubComponents/WorkshopDetails';
+import axios from 'axios';
 
 
-const WorkshopInfo = ( ) => {
+const WorkshopInfo = ( { workshopId } ) => {
 
-    const { workshops, workshopId, getWorkshopId } = useContext(WorkshopContext);
+    const [workshops, setWorkshops] = useState([]);
 
-    let selectedWorkshop = workshops.filter(workshop => workshop.id === workshopId);
-
-    getWorkshopId();
+    useEffect(() => {
+        axios
+            .get(`/workshops/${workshopId}`)
+            .then((response) => { setWorkshops(response.data) }) 
+    }, []);
 
         return (
             <div>
-                <WorkshopDetails 
-                {...selectedWorkshop}/> 
+                {workshops.map(workshop => {
+                    return <WorkshopDetails 
+                        key={workshop.id} 
+                        {...workshop} /> 
+                })}
             </div>
         );
 }
