@@ -26,7 +26,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
       room_type: data.room_type
     };
     editTempWorkshop(newObject);
-    setEditMode(!editMode);
+    setEditMode(false);
   };
 
   const handleConfirmWorkshop = () => {
@@ -50,7 +50,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
     confirmWorkshop(newObject);
   }
 
-  console.log(tempWorkshop)
+  //console.log(tempWorkshop)
 
   return (
     <div>

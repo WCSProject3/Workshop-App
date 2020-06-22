@@ -14,7 +14,10 @@ const WorkshopContextProvider = (props) => {
   const getWorkshops = () => {
     axios
       .get("/workshops")
-      .then((response) => setWorkshops(response.data));
+      .then((response) => {
+        setWorkshops(response.data)
+        setAllWorkshops(response.data)
+      });
   }
 
   const addTempWorkshop = (newObject) => {
@@ -36,7 +39,7 @@ const WorkshopContextProvider = (props) => {
         return workshops;
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
-          const workshopDate = workshop.date.substring(0, 10);
+          const workshopDate = workshop.date;
           return workshopDate === date;
         });
         setWorkshops(filterdResult);
@@ -46,10 +49,10 @@ const WorkshopContextProvider = (props) => {
   }
 
   const editTempWorkshop = (newObject) => {
-    const workshopsList = tempWorkshops;
+    const workshopsList = [...tempWorkshops];
     const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
     workshopsList.splice(i, 1, newObject);
-    console.log(workshopsList)
+    console.log("workshops list before", workshopsList)
     setTempWorkshop(workshopsList);
   };
   
