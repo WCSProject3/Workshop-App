@@ -24,7 +24,7 @@ const WorkshopForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="date" placeholder="date" name="date" ref={register} />
+      <input type="date" placeholder="Date" name="date" ref={register} />
       <input type="text" placeholder="Title" name="title" ref={register} />
       <input type="text" placeholder="Speaker" name="speaker" ref={register} />
       <select name="room" ref={register}>

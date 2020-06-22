@@ -1,14 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { NotificationContext } from '../../../Context/NotificationContext';
-import uuid from "react-uuid";
 
 
 const TempNotification = ( { tempNotification } ) => {
 
-    const { confirmNotification } = useContext(NotificationContext);
-    const { confirmModification } = useContext(NotificationContext);
-    const { deleteNotification } = useContext(NotificationContext);
+    const { confirmNotification, confirmModification, deleteNotification } = useContext(NotificationContext);
     const [ editToggle, setEditToggle ] = useState(false);
     const { register, handleSubmit } = useForm();
 
@@ -33,10 +30,10 @@ const TempNotification = ( { tempNotification } ) => {
             </li>
             {editToggle &&
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input type="email" placeholder="Email" name="emails_users" defaultValue={tempNotification.emails_users} ref={register} />
-                    <input type="text" placeholder="Subject" name="subject" ref={register} />
-                    <input type="text" placeholder="Content" name="content" ref={register} />
-                    <input type="date" placeholder="Date" name="date" ref={register} />
+                    <input type="text" placeholder="emails_users" name="emails_users" defaultValue={tempNotification.emails_users} ref={register} />
+                    <input type="text" placeholder="Subject" name="subject" ref={tempNotification.register} />
+                    <input type="text" placeholder="Content" name="content" ref={tempNotification.register} />
+                    <input type="date" placeholder="Date" name="date" ref={tempNotification.register} />
                     <input type="submit" value="Save" />
                 </form>
             }

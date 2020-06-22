@@ -3,15 +3,13 @@ import { WorkshopContext } from '../../../Context/WorkshopContext';
 import WorkshopDetails from '../AllWorkshopsSubComponents/WorkshopDetails';
 
 
-const WorkshopInfo = ( getWorkshopId ) => {
+const WorkshopInfo = ( ) => {
 
-    const { workshops } = useContext(WorkshopContext);
-    const { workshopId } = useContext(WorkshopContext);
+    const { workshops, workshopId, getWorkshopId } = useContext(WorkshopContext);
 
     let selectedWorkshop = workshops.filter(workshop => workshop.id === workshopId);
 
-    console.log(this.props.match.params.id);
-    getWorkshopId(workshops);
+    getWorkshopId();
 
         return (
             <div>

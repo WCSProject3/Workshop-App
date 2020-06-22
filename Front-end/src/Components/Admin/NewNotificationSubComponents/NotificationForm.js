@@ -5,9 +5,17 @@ import uuid from "react-uuid";
 
 const NotificationForm = () => {
     const { addTempNotification } = useContext(NotificationContext);
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            users_emails: "",
+            subject: "",
+            content: "",
+            date: ""
+        }});
 
-    const onSubmit = (data) => {
+    const onSubmit = (data, e) => {
+        console.log("Submit event", e);
+
         const newObject = {
             id: uuid(),
             users_emails: data.users_emails,
@@ -16,11 +24,12 @@ const NotificationForm = () => {
             date: data.date
             };
         addTempNotification(newObject);
+
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="email" placeholder="Email" name="emails_users" ref={register} />
+            <input type="text" placeholder="emails_users" name="emails_users" ref={register} />
             <input type="text" placeholder="Subject" name="subject" ref={register} />
             <input type="text" placeholder="Content" name="content" ref={register} />
             <input type="date" placeholder="Date" name="date" ref={register} />

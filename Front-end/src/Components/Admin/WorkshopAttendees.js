@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AttendeesList from './WorkshopAttendeesSubComponents/AttendeesList';
 import AttendeesFilter from './WorkshopAttendeesSubComponents/AttendeesFilter';
 import WorkshopInfo from './WorkshopAttendeesSubComponents/WorkshopInfo';

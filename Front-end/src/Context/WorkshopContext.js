@@ -26,12 +26,11 @@ const WorkshopContextProvider = (props) => {
       .then((response) => setAllWorkshops(response.data));
   }, []);
 
-  useEffect(() => {
-    console.log(props)
-  });
+  //useEffect(() => {console.log(props.match.params)});
 
   function handleFilterDate(date) {
-    axios.get("/workshops").then((response) => {
+    axios.get("/workshops")
+    .then((response) => {
       if (date === "All workshops") {
         setWorkshops(response.data);
         return workshops;
