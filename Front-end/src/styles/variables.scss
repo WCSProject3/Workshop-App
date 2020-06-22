@@ -1,0 +1,92 @@
+/****** COLORS ******/
+
+$blue : #3B65B0;
+$grey: #F0F0F0;
+$darkgrey: #8f8f8f;
+
+/****** MIXINS ******/
+
+/****** Profile ******/
+
+@mixin edit-profile-box ( $width ) {
+  background-color: white;
+  border-radius: 5px;
+  width: $width;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
+}
+
+@mixin edit-profile-title( $height ) {
+  width: 100%;
+  height: $height;
+  background-color: $grey;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-left: 10px;
+  border-radius: 5px 5px 0 0;
+  font-family: roboto;
+  font-weight: 450;
+  font-size: 16px;
+  color: $blue;
+}
+
+@mixin edit-profile-form {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 20px 0;
+  padding: 0 10px;
+}
+
+@mixin edit-profile-input {
+  height: 25px;
+  width: 90%;
+  outline: none;
+  padding: 0;
+  border: 2px solid $grey;
+  border-radius: 5px;
+  color: $darkgrey;
+}
+
+@mixin edit-profile-label {
+  padding: 0;
+  height: 40px;
+  font-family: roboto;
+  font-weight: 500;
+  font-size: 16px;
+  color: $darkgrey;
+}
+
+@mixin edit-profile-select( $height, $width ) {
+  height: $height;
+  width: $width;
+  outline: none;
+  border: 2px solid $grey;
+  border-radius: 5px;
+  color: $darkgrey;
+}
+
+/****** general mixins ******/
+
+@mixin button ( $height, $color ) {
+  background-color: $color;
+  color: white;
+  height: $height;
+  outline: none;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+@mixin page-title {
+  margin: 0;
+  font-family: roboto;
+  font-weight: 450;
+  font-size: 25px;
+  color: $darkgrey;
+  margin: 20px;
+}
