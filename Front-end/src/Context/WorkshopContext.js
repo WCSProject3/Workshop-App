@@ -6,9 +6,11 @@ const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
+  const [months, setMonths] = useState([]);
 
   useEffect(() => {
     getWorkshops();
+    getMonth();
   }, []);
 
   const getWorkshops = () => {
@@ -19,6 +21,16 @@ const WorkshopContextProvider = (props) => {
         setWorkshops(workshopsList)
         setAllWorkshops(workshopsList)
       });
+  }
+
+  const getMonth = () => {
+    axios
+    .get("/workshops/months")
+    .then((response) => response.data)
+    .then((monthsList) => {
+      console.log(monthsList)
+      setMonths(monthsList);
+    });
   }
 
   const addTempWorkshop = (newObject) => {
@@ -75,7 +87,8 @@ const WorkshopContextProvider = (props) => {
           allWorkshops,
           handleFilterDate,
           editTempWorkshop,
-          deleteTempWorkshop
+          deleteTempWorkshop,
+          months
         }}
       >
         {props.children}
