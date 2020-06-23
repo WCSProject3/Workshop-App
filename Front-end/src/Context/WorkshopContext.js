@@ -8,35 +8,53 @@ const WorkshopContextProvider = (props) => {
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
 
+  useEffect(() => {
+    getWorkshops();
+  }, []);
+
+  const getWorkshops = () => {
+    axios
+      .get("/workshops")
+      .then((response) => response.data)
+      .then((workshopsList) => {
+        setWorkshops(workshopsList)
+        setAllWorkshops(workshopsList)
+      });
+  }
 
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
   };
 
   const confirmWorkshop = (newObject) => {
-    setWorkshops([...workshops, { newObject }]);
+    axios
+      .post('/workshops', newObject)
+      .then((response) => console.log(response))
+
+    getWorkshops();
   };
 
-  useEffect(() => {
-    axios
-      .get("/workshops")
-      .then((response) => setWorkshops(response.data));
-    axios
-      .get("/workshops")
-      .then((response) => setAllWorkshops(response.data));
-  }, []);
+  const editTempWorkshop = (newObject) => {
+    const workshopsList = [...tempWorkshops];
+    const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
+    workshopsList.splice(i, 1, newObject);
+    console.log("workshops list before", workshopsList)
+    setTempWorkshop(workshopsList);
+  };
 
-  //useEffect(() => {console.log(props.match.params)});
+  const deleteTempWorkshop = (id) => {
+    const workshopList = tempWorkshops.filter(workshop => workshop.id !== id)
+    setTempWorkshop(workshopList);
+};
 
-  function handleFilterDate(date) {
-    axios.get("/workshops")
-    .then((response) => {
+  const handleFilterDate = (date) => {
+    axios.get("/workshops").then((response) => {
       if (date === "All workshops") {
         setWorkshops(response.data);
         return workshops;
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
-          const workshopDate = workshop.date.substring(0, 10);
+          const workshopDate = workshop.date;
           return workshopDate === date;
         });
         setWorkshops(filterdResult);
@@ -45,12 +63,7 @@ const WorkshopContextProvider = (props) => {
     });
   }
 
-  const editTempWorkshop = (newObject) => {
-    const workshopsList = tempWorkshops;
-    const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
-    workshopsList.splice(i, 1, newObject);
-    setTempWorkshop(workshopsList);
-  };
+  
   
   return (
     <div>
@@ -62,7 +75,8 @@ const WorkshopContextProvider = (props) => {
           confirmWorkshop,
           allWorkshops,
           handleFilterDate,
-          editTempWorkshop
+          editTempWorkshop,
+          deleteTempWorkshop
         }}
       >
         {props.children}

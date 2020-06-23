@@ -8,47 +8,48 @@ const [notifications, setNotifications] = useState([]);
 const [tempNotifications, setTempNotifications] = useState([]);
 const [allNotifications, setAllNotifications] = useState([]);
 
+useEffect(() => {
+    getNotifications();
+}, []);
+
+useEffect(() => {
+    console.log(tempNotifications)
+}, [tempNotifications]);
+
+const getNotifications = () => {
+    axios
+      .get("/notifications")
+      .then((response) => response.data)
+      .then((notificationsList) => {
+        setNotifications(notificationsList)
+        setAllNotifications(notificationsList)
+      });
+  }
+
 const addTempNotification = (newObject) => {
-    console.log(newObject.id)
-    setTempNotifications([
-        ...tempNotifications, newObject 
-    ]);
+    setTempNotifications([...tempNotifications, newObject]);
 };
 
 const confirmNotification = (newObject) => {
-    setNotifications([
-        ...notifications, newObject
-    ]);
-};
+    axios
+      .post('/notifications', newObject)
+      .then((response) => console.log(response))
 
-const confirmModification = (data) => {
-    setNotifications([
-        data
-    ]);
-};
-
-const deleteNotification = (id) => {
-
-    const deleteTempNotification = tempNotifications.filter(tempNotification => tempNotification.id !== id);
-
-    setTempNotifications( deleteTempNotification );
-    
+    getNotifications();
 };
 
 const editNotification = (newObject) => {
-    setNotifications([
-        ...notifications, newObject
-    ]);
-};
+    const notificationsList = [...tempNotifications];
+    const i = notificationsList.findIndex((notification) => notification.id === newObject.id);
+    notificationsList.splice(i, 1, newObject);
+    console.log("workshops list before", notificationsList)
+    setTempNotifications(notificationsList);
+  };
 
-useEffect(() => {
-    axios
-    .get("dummyData.json")
-    .then((response) => setNotifications(response.data.notifications));
-    axios
-    .get("dummyData.json")
-    .then((response) => setAllNotifications(response.data.notifications));
-}, []);
+const deleteTempNotification = (id) => {
+    const notificationList = tempNotifications.filter(notification => notification.id !== id)
+    setTempNotifications(notificationList);
+};
 
 return (
     <div>
@@ -59,9 +60,8 @@ return (
         addTempNotification,
         confirmNotification,
         allNotifications,
-        deleteNotification,
+        deleteTempNotification,
         editNotification,
-        confirmModification
         }}
     >
         {props.children}
