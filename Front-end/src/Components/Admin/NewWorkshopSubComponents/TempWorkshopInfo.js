@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { WorkshopContext } from "../../../Context/WorkshopContext";
-import { RoomContext } from "../../../Context/RoomContext";
 import { useForm } from "react-hook-form";
-import { AttendeeContext } from "../../../Context/AttendeeContext";
+import { UserContext } from "../../../Context/UserContext";
 
 const TempWorkshopInfo = ({ tempWorkshop }) => {
   const { confirmWorkshop, editTempWorkshop, deleteTempWorkshop } = useContext(WorkshopContext);
-  const { speakers } = useContext(AttendeeContext);
-  const { rooms } = useContext(RoomContext);
+  const { speakers } = useContext(UserContext);
 
   const [editMode, setEditMode] = useState(false);
 

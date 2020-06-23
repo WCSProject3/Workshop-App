@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AttendeeContext } from '../../../Context/AttendeeContext';
+import { UserContext } from '../../../Context/UserContext';
 import axios from 'axios';
 
 const AttendeesFilter = () => {
@@ -12,7 +12,7 @@ const AttendeesFilter = () => {
             .then((response) => { setAttendeeFiltered(response.data) }) 
     }, []);
 
-    const { handleFilterAttendee } = useContext(AttendeeContext);
+    const { handleFilterAttendee } = useContext(UserContext);
 
         return (  
             <div>

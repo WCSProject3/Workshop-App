@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import WorkshopForm from "./NewWorkshopSubComponents/WorkshopForm";
 import { WorkshopContext } from "../../Context/WorkshopContext";
 import TempWorkshopInfo from "./NewWorkshopSubComponents/TempWorkshopInfo";
