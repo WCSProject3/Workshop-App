@@ -53,5 +53,20 @@ router.get('/attendees', (req, res) => {
     })
 });
 
+router.get('/attendees/roles', (req, res) => {
+
+  connection.query('SELECT DISTINCT role_id FROM user ORDER BY role_id ASC', (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
+});
+
+
 
 module.exports = router;

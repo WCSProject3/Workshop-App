@@ -1,9 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AttendeeContext } from '../../../Context/AttendeeContext';
+import axios from 'axios';
 
 const AttendeesFilter = () => {
 
-    const { allAttendees, handleFilterAttendee } = useContext(AttendeeContext);
+    const [ attendeeFiltered, setAttendeeFiltered ] = useState([])
+
+    useEffect(() => {
+        axios
+            .get("/users/attendees/roles")
+            .then((response) => { setAttendeeFiltered(response.data) }) 
+    }, []);
+
+    const { handleFilterAttendee } = useContext(AttendeeContext);
 
         return (  
             <div>
@@ -13,13 +22,13 @@ const AttendeesFilter = () => {
                         value={'All attendees'}>
                         All attendees
                     </option>
-                    {allAttendees.map(attendee => {
+                    {attendeeFiltered.map(attendee => {
                             return ( 
                             <option
                             key={attendee.id}
-                            value={attendee.role[0].name}
+                            value={attendee.role_id}
                             >
-                                {attendee.role[0].name}
+                                {attendee.role_id}
                             </option>
                             )
                     })}

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { NotificationContext } from '../../../Context/NotificationContext';
-import uuid from "react-uuid";
 
 
 const TempNotification = ( { tempNotification } ) => {
