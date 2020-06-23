@@ -2,10 +2,12 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const WorkshopContext = createContext();
+
 const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
+
 
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
@@ -17,24 +19,28 @@ const WorkshopContextProvider = (props) => {
 
   useEffect(() => {
     axios
-      .get("dummyData.json")
-      .then((response) => setWorkshops(response.data.workshops));
+      .get("/workshops")
+      .then((response) => setWorkshops(response.data));
     axios
-      .get("dummyData.json")
-      .then((response) => setAllWorkshops(response.data.workshops));
+      .get("/workshops")
+      .then((response) => setAllWorkshops(response.data));
   }, []);
 
+  //useEffect(() => {console.log(props.match.params)});
+
   function handleFilterDate(date) {
-    axios.get("dummyData.json").then((response) => {
+    axios.get("/workshops")
+    .then((response) => {
       if (date === "All workshops") {
-        setWorkshops(response.data.workshops);
+        setWorkshops(response.data);
         return workshops;
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
-          return workshop.date === date;
+          const workshopDate = workshop.date.substring(0, 10);
+          return workshopDate === date;
         });
         setWorkshops(filterdResult);
-        setAllWorkshops(response.data.workshops);
+        setAllWorkshops(response.data);
       }
     });
   }
@@ -56,7 +62,7 @@ const WorkshopContextProvider = (props) => {
           confirmWorkshop,
           allWorkshops,
           handleFilterDate,
-          editTempWorkshop,
+          editTempWorkshop
         }}
       >
         {props.children}

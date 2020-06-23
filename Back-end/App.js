@@ -6,6 +6,11 @@ const bodyParser = require("body-parser");
 const port = process.env.PORT;
 const connection = require("./config.js");
 
+const notificationRouter = require('./routes/notifications.route');
+const roomRouter = require('./routes/room.route');
+const userRouter = require('./routes/users.route');
+const workshopRouter = require('./routes/workshop.route');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -17,15 +22,10 @@ connection.connect((err) => {
   }
 });
 
-app.get("/wizard", (req, res) => {
-  connection.query("SELECT * FROM wizard", (err, results) => {
-    if (err) {
-      res.status(500).send("There was an error retreiving the Wizard");
-    } else {
-      res.status(200).send(results);
-    }
-  });
-});
+app.use('/notifications', notificationRouter);
+app.use('/rooms', roomRouter);
+app.use('/users', userRouter);
+app.use('/workshops', workshopRouter);
 
 app.listen(port, (err) => {
   if (err) {
