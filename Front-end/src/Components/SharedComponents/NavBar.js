@@ -11,7 +11,6 @@ const NavBar = () => {
 
   //to be generated with database instead of dummy data (coming from AttendeeContext)
   const speakersList = speakers.map((speaker) => {
-    console.log(speaker.firstname, speaker.lastname);
     return (
       <li>
         <Link to='/AttendeeDetails'>

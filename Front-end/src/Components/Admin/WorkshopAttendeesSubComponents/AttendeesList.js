@@ -1,11 +1,19 @@
-import React, { useContext } from 'react';
-import { AttendeeContext } from '../../../Context/AttendeeContext';
+import React, { useState, useEffect } from 'react';
 import AttendeeDetails from './AttendeeDetails';
+import axios from 'axios';
 
 
-const AttendeeList = () => {
+const AttendeeList = ( {workshopId }) => {
 
-    const { attendees } = useContext(AttendeeContext);
+    const [attendees, setAttendees] = useState([]);
+
+    console.log(workshopId, attendees);
+
+    useEffect(() => {
+        axios
+            .get(`/workshops/${workshopId}/attendees/`)
+            .then((response) => { setAttendees(response.data) }) 
+    }, []);
 
         return (
             <div>

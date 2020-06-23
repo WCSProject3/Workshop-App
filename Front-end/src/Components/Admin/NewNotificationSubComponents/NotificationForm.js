@@ -8,6 +8,7 @@ const NotificationForm = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = (data) => {
+
         const newObject = {
             id: uuid(),
             to: data.to,
@@ -24,6 +25,13 @@ const NotificationForm = () => {
                 state:"sent"
             })
         addTempNotification(newObject);
+        reset({
+            emails_users: "",
+            subject: "",
+            content: "",
+            date: ""
+        });
+
     };
 
     return (
