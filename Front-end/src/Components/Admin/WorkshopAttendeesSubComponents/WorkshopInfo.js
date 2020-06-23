@@ -13,13 +13,15 @@ const WorkshopInfo = ( { workshopId } ) => {
             .then((response) => { setWorkshops(response.data) }) 
     }, []);
 
+    const workshopInfo = workshops.filter(workshop => {
+        return workshop.id === workshopId
+    })
+
         return (
             <div>
-                {workshops.map(workshop => {
-                    return <WorkshopDetails 
-                        key={workshop.id} 
-                        {...workshop} /> 
-                })}
+                <WorkshopDetails 
+                        key={workshopInfo.id} 
+                        workshop={workshopInfo} /> 
             </div>
         );
 }
