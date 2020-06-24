@@ -1,6 +1,7 @@
 @import '../../styles/variables.scss';
 
-.new-workshops-header{
+
+.new-notifications-header{
     display: flex;
     align-items: center;
     margin: 10px 10px 10px 2.5%;
@@ -9,7 +10,7 @@
         margin-left: 0;
     }
 
-    .all-workshops-btn{
+    .all-notifications-btn{
         @include button(40px, $darkgrey);
         margin-right: 20px;
         margin-top: 0;
@@ -26,7 +27,7 @@
     }
 }
 
-.new-workshop-form{
+.new-notification-form{
     background-color: white;
     border-radius: 5px;
     width: 95%;
@@ -36,7 +37,7 @@
     box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
 }
 
-.new-workshop-form-header{
+.new-notification-form-header{
     width: 100%;
     height: 50px;
     background-color: $grey;
@@ -65,24 +66,14 @@
     }
 }  
 
-.new-workshop-form-body{
-    display:flex;
-    justify-content: space-evenly;
-}
-
-.new-workshop-form-left{
+.new-notification-form-body{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 50%;
-    border-right: 1px solid $darkgrey;
-    padding: 10px 20px;
-
 
     input{
         box-sizing: border-box;
-        width: 100%;
-        margin: 10px 0;
+        width: 70%;
+        margin: 20px auto;
         height: 25px;
         outline: none;
         padding-left: 5px;
@@ -94,9 +85,9 @@
     select{
         box-sizing: border-box;
         align-self: flex-start;
-        width: 100%;
+        width: 70%;
         height: 25px;
-        margin: 10px 0;
+        margin: 20px auto;
         outline: none;
         border: 2px solid $grey;
         border-radius: 5px;
@@ -104,43 +95,8 @@
     }
 }
 
-.new-workshop-form-right{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    padding: 10px 20px;
 
-    input{
-        box-sizing: border-box;
-        width: 100%;
-        margin: 10px 0;
-        height: 25px;
-        outline: none;
-        padding-left: 5px;
-        border: 2px solid $grey;
-        border-radius: 5px;
-        color: $darkgrey;
-    }
-
-    .new-workshop-form-selects{
-        align-self: flex-start;
-
-        select{
-            box-sizing: border-box;
-            align-self: flex-start;
-            width: fit-content;
-            height: 25px;
-            margin: 10px 10px 0 0;
-            outline: none;
-            border: 2px solid $grey;
-            border-radius: 5px;
-            color: $darkgrey;
-        }
-    }
-}
-
-.new-workshop-form-footer{
+.new-notification-form-footer{
     background-color: $grey;
     height: 60px;
     display: flex;
@@ -156,9 +112,7 @@
 }
 
 
-
-
-.temp-workshop-info{
+.temp-notification-info{
     background-color: white;
     border-radius: 5px;
     width: 95%;
@@ -168,7 +122,9 @@
     box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
 }
 
-.temp-workshop-info-header{
+
+
+.temp-notification-info-header{
     width: 100%;
     height: 50px;
     background-color: $grey;
@@ -190,47 +146,13 @@
     }
 }
 
-.temp-workshop-info-body{
-    display:flex;
-    justify-content: space-evenly;
-}
-
-.temp-workshop-info-left{
+.temp-notification-info-body{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    text-align: start;
-    width: 50%;
-    border-right: 1px solid $darkgrey;
-    padding: 10px 20px;
 
-    h2,
-    h4,
-    p{
-        font-family: roboto;
-        color: $darkgrey;
-    }
-}
-
-.temp-workshop-info-right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: end;
-    width: 50%;
-    border-right: 1px solid $darkgrey;
-    padding: 10px 20px;
-
-    .room-room-manager{
-        display: flex;
-        justify-content: flex-end;
-
-        .room{
-            margin-right: 15px;
-        }
-    }
-
-    p{
+    div{
+        margin: 20px 10px;
         font-family: roboto;
         color: $darkgrey;
 
@@ -238,17 +160,10 @@
             font-weight: 500;
         }
     }
-
-    .open{
-        color:green;
-    }
-
-    .closed{
-        color:red;
-    }
 }
 
-.temp-workshop-info-footer{
+
+.temp-notification-info-footer{
     background-color: $grey;
     height: 60px;
     display: flex;

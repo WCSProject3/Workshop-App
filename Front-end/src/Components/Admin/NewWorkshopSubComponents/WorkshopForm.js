@@ -14,6 +14,7 @@ const WorkshopForm = () => {
   const onSubmit = (data) => {
     console.log(data)
     const newObject = {
+      id: uuid(),
       title: data.title,
       status_open: data.status_open,
       date: data.date,

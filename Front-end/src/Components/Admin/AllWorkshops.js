@@ -12,7 +12,6 @@ const AllWorkshops = (date) => {
                 <button className="new-workshop-btn"><Link to='/new-workshop'>New Workshop</Link></button>
             </div>
             <div className="all-workshops-body">
-                <h2 className="all-workshops-title">Workshops List</h2>
                 <WorkshopFilters date={date} />
                 <WorkshopList /> 
             </div>

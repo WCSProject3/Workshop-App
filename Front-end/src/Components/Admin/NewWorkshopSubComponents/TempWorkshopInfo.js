@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { AttendeeContext } from "../../../Context/AttendeeContext";
 
 const TempWorkshopInfo = ({ tempWorkshop }) => {
-  const { confirmWorkshop, editTempWorkshop } = useContext(WorkshopContext);
+  const { confirmWorkshop, editTempWorkshop, deleteTempWorkshop } = useContext(WorkshopContext);
   const { speakers } = useContext(AttendeeContext);
   const { rooms } = useContext(RoomContext);
 
@@ -48,6 +48,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
     };
 
     confirmWorkshop(newObject);
+    deleteTempWorkshop(tempWorkshop.id)
   }
 
   console.log(tempWorkshop)
@@ -58,7 +59,10 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
           <div className="temp-workshop-info">
             <div className="temp-workshop-info-header">
               <div>{tempWorkshop.date}</div>
-              <button onClick={() => setEditMode(!editMode)}>Edit Workshop</button>
+              <div className="temp-workshop-info-header-btns">
+                <button onClick={() => setEditMode(!editMode)}>Edit Workshop</button>
+                <button onClick={() => deleteTempWorkshop(tempWorkshop.id)}>Delete Workshop</button>
+              </div>
             </div>
             <div className="temp-workshop-info-body">
               <div className="temp-workshop-info-left">
@@ -73,7 +77,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
                 </div>
                 <p><span>Room setup:</span> {tempWorkshop.room_type}</p>
                 <p><span>Room capacity:</span> {tempWorkshop.room_capacity}</p>
-                <p className={tempWorkshop.status_open === 1 ? "open" : "closed"}><span>Registrations:</span> {tempWorkshop.status_open === 1 ? "OPEN": "CLOSED"}</p>
+                <p className={tempWorkshop.status_open === "1" ? "open" : "closed"}><span>Registrations:</span> {tempWorkshop.status_open === "1" ? "OPEN": "CLOSED"}</p>
               </div>
             </div>
             <div className="temp-workshop-info-footer">

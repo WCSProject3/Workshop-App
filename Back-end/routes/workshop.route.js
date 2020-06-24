@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT w.id, w.title, w.date, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
+    connection.query('SELECT w.id, w.title, w.date, MONTHNAME(w.date) AS workshop_month, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -17,6 +17,56 @@ router.get('/', (req, res) => {
             res.json(results);
           }
     })
+});
+
+router.get('/months', (req, res) => {
+
+    connection.query('SELECT DISTINCT MONTHNAME(date) AS months FROM workshops ORDER BY months DESC', (err, results) => {
+        if (err) {
+            res.status(500).json({
+              error: err.message,
+              sql: err.sql,
+            });
+          } else {
+            res.json(results);
+          }
+    })
+});
+
+router.get('/:id', (req, res) => {
+
+  const workshopId = req.params.id;
+
+  console.log('workshopId')
+
+  connection.query('SELECT * FROM workshops WHERE id=?', [workshopId], (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
+});
+
+router.get('/:id/attendees', (req, res) => {
+
+  const workshopId = req.params.id;
+
+  //query to adapt from user_workshops with JOIN user & workshops tables
+
+  connection.query('SELECT * FROM user WHERE role_id=?', [workshopId], (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
 });
 
 router.post('/', (req, res) => {
@@ -45,8 +95,6 @@ router.post('/', (req, res) => {
       });
   });
 });
-
-
 
 
 module.exports = router;
