@@ -3,7 +3,10 @@ import { WorkshopContext } from '../../Context/WorkshopContext';
 
 const WorkshopFilters = () => {
 
-    const { allWorkshops, handleFilterDate } = useContext(WorkshopContext);
+    const { allWorkshops, handleFilterDate, months } = useContext(WorkshopContext);
+
+
+    console.log(months)
 
         return (  
             <div className="workshop-filters">
@@ -23,13 +26,13 @@ const WorkshopFilters = () => {
                           value={'All workshops'}>
                           All workshops
                       </option>
-                      {allWorkshops.map(workshop => {
+                      {months.map(month => {
                               return ( 
                               <option
-                              key={workshop.id}
-                              value={workshop.date}
+                              key={month.months}
+                              value={month.months}
                               >
-                                  {workshop.date}
+                                  {month.months}
                               </option>
                               )
                       })}
