@@ -6,7 +6,9 @@ export const UserContext = createContext();
 const UserContextProvider = (props) => {
   const [attendees, setAttendees] = useState([]);
   const [allAttendees, setAllattendees] = useState([]);
+  const [allAttendeesCopy, setAllattendeesCopy] = useState([]);
   const [speakers, setSpeakers] = useState([]);
+  const [searchValue, setsearchValue] = useState('')
 
   useEffect(() => {
     getSpeakers();
@@ -38,6 +40,7 @@ const UserContextProvider = (props) => {
       .then((response) => response.data)
       .then((allUsersList) => {
         setAllattendees(allUsersList)
+        setAllattendeesCopy(allUsersList)
       })
   };
 
@@ -55,12 +58,47 @@ const UserContextProvider = (props) => {
       }
     });
   }
+
+  const handleChangeSearch = (event) => {
+    const { value } = event.target;
+    console.log(value)
+    if(value.length){
+      const filteredUsers = allAttendees.filter((attendee) => {
+        const name = `${attendee.firstname} ${attendee.lastname}`
+        return name.toLowerCase().includes(value.toLowerCase());
+      });
+      setsearchValue(value)
+      setAllattendeesCopy(filteredUsers);
+    } else {
+      setsearchValue(value)
+      setAllattendeesCopy(allAttendees)
+    }
+  }
+
+  const deleteUser = (id, role) => {
+    console.log("id", id)
+    if(role === "speaker"){
+      axios
+        .delete(`/workshops/${id}`)
+        .then((response) => console.log(response))
+        .then(() => {
+          axios
+          .delete(`/users/${id}`)
+          .then((response) => console.log(response))
+        })
+    }
+    axios
+      .delete(`/users/${id}`)
+      .then((response) => console.log(response))
+
+      getAllUsers()
+  }
   
 
   return (
     <div>
       <UserContext.Provider
-        value={{ allAttendees, attendees, handleFilterAttendee, speakers }}>
+        value={{ allAttendees, attendees, handleFilterAttendee, speakers, allAttendeesCopy,searchValue, handleChangeSearch, deleteUser }}>
         {props.children}
       </UserContext.Provider>
     </div>
