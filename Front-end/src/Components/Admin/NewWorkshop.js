@@ -25,6 +25,8 @@ const NewWorkshop = () => {
         title: tempWorkshop.title,
         status_open: tempWorkshop.status_open,
         date: tempWorkshop.date,
+        starting_hour: tempWorkshop.starting_hour,
+        ending_hour: tempWorkshop.ending_hour,
         description: tempWorkshop.description,
         speaker_id: speaker_id[0].id,
         room: tempWorkshop.room,
