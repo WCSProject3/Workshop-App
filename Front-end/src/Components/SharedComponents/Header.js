@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AttendeeContext } from '../../Context/AttendeeContext'; //context to add state
+import { UserContext } from '../../Context/UserContext'; //context to add state
 import './Header.scss';
 
 const Header = () => {

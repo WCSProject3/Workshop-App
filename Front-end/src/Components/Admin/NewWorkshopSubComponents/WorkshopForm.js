@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { WorkshopContext } from "../../../Context/WorkshopContext";
-import { RoomContext } from "../../../Context/RoomContext";
 import uuid from "react-uuid";
-import { AttendeeContext } from "../../../Context/AttendeeContext";
+import { UserContext } from "../../../Context/UserContext";
 
 const WorkshopForm = () => {
   const { addTempWorkshop } = useContext(WorkshopContext);
-  const { speakers } = useContext(AttendeeContext);
-  const { rooms } = useContext(RoomContext);
+  const { speakers } = useContext(UserContext);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {

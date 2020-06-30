@@ -1,28 +1,13 @@
 import React, { useContext } from 'react';
-import { AttendeeContext } from '../../Context/AttendeeContext';
+import { UserContext } from '../../Context/UserContext';
 import { Link } from 'react-router-dom';
 import './NavBar.scss';
 import { WorkshopContext } from '../../Context/WorkshopContext';
 
 import MonthlySpeakers from './MonthlySpeakers'
 const NavBar = () => {
-  const { speakers } = useContext(AttendeeContext);
+  const { speakers } = useContext(UserContext);
   const { months } = useContext(WorkshopContext);
-
-  //to be generated with database instead of dummy data (coming from AttendeeContext)
-  const speakersList = speakers.map((speaker) => {
-    return (
-      <li>
-        <Link to='/AttendeeDetails'>
-          {`${speaker.firstname} ${speaker.lastname}`}
-        </Link>
-      </li>
-    );
-  });
-
-  console.log(months)
-
-  // Months will also be generated dynamicaly with backend
 
   return (
     <div className='nav'>
