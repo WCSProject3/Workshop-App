@@ -16,6 +16,8 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
       title: data.title,
       status_open: data.status_open,
       date: data.date,
+      startig_hour: data.startig_hour,
+      ending_hour: data.ending_hour,
       description: data.description,
       speaker: data.speaker,
       room: data.room,
@@ -37,6 +39,8 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
       title: tempWorkshop.title,
       status_open: tempWorkshop.status_open,
       date: tempWorkshop.date,
+      startig_hour: tempWorkshop.startig_hour,
+      ending_hour: tempWorkshop.ending_hour,
       description: tempWorkshop.description,
       speaker_id: speaker_id[0].id,
       room: tempWorkshop.room,
@@ -56,7 +60,10 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
         {!editMode && (
           <div className="temp-workshop-info">
             <div className="temp-workshop-info-header">
-              <div>{tempWorkshop.date}</div>
+              <div className="temp-workshop-date">
+                <div className="temp-date">{tempWorkshop.date}</div>
+                <div>{`${tempWorkshop.startig_hour}-${tempWorkshop.ending_hour}`}</div>
+              </div>
               <div className="temp-workshop-info-header-btns">
                 <button onClick={() => setEditMode(!editMode)}>Edit Workshop</button>
                 <button onClick={() => deleteTempWorkshop(tempWorkshop.id)}>Delete Workshop</button>
@@ -86,13 +93,15 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
         {editMode && (
           <form className="new-workshop-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="new-workshop-form-header">
-              <input
-                type="datetime-local"
-                placeholder="date"
-                name="date"
-                defaultValue={tempWorkshop.date}
-                ref={register}
-              />
+              <input type="date" placeholder="date" name="date" ref={register} />
+              <div className="hour-label-input">
+                <label htmlFor="startig_hour">starting at</label>
+                <input id="startig_hour" type="time" placeholder="hour" name="startig_hour" ref={register} />
+              </div>
+              <div className="hour-label-input">
+                <label htmlFor="ending_hour">finishing at</label>
+                <input id="ending_hour" type="time" placeholder="hour" name="ending_hour" ref={register} />
+              </div>
             </div>
             <div className="new-workshop-form-body">
               <div className="new-workshop-form-left">
