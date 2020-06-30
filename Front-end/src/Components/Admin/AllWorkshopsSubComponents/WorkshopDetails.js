@@ -3,12 +3,16 @@ import React from 'react';
 const WorkshopDetails = (workshop) => {
 
     const workshopDate = workshop.date.substring(0, 10);
-    const workshopHour = workshop.date.substring(11, 16);
+    const starting_at = workshop.starting_hour.substring(0, 5);
+    const ending_at = workshop.ending_hour.substring(0, 5);
 
     console.log(workshop)
         return (
             <tr>
-                <td>{`${workshopDate} ${workshopHour} `}</td>
+                <td>
+                    <div>{workshopDate}</div>
+                    <div>{`${starting_at}-${ending_at}`}</div> 
+                </td>
                 <td>{workshop.title}</td>
                 <td>{workshop.workshop_speaker}</td>
                 <td>{workshop.room_capacity}</td>

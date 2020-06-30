@@ -16,6 +16,8 @@ const WorkshopForm = () => {
       title: data.title,
       status_open: data.status_open,
       date: data.date,
+      startig_hour: data.startig_hour,
+      ending_hour: data.ending_hour,
       description: data.description,
       speaker: data.speaker,
       room: data.room,
@@ -32,7 +34,15 @@ const WorkshopForm = () => {
   return (
     <form className="new-workshop-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="new-workshop-form-header">
-        <input type="datetime-local" placeholder="date" name="date" ref={register} />
+        <input type="date" placeholder="date" name="date" ref={register} />
+        <div className="hour-label-input">
+          <label htmlFor="startig_hour">starting at</label>
+          <input id="startig_hour" type="time" placeholder="hour" name="startig_hour" ref={register} />
+        </div>
+        <div className="hour-label-input">
+          <label htmlFor="ending_hour">finishing at</label>
+          <input id="ending_hour" type="time" placeholder="hour" name="ending_hour" ref={register} />
+        </div>
       </div>
       <div className="new-workshop-form-body">
         <div className="new-workshop-form-left">

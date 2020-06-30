@@ -19,6 +19,8 @@ const WorkshopContextProvider = (props) => {
       .get("/workshops")
       .then((response) => response.data)
       .then((workshopsList) => {
+        console.log("here")
+        console.log(workshopsList)
         setWorkshops(workshopsList)
         setAllWorkshops(workshopsList)
       });
