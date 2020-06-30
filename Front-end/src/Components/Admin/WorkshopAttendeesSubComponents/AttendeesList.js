@@ -3,11 +3,9 @@ import AttendeeDetails from './AttendeeDetails';
 import axios from 'axios';
 
 
-const AttendeeList = ( {workshopId }) => {
+const AttendeeList = ( { workshopId } ) => {
 
     const [attendees, setAttendees] = useState([]);
-
-    console.log(workshopId, attendees);
 
     useEffect(() => {
         axios

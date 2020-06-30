@@ -9,11 +9,8 @@ const MonthlySpeakers = ({ month }) => {
 
 
     const filteredWorkshops = workshops.filter( workshop => {
-       return workshop.workshop_month === month
+    return workshop.workshop_month === month
     })
-    console.log(month)
-    console.log(filteredWorkshops)
-
 
     return(
             filteredWorkshops.map(workshop => {

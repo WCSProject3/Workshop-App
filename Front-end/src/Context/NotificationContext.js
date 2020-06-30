@@ -13,18 +13,17 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-    console.log(tempNotifications)
 }, [tempNotifications]);
 
 const getNotifications = () => {
     axios
-      .get("/notifications")
-      .then((response) => response.data)
-      .then((notificationsList) => {
+    .get("/notifications")
+    .then((response) => response.data)
+    .then((notificationsList) => {
         setNotifications(notificationsList)
         setAllNotifications(notificationsList)
-      });
-  }
+    });
+}
 
 const addTempNotification = (newObject) => {
     setTempNotifications([...tempNotifications, newObject]);
@@ -32,8 +31,8 @@ const addTempNotification = (newObject) => {
 
 const confirmNotification = (newObject) => {
     axios
-      .post('/notifications', newObject)
-      .then((response) => console.log(response))
+    .post('/notifications', newObject)
+    .then((response) => console.log(response))
 
     getNotifications();
 };
@@ -42,9 +41,8 @@ const editNotification = (newObject) => {
     const notificationsList = [...tempNotifications];
     const i = notificationsList.findIndex((notification) => notification.id === newObject.id);
     notificationsList.splice(i, 1, newObject);
-    console.log("workshops list before", notificationsList)
     setTempNotifications(notificationsList);
-  };
+};
 
 const deleteTempNotification = (id) => {
     const notificationList = tempNotifications.filter(notification => notification.id !== id)

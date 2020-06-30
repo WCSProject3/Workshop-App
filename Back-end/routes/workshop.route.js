@@ -37,8 +37,6 @@ router.get('/:id', (req, res) => {
 
   const workshopId = req.params.id;
 
-  console.log('workshopId')
-
   connection.query('SELECT * FROM workshops WHERE id=?', [workshopId], (err, results) => {
       if (err) {
           res.status(500).json({
@@ -57,7 +55,7 @@ router.get('/:id/attendees', (req, res) => {
 
   //query to adapt from user_workshops with JOIN user & workshops tables
 
-  connection.query('SELECT * FROM user WHERE role_id=?', [workshopId], (err, results) => {
+  connection.query('SELECT u.firstname FROM user u JOIN user_workshops u_w ON u_w.user_id = u.id JOIN workshops w ON u_w.workshop_id = w.id where w.id = ?', [workshopId], (err, results) => {
       if (err) {
           res.status(500).json({
             error: err.message,

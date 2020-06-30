@@ -7,13 +7,11 @@ const WorkshopAttendees = ( props ) => {
 
     const workshopId = props.match.params.id;
 
-    console.log(workshopId)
-
     return ( 
         <div>
-            {/*<WorkshopInfo workshopId={workshopId}/>
+            <WorkshopInfo workshopId={workshopId}/>
             <AttendeesFilter role={props.role} />
-            <AttendeesList workshopId={workshopId}/> */}
+            <AttendeesList workshopId={workshopId}/>
         </div>
     );
 }
