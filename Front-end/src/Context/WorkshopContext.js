@@ -59,15 +59,15 @@ const WorkshopContextProvider = (props) => {
     setTempWorkshop(workshopList);
   };
 
-  const handleFilterDate = (date) => {
+  const handleFilterDate = (month) => {
     axios.get('/workshops').then((response) => {
-      if (date === 'All workshops') {
+      if (month === 'All workshops') {
         setWorkshops(response.data);
         return workshops;
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
-          const workshopDate = workshop.date;
-          return workshopDate === date;
+          const workshopMonth = workshop.workshop_month;
+          return workshopMonth === month;
         });
         setWorkshops(filterdResult);
         setAllWorkshops(response.data);
