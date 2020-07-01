@@ -67,33 +67,6 @@ router.get('/:id/attendees', (req, res) => {
   })
 });
 
-router.delete('/:id', (req, res) => {
-
-  const id = req.params.id;
-
-  connection.query('DELETE FROM workshops WHERE speaker_id = ?', [id], (err, results) => {
-      if(err) {
-        console.log(err)
-          return res.status(500).json({
-                   error: err.message,
-                   sql: err.sql,
-                  });
-      }
-      if(results.affectedRows === 0){
-        console.log("not found")
-
-        return res
-        .status(404)
-        .json({msg: 'user does not exist'})
-      }
-      console.log("succesful")
-
-      return res
-      .status(201)
-      .json(results)
-  })
-});
-
 router.post('/', (req, res) => {
 
   const formData = req.body;
