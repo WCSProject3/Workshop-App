@@ -7,6 +7,9 @@ const WorkshopInfo = ( { workshopId } ) => {
 
     const [workshop, setWorkshop] = useState([]);
 
+    console.log('url id', workshopId)
+
+
     const getWorkshop = () => {
         axios
             .get(`/workshops/${workshopId}`)
@@ -15,7 +18,7 @@ const WorkshopInfo = ( { workshopId } ) => {
 
     useEffect(() => {
         getWorkshop();
-    }, []);
+    }, [workshopId]);
 
 
         return (
