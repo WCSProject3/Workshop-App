@@ -11,7 +11,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
 
   const [editMode, setEditMode] = useState(false);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
     const newObject = {
@@ -57,7 +57,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
     deleteTempWorkshop(tempWorkshop.id);
   };
 
-  console.log(tempWorkshop);
+  const date_errors = errors.date || errors.starting_hour || errors.ending_hour
 
   return (
     <div>
@@ -115,41 +115,54 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
       {editMode && (
         <form className='new-workshop-form' onSubmit={handleSubmit(onSubmit)}>
           <div className='new-workshop-form-header'>
-            <input type='date' placeholder='date' name='date' ref={register} />
+            <input type='date' 
+              style={errors.date && ({border: "1px solid #3B65B0"})} 
+              placeholder='date' 
+              name='date' 
+              defaultValue={tempWorkshop.date}
+              ref={register({ required: true })} />
             <div className='hour-label-input'>
               <label htmlFor='starting_hour'>starting at</label>
               <input
+                style={errors.starting_hour && ({border: "1px solid #3B65B0"})} 
                 id='starting_hour'
                 type='time'
                 placeholder='hour'
                 name='starting_hour'
-                ref={register}
+                defaultValue={tempWorkshop.starting_hour}
+                ref={register({ required: true })}
               />
             </div>
             <div className='hour-label-input'>
               <label htmlFor='ending_hour'>finishing at</label>
               <input
+                style={errors.ending_hour && ({border: "1px solid #3B65B0"})} 
                 id='ending_hour'
                 type='time'
                 placeholder='hour'
                 name='ending_hour'
-                ref={register}
+                defaultValue={tempWorkshop.ending_hour}
+                ref={register({ required: true })}
               />
             </div>
+            {date_errors && <p>please add date and hours</p>}
           </div>
           <div className='new-workshop-form-body'>
             <div className='new-workshop-form-left'>
               <input
+                style={errors.title && ({border: "1px solid #3B65B0"})} 
                 type='text'
                 placeholder='Title'
                 name='title'
                 defaultValue={tempWorkshop.title}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.title && <p>please add title</p>}
               <select
                 name='speaker'
                 defaultValue={tempWorkshop.speaker}
-                ref={register}>
+                ref={register({ required: true })}>
+                  <option value="">To:</option>
                 {speakers.map((speaker) => {
                   return (
                     <option
@@ -157,41 +170,48 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
                   );
                 })}
               </select>
+              {errors.speaker && <p>please choose speaker</p>}
               <input
+                style={errors.description && ({border: "1px solid #3B65B0"})} 
                 type='text'
                 placeholder='Description'
                 name='description'
                 defaultValue={tempWorkshop.description}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.description && <p>please add a description</p>}
             </div>
             <div className='new-workshop-form-right'>
               <input
+                style={errors.room && ({border: "1px solid #3B65B0"})} 
                 type='text'
                 placeholder='Room'
                 name='room'
                 defaultValue={tempWorkshop.room}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.room && <p>please add a room</p>}
               <input
+                style={errors.room_manager && ({border: "1px solid #3B65B0"})} 
                 type='text'
                 placeholder='Room Manager'
                 name='room_manager'
                 defaultValue={tempWorkshop.room_manager}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.room_manager && <p>please add a room manager</p>}
               <div className='new-workshop-form-selects'>
                 <select
                   defaultValue={tempWorkshop.room_type}
                   name='room_type'
-                  ref={register}>
+                  ref={register({ required: true })}>
                   <option value='Banquet'>Banquet</option>
                   <option value='Classroom'>Classroom</option>
                 </select>
                 <select
                   defaultValue={tempWorkshop.room_capacity}
                   name='room_capacity'
-                  ref={register}>
+                  ref={register({ required: true })}>
                   <option value='10'>10 pax</option>
                   <option value='20'>20 pax</option>
                   <option value='30'>30 pax</option>
@@ -202,7 +222,7 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
                 <select
                   defaultValue={tempWorkshop.status_open}
                   name='status_open'
-                  ref={register}>
+                  ref={register({ required: true })}>
                   <option value='1'>Open</option>
                   <option value='0'>Closed</option>
                 </select>
