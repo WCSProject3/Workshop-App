@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT w.id, w.title, w.date, MONTHNAME(w.date) AS workshop_month, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
+    connection.query('SELECT w.id, w.title, w.date, w.starting_hour, w.ending_hour, MONTHNAME(w.date) AS workshop_month, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -64,6 +64,33 @@ router.get('/:id/attendees', (req, res) => {
         } else {
           res.json(results);
         }
+  })
+});
+
+router.delete('/:id', (req, res) => {
+
+  const id = req.params.id;
+
+  connection.query('DELETE FROM workshops WHERE speaker_id = ?', [id], (err, results) => {
+      if(err) {
+        console.log(err)
+          return res.status(500).json({
+                   error: err.message,
+                   sql: err.sql,
+                  });
+      }
+      if(results.affectedRows === 0){
+        console.log("not found")
+
+        return res
+        .status(404)
+        .json({msg: 'user does not exist'})
+      }
+      console.log("succesful")
+
+      return res
+      .status(201)
+      .json(results)
   })
 });
 

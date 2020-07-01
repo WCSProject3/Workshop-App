@@ -58,11 +58,28 @@
         margin: 10px 0;
         height: 25px;
         outline: none;
-        padding-left: 5px;
         border: 2px solid $grey;
         border-radius: 5px;
         color: $darkgrey;
     }
+    
+    .hour-label-input{
+        display: flex;
+        align-items: center;
+
+        
+
+        label{
+            color: $darkgrey;
+            padding: 0 5px 0 15px;
+            margin: 0;
+            width: fit-content;
+            font-family: roboto;
+
+        }
+    }
+
+    
 }  
 
 .new-workshop-form-body{
@@ -184,6 +201,14 @@
     font-weight: 450;
     font-size: 16px;
     color: $blue;
+
+    .temp-workshop-date{
+        display: flex;
+
+        .temp-date{
+            margin-right: 10px;
+        }
+    }
 
     button{
         margin-right: 10px;
