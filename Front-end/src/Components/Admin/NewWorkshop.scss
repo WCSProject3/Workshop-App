@@ -55,7 +55,7 @@
     input{
         box-sizing: border-box;
         width: fit-content;
-        margin: 10px 0;
+        margin: 10px 10px 10px 0 ;
         height: 25px;
         outline: none;
         border: 2px solid $grey;
@@ -119,6 +119,17 @@
         border-radius: 5px;
         color: $darkgrey;
     }
+
+    p{
+        box-sizing: border-box;
+        width: 70%;
+        margin: 0;
+        align-self: flex-start;
+        height: fit-content;
+        font-family: roboto;
+        font-weight: 400;
+        color: $blue;
+    }
 }
 
 .new-workshop-form-right{
@@ -138,6 +149,17 @@
         border: 2px solid $grey;
         border-radius: 5px;
         color: $darkgrey;
+    }
+
+    p{
+        box-sizing: border-box;
+        width: 70%;
+        margin: 0;
+        align-self: flex-start;
+        height: fit-content;
+        font-family: roboto;
+        font-weight: 400;
+        color: $blue;
     }
 
     .new-workshop-form-selects{
