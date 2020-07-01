@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { WorkshopContext } from '../../Context/WorkshopContext';
+import SearchBar from './SearchBar'
 
 const WorkshopFilters = () => {
 
-    const { allWorkshops, handleFilterDate, months } = useContext(WorkshopContext);
+    const { allWorkshops, handleFilterDate, months, handleChangeSearch, searchValue } = useContext(WorkshopContext);
 
 
     console.log(months)
@@ -11,13 +12,7 @@ const WorkshopFilters = () => {
         return (  
             <div className="workshop-filters">
                 <div className="filter-select">
-                  <label>Show</label>
-                  <select>
-                      <option>10</option>
-                      <option>20</option>
-                      <option>30</option>
-                      <option>all</option>
-                  </select>
+                    <SearchBar handleChange={handleChangeSearch} searchValue={searchValue} />
                 </div>
                 <div className="filter-select">
                   <label>Filter by Date </label>

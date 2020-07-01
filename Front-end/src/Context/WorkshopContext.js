@@ -7,7 +7,10 @@ const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
+  const [allWorkshopsCopy, setAllWorkshopsCopy] = useState([]);
   const [months, setMonths] = useState([]);
+  const [searchValue, setsearchValue] = useState('')
+
 
   useEffect(() => {
     getWorkshops();
@@ -21,8 +24,11 @@ const WorkshopContextProvider = (props) => {
       .then((workshopsList) => {
         setWorkshops(workshopsList);
         setAllWorkshops(workshopsList);
+        setAllWorkshopsCopy(workshopsList);
       });
   };
+
+  console.log(allWorkshops)
 
   const getMonth = () => {
     axios
@@ -75,6 +81,21 @@ const WorkshopContextProvider = (props) => {
     });
   };
 
+  const handleChangeSearch = (event) => {
+    const { value } = event.target;
+    console.log(value)
+    if(value.length){
+      const filteredWorkshops = allWorkshops.filter((workshop) => {
+        return workshop.title.toLowerCase().includes(value.toLowerCase()) ||workshop.workshop_speaker.toLowerCase().includes(value.toLowerCase()) ;
+      });
+      setsearchValue(value)
+      setAllWorkshopsCopy(filteredWorkshops);
+    } else {
+      setsearchValue(value)
+      setAllWorkshopsCopy(allWorkshops)
+    }
+  }
+
   return (
     <div>
       <WorkshopContext.Provider
@@ -89,6 +110,8 @@ const WorkshopContextProvider = (props) => {
           deleteTempWorkshop,
           months,
           setTempWorkshop,
+          allWorkshopsCopy,
+          handleChangeSearch
         }}>
         {props.children}
       </WorkshopContext.Provider>
