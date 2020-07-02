@@ -23,8 +23,11 @@ const WorkshopContextProvider = (props) => {
       .then((workshopsList) => {
         setWorkshops(workshopsList);
         setAllWorkshops(workshopsList);
+        setAllWorkshopsCopy(workshopsList);
       });
   };
+
+  console.log(allWorkshops);
 
   const getMonth = () => {
     axios
