@@ -1,20 +1,18 @@
 import React, { useContext } from 'react';
 import { WorkshopContext } from '../../Context/WorkshopContext';
+import SearchBar from './SearchBar'
 
 const WorkshopFilters = () => {
 
-    const { allWorkshops, handleFilterDate } = useContext(WorkshopContext);
+    const { allWorkshops, handleFilterDate, months, handleChangeSearch, searchValue } = useContext(WorkshopContext);
+
+
+    console.log(months)
 
         return (  
             <div className="workshop-filters">
                 <div className="filter-select">
-                  <label>Show</label>
-                  <select>
-                      <option>10</option>
-                      <option>20</option>
-                      <option>30</option>
-                      <option>all</option>
-                  </select>
+                    <SearchBar handleChange={handleChangeSearch} searchValue={searchValue} />
                 </div>
                 <div className="filter-select">
                   <label>Filter by Date </label>
@@ -23,13 +21,13 @@ const WorkshopFilters = () => {
                           value={'All workshops'}>
                           All workshops
                       </option>
-                      {allWorkshops.map(workshop => {
+                      {months.map(month => {
                               return ( 
                               <option
-                              key={workshop.id}
-                              value={workshop.date}
+                              key={month.months}
+                              value={month.months}
                               >
-                                  {workshop.date}
+                                  {month.months}
                               </option>
                               )
                       })}

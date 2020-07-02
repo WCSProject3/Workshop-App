@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT w.id, w.title, w.date, MONTHNAME(w.date) AS workshop_month, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
+    connection.query('SELECT w.id, w.title, w.date, w.starting_hour, w.ending_hour, MONTHNAME(w.date) AS workshop_month, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -37,8 +37,6 @@ router.get('/:id', (req, res) => {
 
   const workshopId = req.params.id;
 
-  console.log('workshopId')
-
   connection.query('SELECT * FROM workshops WHERE id=?', [workshopId], (err, results) => {
       if (err) {
           res.status(500).json({
@@ -57,8 +55,8 @@ router.get('/:id/attendees', (req, res) => {
 
   //query to adapt from user_workshops with JOIN user & workshops tables
 
-  connection.query('SELECT * FROM user WHERE role_id=?', [workshopId], (err, results) => {
-      if (err) {
+  connection.query('SELECT u.firstname, u.lastname, u.email, u.position, u.company, u.country FROM user u JOIN user_workshops u_w ON u_w.user_id = u.id JOIN workshops w ON u_w.workshop_id = w.id where w.id = ?', [workshopId], (err, results) => {
+    if (err) {
           res.status(500).json({
             error: err.message,
             sql: err.sql,

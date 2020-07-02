@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT * FROM user', (err, results) => {
+    connection.query('SELECT u.*, r.role FROM user u JOIN role r ON u.role_id=r.id', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -34,6 +34,33 @@ router.get('/speakers', (req, res) => {
             res.json(results);
           }
     })
+});
+
+router.delete('/:id', (req, res) => {
+
+  const id = req.params.id;
+
+  connection.query('DELETE FROM user WHERE id = ?', [id], (err, results) => {
+      if(err) {
+        console.log(err)
+          return res.status(500).json({
+                   error: err.message,
+                   sql: err.sql,
+                  });
+      }
+      if(results.affectedRows === 0){
+        console.log("not found")
+
+        return res
+        .status(404)
+        .json({msg: 'user does not exist'})
+      }
+      console.log("succesful")
+
+      return res
+      .status(201)
+      .json(results)
+  })
 });
 
 

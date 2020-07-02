@@ -82,6 +82,18 @@
         color: $darkgrey;
     }
 
+    .content{
+        box-sizing: border-box;
+        width: 70%;
+        margin: 20px auto;
+        height: 60px;
+        outline: none;
+        padding-left: 5px;
+        border: 2px solid $grey;
+        border-radius: 5px;
+        color: $darkgrey;
+    }
+
     select{
         box-sizing: border-box;
         align-self: flex-start;
@@ -92,6 +104,39 @@
         border: 2px solid $grey;
         border-radius: 5px;
         color: $darkgrey;
+    }
+
+    p{
+        box-sizing: border-box;
+        width: 70%;
+        margin: auto;
+        align-self: flex-start;
+        height: fit-content;
+        font-family: roboto;
+        font-weight: 400;
+        color: $blue;
+    }
+    
+    .schedule{
+        display: flex;
+        align-self: flex-start;
+        width: 70%;
+        margin: 20px auto;
+        align-items: center;
+
+        label{
+            width: fit-content;
+            align-self: flex-start;
+            padding-left: 0;
+            font-family: roboto;
+            font-weight: 500;
+            color: $darkgrey;
+        }
+
+        input{
+            width: fit-content;
+            margin: 0 16px 0 0;
+        }
     }
 }
 
