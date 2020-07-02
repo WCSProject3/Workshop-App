@@ -3,7 +3,6 @@ import { WorkshopContext } from "../../../Context/WorkshopContext";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../Context/UserContext";
 import Modal from "../Modals/Modal";
-import MessageModal from "../Modals/MessageModal";
 
 const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
   const { confirmWorkshop, editTempWorkshop, deleteTempWorkshop } = useContext(
@@ -89,9 +88,7 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
               <button onClick={() => setEditMode(!editMode)}>
                 Edit Workshop
               </button>
-              <button onClick={() => deleteTempWorkshop(tempWorkshop.id)}>
-                Delete Workshop
-              </button>
+              <button onClick={toggleModal}>Delete Workshop</button>
             </div>
           </div>
           <div className="temp-workshop-info-body">
