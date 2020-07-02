@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const WorkshopContext = createContext();
 
@@ -9,8 +9,7 @@ const WorkshopContextProvider = (props) => {
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [allWorkshopsCopy, setAllWorkshopsCopy] = useState([]);
   const [months, setMonths] = useState([]);
-  const [searchValue, setsearchValue] = useState('')
-
+  const [searchValue, setsearchValue] = useState("");
 
   useEffect(() => {
     getWorkshops();
@@ -19,7 +18,7 @@ const WorkshopContextProvider = (props) => {
 
   const getWorkshops = () => {
     axios
-      .get('/workshops')
+      .get("/workshops")
       .then((response) => response.data)
       .then((workshopsList) => {
         setWorkshops(workshopsList);
@@ -28,11 +27,11 @@ const WorkshopContextProvider = (props) => {
       });
   };
 
-  console.log(allWorkshops)
+  console.log(allWorkshops);
 
   const getMonth = () => {
     axios
-      .get('/workshops/months')
+      .get("/workshops/months")
       .then((response) => response.data)
       .then((monthsList) => {
         console.log(monthsList);
@@ -46,7 +45,7 @@ const WorkshopContextProvider = (props) => {
 
   const confirmWorkshop = (newObject) => {
     axios
-      .post('/workshops', newObject)
+      .post("/workshops", newObject)
       .then((response) => console.log(response));
 
     getWorkshops();
@@ -56,7 +55,7 @@ const WorkshopContextProvider = (props) => {
     const workshopsList = [...tempWorkshops];
     const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
     workshopsList.splice(i, 1, newObject);
-    console.log('workshops list before', workshopsList);
+    console.log("workshops list before", workshopsList);
     setTempWorkshop(workshopsList);
   };
 
@@ -66,8 +65,8 @@ const WorkshopContextProvider = (props) => {
   };
 
   const handleFilterDate = (month) => {
-    axios.get('/workshops').then((response) => {
-      if (month === 'All workshops') {
+    axios.get("/workshops").then((response) => {
+      if (month === "All workshops") {
         setWorkshops(response.data);
         return workshops;
       } else {
@@ -83,18 +82,21 @@ const WorkshopContextProvider = (props) => {
 
   const handleChangeSearch = (event) => {
     const { value } = event.target;
-    console.log(value)
-    if(value.length){
+    console.log(value);
+    if (value.length) {
       const filteredWorkshops = allWorkshops.filter((workshop) => {
-        return workshop.title.toLowerCase().includes(value.toLowerCase()) ||workshop.workshop_speaker.toLowerCase().includes(value.toLowerCase()) ;
+        return (
+          workshop.title.toLowerCase().includes(value.toLowerCase()) ||
+          workshop.workshop_speaker.toLowerCase().includes(value.toLowerCase())
+        );
       });
-      setsearchValue(value)
+      setsearchValue(value);
       setAllWorkshopsCopy(filteredWorkshops);
     } else {
-      setsearchValue(value)
-      setAllWorkshopsCopy(allWorkshops)
+      setsearchValue(value);
+      setAllWorkshopsCopy(allWorkshops);
     }
-  }
+  };
 
   return (
     <div>
@@ -111,8 +113,9 @@ const WorkshopContextProvider = (props) => {
           months,
           setTempWorkshop,
           allWorkshopsCopy,
-          handleChangeSearch
-        }}>
+          handleChangeSearch,
+        }}
+      >
         {props.children}
       </WorkshopContext.Provider>
     </div>
