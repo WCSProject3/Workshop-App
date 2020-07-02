@@ -1,14 +1,19 @@
 import React from "react";
 import NotificationForm from "./NewNotificationSubComponents/NotificationForm";
 import TempNotification from "./NewNotificationSubComponents/TempNotification";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { NotificationContext } from "../../Context/NotificationContext";
 import { Link } from "react-router-dom";
 import "./NewNotification.scss";
 import MessageModal from "./Modals/MessageModal";
 
 const NewNotification = () => {
-  const { tempNotifications } = useContext(NotificationContext);
+  const {
+    tempNotifications,
+    confirmNotification,
+    setTempNotifications,
+  } = useContext(NotificationContext);
+
   const [isMessageModalDisplayed, setMessageModalVisibility] = useState(false);
 
   const toggleMessageModal = () => {
@@ -17,6 +22,34 @@ const NewNotification = () => {
     console.log("ITS WORKING");
   };
 
+  const handleConfirmAllNotifications = () =>
+    tempNotifications.map((tempNotification) => {
+      let to_id = null;
+
+      switch (tempNotification.to) {
+        case "All":
+          to_id = 1;
+          break;
+        case "All Attendees":
+          to_id = 2;
+          break;
+        case "All Speakers":
+          to_id = 3;
+          break;
+      }
+
+      const newObject = {
+        subject: tempNotification.subject,
+        content: tempNotification.content,
+        state: tempNotification.state,
+        send_to_id: to_id,
+        date: tempNotification.date,
+      };
+
+      confirmNotification(newObject);
+      setTempNotifications([]);
+    });
+
   return (
     <div className="new-notifications-body">
       <div className="new-notifications-header">
@@ -24,12 +57,17 @@ const NewNotification = () => {
         <button className="all-notifications-btn">
           <Link to="/all-notifications">All Notifications</Link>
         </button>
-        <button className="confirm-all-btn">Confirm All</button>
-      </div>
-      <div>
-        {isMessageModalDisplayed && (
-          <MessageModal content="Your Notification was successfully added" />
-        )}
+        <button
+          className="confirm-all-btn"
+          onClick={handleConfirmAllNotifications}
+        >
+          Confirm All
+        </button>
+        <div>
+          {isMessageModalDisplayed && (
+            <MessageModal content="Your Notification was successfully added" />
+          )}
+        </div>
       </div>
       {tempNotifications.map((tempNotification) => {
         return (

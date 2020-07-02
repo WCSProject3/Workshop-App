@@ -7,7 +7,9 @@ const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
+  const [allWorkshopsCopy, setAllWorkshopsCopy] = useState([]);
   const [months, setMonths] = useState([]);
+  const [searchValue, setsearchValue] = useState("");
 
   useEffect(() => {
     getWorkshops();
@@ -59,20 +61,38 @@ const WorkshopContextProvider = (props) => {
     setTempWorkshop(workshopList);
   };
 
-  const handleFilterDate = (date) => {
+  const handleFilterDate = (month) => {
     axios.get("/workshops").then((response) => {
-      if (date === "All workshops") {
+      if (month === "All workshops") {
         setWorkshops(response.data);
         return workshops;
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
-          const workshopDate = workshop.date;
-          return workshopDate === date;
+          const workshopMonth = workshop.workshop_month;
+          return workshopMonth === month;
         });
         setWorkshops(filterdResult);
         setAllWorkshops(response.data);
       }
     });
+  };
+
+  const handleChangeSearch = (event) => {
+    const { value } = event.target;
+    console.log(value);
+    if (value.length) {
+      const filteredWorkshops = allWorkshops.filter((workshop) => {
+        return (
+          workshop.title.toLowerCase().includes(value.toLowerCase()) ||
+          workshop.workshop_speaker.toLowerCase().includes(value.toLowerCase())
+        );
+      });
+      setsearchValue(value);
+      setAllWorkshopsCopy(filteredWorkshops);
+    } else {
+      setsearchValue(value);
+      setAllWorkshopsCopy(allWorkshops);
+    }
   };
 
   return (
@@ -88,6 +108,9 @@ const WorkshopContextProvider = (props) => {
           editTempWorkshop,
           deleteTempWorkshop,
           months,
+          setTempWorkshop,
+          allWorkshopsCopy,
+          handleChangeSearch,
         }}
       >
         {props.children}

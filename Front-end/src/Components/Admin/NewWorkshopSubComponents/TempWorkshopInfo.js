@@ -20,13 +20,15 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
     setModalVisibility(!isModalDisplayed);
   };
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
     const newObject = {
       title: data.title,
       status_open: data.status_open,
       date: data.date,
+      starting_hour: data.starting_hour,
+      ending_hour: data.ending_hour,
       description: data.description,
       speaker: data.speaker,
       room: data.room,
@@ -50,6 +52,8 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
       title: tempWorkshop.title,
       status_open: tempWorkshop.status_open,
       date: tempWorkshop.date,
+      starting_hour: tempWorkshop.starting_hour,
+      ending_hour: tempWorkshop.ending_hour,
       description: tempWorkshop.description,
       speaker_id: speaker_id[0].id,
       room: tempWorkshop.room,
@@ -58,11 +62,11 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
       room_type_id: room_type_id,
     };
     confirmWorkshop(newObject);
-    toggleMessageModal();
     deleteTempWorkshop(tempWorkshop.id);
+    toggleMessageModal();
   };
 
-  console.log(tempWorkshop);
+  const date_errors = errors.date || errors.starting_hour || errors.ending_hour;
 
   return (
     <div>
@@ -77,12 +81,17 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
       {!editMode && (
         <div className="temp-workshop-info">
           <div className="temp-workshop-info-header">
-            <div>{tempWorkshop.date}</div>
+            <div className="temp-workshop-date">
+              <div className="temp-date">{tempWorkshop.date}</div>
+              <div>{`${tempWorkshop.starting_hour}-${tempWorkshop.ending_hour}`}</div>
+            </div>
             <div className="temp-workshop-info-header-btns">
               <button onClick={() => setEditMode(!editMode)}>
                 Edit Workshop
               </button>
-              <button onClick={toggleModal}>Delete Workshop</button>
+              <button onClick={() => deleteTempWorkshop(tempWorkshop.id)}>
+                Delete Workshop
+              </button>
             </div>
           </div>
           <div className="temp-workshop-info-body">
@@ -123,27 +132,56 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
         <form className="new-workshop-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="new-workshop-form-header">
             <input
-              type="datetime-local"
+              type="date"
+              style={errors.date && { border: "1px solid #3B65B0" }}
               placeholder="date"
               name="date"
               defaultValue={tempWorkshop.date}
-              ref={register}
+              ref={register({ required: true })}
             />
+            <div className="hour-label-input">
+              <label htmlFor="starting_hour">starting at</label>
+              <input
+                style={errors.starting_hour && { border: "1px solid #3B65B0" }}
+                id="starting_hour"
+                type="time"
+                placeholder="hour"
+                name="starting_hour"
+                defaultValue={tempWorkshop.starting_hour}
+                ref={register({ required: true })}
+              />
+            </div>
+            <div className="hour-label-input">
+              <label htmlFor="ending_hour">finishing at</label>
+              <input
+                style={errors.ending_hour && { border: "1px solid #3B65B0" }}
+                id="ending_hour"
+                type="time"
+                placeholder="hour"
+                name="ending_hour"
+                defaultValue={tempWorkshop.ending_hour}
+                ref={register({ required: true })}
+              />
+            </div>
+            {date_errors && <p>please add date and hours</p>}
           </div>
           <div className="new-workshop-form-body">
             <div className="new-workshop-form-left">
               <input
+                style={errors.title && { border: "1px solid #3B65B0" }}
                 type="text"
                 placeholder="Title"
                 name="title"
                 defaultValue={tempWorkshop.title}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.title && <p>please add title</p>}
               <select
                 name="speaker"
                 defaultValue={tempWorkshop.speaker}
-                ref={register}
+                ref={register({ required: true })}
               >
+                <option value="">To:</option>
                 {speakers.map((speaker) => {
                   return (
                     <option
@@ -152,34 +190,41 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
                   );
                 })}
               </select>
+              {errors.speaker && <p>please choose speaker</p>}
               <input
+                style={errors.description && { border: "1px solid #3B65B0" }}
                 type="text"
                 placeholder="Description"
                 name="description"
                 defaultValue={tempWorkshop.description}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.description && <p>please add a description</p>}
             </div>
             <div className="new-workshop-form-right">
               <input
+                style={errors.room && { border: "1px solid #3B65B0" }}
                 type="text"
                 placeholder="Room"
                 name="room"
                 defaultValue={tempWorkshop.room}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.room && <p>please add a room</p>}
               <input
+                style={errors.room_manager && { border: "1px solid #3B65B0" }}
                 type="text"
                 placeholder="Room Manager"
                 name="room_manager"
                 defaultValue={tempWorkshop.room_manager}
-                ref={register}
+                ref={register({ required: true })}
               />
+              {errors.room_manager && <p>please add a room manager</p>}
               <div className="new-workshop-form-selects">
                 <select
                   defaultValue={tempWorkshop.room_type}
                   name="room_type"
-                  ref={register}
+                  ref={register({ required: true })}
                 >
                   <option value="Banquet">Banquet</option>
                   <option value="Classroom">Classroom</option>
@@ -187,7 +232,7 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
                 <select
                   defaultValue={tempWorkshop.room_capacity}
                   name="room_capacity"
-                  ref={register}
+                  ref={register({ required: true })}
                 >
                   <option value="10">10 pax</option>
                   <option value="20">20 pax</option>
@@ -199,7 +244,7 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
                 <select
                   defaultValue={tempWorkshop.status_open}
                   name="status_open"
-                  ref={register}
+                  ref={register({ required: true })}
                 >
                   <option value="1">Open</option>
                   <option value="0">Closed</option>

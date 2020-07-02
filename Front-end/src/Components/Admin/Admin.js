@@ -7,6 +7,7 @@ import UserContextProvider from "../../Context/UserContext";
 import WorkshopAttendees from "./WorkshopAttendees";
 import AllNotifications from "./AllNotifications";
 import AllWorkshops from "./AllWorkshops";
+import AllRegistrations from "./AllRegistrations";
 import NewNotification from "./NewNotification";
 import NavBar from "../SharedComponents/NavBar";
 import Header from "../SharedComponents/Header";
@@ -36,8 +37,8 @@ const Admin = () => {
                   />
                   <Route path="/new-notification" component={NewNotification} />
                   <Route path="/profile" component={Profile} />
-                  {/*<Route path="/notifications-list" component={NotificationsList} />
-                  <Route path="/all-registrations" component={AllRegistrations} />*/}
+                  {/*<Route path="/notifications-list" component={NotificationsList} />*/}
+                  <Route path="/all-registrations" component={AllRegistrations} />
                 </Switch>
               </div>
             </div>

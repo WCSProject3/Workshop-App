@@ -1,19 +1,15 @@
 import React from 'react';
 import AttendeesList from './WorkshopAttendeesSubComponents/AttendeesList';
-import AttendeesFilter from './WorkshopAttendeesSubComponents/AttendeesFilter';
 import WorkshopInfo from './WorkshopAttendeesSubComponents/WorkshopInfo';
 
 const WorkshopAttendees = ( props ) => {
 
     const workshopId = props.match.params.id;
 
-    console.log(workshopId)
-
     return ( 
         <div>
-            {/*<WorkshopInfo workshopId={workshopId}/>
-            <AttendeesFilter role={props.role} />
-            <AttendeesList workshopId={workshopId}/> */}
+            <WorkshopInfo workshopId={workshopId}/>
+            <AttendeesList workshopId={workshopId}/>
         </div>
     );
 }
