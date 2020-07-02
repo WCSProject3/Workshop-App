@@ -75,14 +75,6 @@ const WorkshopContextProvider = (props) => {
     });
   };
 
-  const editTempWorkshop = (newObject) => {
-    const workshopsList = [...tempWorkshops];
-    const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
-    workshopsList.splice(i, 1, newObject);
-    console.log(workshopsList);
-    setTempWorkshop(workshopsList);
-  };
-
   return (
     <div>
       <WorkshopContext.Provider
