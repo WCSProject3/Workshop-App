@@ -1,7 +1,7 @@
 import React from "react";
 import NotificationForm from "./NewNotificationSubComponents/NotificationForm";
 import TempNotification from "./NewNotificationSubComponents/TempNotification";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NotificationContext } from "../../Context/NotificationContext";
 import { Link } from "react-router-dom";
 import "./NewNotification.scss";

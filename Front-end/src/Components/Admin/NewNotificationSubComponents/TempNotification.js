@@ -9,25 +9,14 @@ const TempNotification = ({ tempNotification, toggleMessageModal }) => {
     deleteTempNotification,
     confirmNotification,
   } = useContext(NotificationContext);
-  const [editMode, setEditMode] = useState(false);
-  const { register, handleSubmit } = useForm();
-  const [isModalDisplayed, setModalVisibility] = useState(false);
 
-  const onSubmit = (data) => {
-    editNotification(data);
-    setEditMode(!editMode);
-  };
+  const [editMode, setEditMode] = useState(false);
+
+  const [isModalDisplayed, setModalVisibility] = useState(false);
 
   const toggleModal = () => {
     setModalVisibility(!isModalDisplayed);
   };
-
-  const {
-    editNotification,
-    deleteTempNotification,
-    confirmNotification,
-  } = useContext(NotificationContext);
-  const [editMode, setEditMode] = useState(false);
 
   const [checkboxCheck, setCheckboxCheck] = useState(false);
 
