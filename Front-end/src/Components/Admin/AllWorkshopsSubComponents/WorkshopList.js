@@ -6,7 +6,7 @@ import './WorkshopList.scss'
 
 const WorkshopList = () => {
 
-    const { allWorkshopsCopy } = useContext(WorkshopContext);
+    const { workshops } = useContext(WorkshopContext);
 
         return (
             <table className="workshops-table">
@@ -30,7 +30,7 @@ const WorkshopList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allWorkshopsCopy.map(workshop => {
+                    {workshops.map(workshop => {
                         return <WorkshopDetails 
                             key={workshop.id} 
                             {...workshop} /> 

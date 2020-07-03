@@ -7,7 +7,6 @@ const WorkshopContextProvider = (props) => {
   const [workshops, setWorkshops] = useState([]);
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
-  const [allWorkshopsCopy, setAllWorkshopsCopy] = useState([]);
   const [months, setMonths] = useState([]);
   const [searchValue, setsearchValue] = useState("");
 
@@ -23,7 +22,6 @@ const WorkshopContextProvider = (props) => {
       .then((workshopsList) => {
         setWorkshops(workshopsList);
         setAllWorkshops(workshopsList);
-        setAllWorkshopsCopy(workshopsList);
       });
   };
 
@@ -82,7 +80,6 @@ const WorkshopContextProvider = (props) => {
 
   const handleChangeSearch = (event) => {
     const { value } = event.target;
-    console.log(value);
     if (value.length) {
       const filteredWorkshops = allWorkshops.filter((workshop) => {
         return (
@@ -91,10 +88,10 @@ const WorkshopContextProvider = (props) => {
         );
       });
       setsearchValue(value);
-      setAllWorkshopsCopy(filteredWorkshops);
+      setWorkshops(filteredWorkshops);
     } else {
       setsearchValue(value);
-      setAllWorkshopsCopy(allWorkshops);
+      setWorkshops(allWorkshops);
     }
   };
 
@@ -112,7 +109,6 @@ const WorkshopContextProvider = (props) => {
           deleteTempWorkshop,
           months,
           setTempWorkshop,
-          allWorkshopsCopy,
           handleChangeSearch,
         }}
       >
