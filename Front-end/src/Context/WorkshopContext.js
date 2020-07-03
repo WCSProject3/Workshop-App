@@ -28,20 +28,28 @@ const WorkshopContextProvider = (props) => {
       });
   };
 
-  console.log(allWorkshops)
-
   const getMonth = () => {
     axios
       .get('/workshops/months')
       .then((response) => response.data)
       .then((monthsList) => {
-        console.log(monthsList);
         setMonths(monthsList);
       });
   };
 
   const addTempWorkshop = (newObject) => {
     setTempWorkshop([...tempWorkshops, newObject]);
+  };
+
+  const confirmEditedWorkshop = (newWorkshop) => {
+
+    const newWorkshopId = newWorkshop.id
+
+    axios
+      .put(`/workshops/${newWorkshopId}`, newWorkshop)
+      .then((response) => console.log(response));
+
+    getWorkshops();
   };
 
   const confirmWorkshop = (newObject) => {
@@ -111,7 +119,8 @@ const WorkshopContextProvider = (props) => {
           months,
           setTempWorkshop,
           allWorkshopsCopy,
-          handleChangeSearch
+          handleChangeSearch,
+          confirmEditedWorkshop
         }}>
         {props.children}
       </WorkshopContext.Provider>

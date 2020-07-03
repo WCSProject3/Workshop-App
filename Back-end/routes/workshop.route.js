@@ -94,5 +94,23 @@ router.post('/', (req, res) => {
   });
 });
 
+router.put('/:id', (req, res) => {
+
+  const formData = req.body;
+  const idWorkshop = req.params.id;
+
+  return connection.query('UPDATE workshops SET ? WHERE id = ?', [formData, idWorkshop], (err, results) => {
+      if(err) {
+        console.log(err)
+          return res.status(500).json({
+              error: err.message,
+              sql: err.sql,
+          });
+      } 
+console.log('res', results)
+        res.status(200).send(results);  
+  });
+});
+
 
 module.exports = router;

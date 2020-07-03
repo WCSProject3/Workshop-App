@@ -1,12 +1,11 @@
 import React from 'react';
 
-const WorkshopDetails = (workshop) => {
+const WorkshopDetails = ({workshop, toggleDisplayModal}) => {
 
     const workshopDate = workshop.date.substring(0, 10);
     const starting_at = workshop.starting_hour.substring(0, 5);
     const ending_at = workshop.ending_hour.substring(0, 5);
 
-    console.log(workshop)
         return (
             <tr>
                 <td>
@@ -19,11 +18,9 @@ const WorkshopDetails = (workshop) => {
                 <td>{workshop.room_type}</td>
                 <td>{workshop.room_manager}</td>
                 <td>
-                    <button>edit</button>
+                    <button onClick={() => toggleDisplayModal(workshop.id)}>Edit</button>
                     <button>export</button>
                 </td>
-                
-                {/* edit button */}
             </tr>
         );
 }
