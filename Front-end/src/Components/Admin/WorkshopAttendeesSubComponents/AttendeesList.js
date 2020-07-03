@@ -11,7 +11,7 @@ const AttendeeList = ( { workshopId } ) => {
         axios
             .get(`/workshops/${workshopId}/attendees/`)
             .then((response) => { setAttendees(response.data) }) 
-    }, []);
+    }, [workshopId]);
 
         return (
             <div>

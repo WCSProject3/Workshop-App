@@ -9,9 +9,9 @@ import AllNotifications from "./AllNotifications";
 import AllWorkshops from "./AllWorkshops";
 import AllRegistrations from "./AllRegistrations";
 import NewNotification from "./NewNotification";
-import NavBar from '../SharedComponents/NavBar';
-import Header from '../SharedComponents/Header';
-import './Admin.scss'
+import NavBar from "../SharedComponents/NavBar";
+import Header from "../SharedComponents/Header";
+import "./Admin.scss";
 import Profile from "../SharedComponents/Profile";
 
 const Admin = (props) => {
