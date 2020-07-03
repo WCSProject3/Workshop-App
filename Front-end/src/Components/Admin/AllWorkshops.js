@@ -13,7 +13,7 @@ const AllWorkshops = (date) => {
         <div>
             <div className="all-workshops-header">
                 <h1>All Workshops</h1>
-                <button className="new-workshop-btn"><Link to='/new-workshop'>New Workshop</Link></button>
+                <button className="new-workshop-btn"><Link to='/admin/new-workshop'>New Workshop</Link></button>
             </div>
             <div className="all-workshops-body">
                 <WorkshopFilters date={date} />

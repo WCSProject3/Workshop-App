@@ -19,6 +19,25 @@ router.get('/', (req, res) => {
     })
 });
 
+//GET ONE USER http://localhost:5000/:id
+
+
+router.get('/:id', (req, res) => {
+
+  const id = req.params.id
+
+  connection.query('SELECT u.*, r.role FROM user u JOIN role r ON u.role_id=r.id WHERE u.id= ?',[id], (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
+});
+
 
 //GET ALL SPEAKERS http://localhost:5000/users/speakers
 

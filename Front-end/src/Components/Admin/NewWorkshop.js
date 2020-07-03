@@ -54,8 +54,8 @@ const NewWorkshop = () => {
     <div className="new-workshops-body">
       <div className="new-workshops-header">
         <h1>New Workshops</h1>
-        <button className="all-workshops-btn">
-          <Link to="/">All Workshops</Link>
+        <button className='all-workshops-btn'>
+          <Link to='/admin'>All Workshops</Link>
         </button>
         <div>
           {isMessageModalDisplayed && (

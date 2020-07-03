@@ -16,7 +16,7 @@ const NavBar = () => {
           <img src='Logo_productized.png' className='logo' />
         </div>
         <div className='item'>
-          <Link to='/'>ALL WORKSHOPS</Link>
+          <Link to='/admin'>ALL WORKSHOPS</Link>
         </div>
         <div className='item'>
           <input type='checkbox' id='A' />
@@ -47,10 +47,10 @@ const NavBar = () => {
           </ul>
         </div>
         <div className='item'>
-          <Link to='/all-registrations'>ALL DATA</Link>
+          <Link to='/admin/all-registrations'>ALL DATA</Link>
         </div>
         <div className='item'>
-          <Link to='/all-notifications'>NOTIFICATIONS</Link>
+          <Link to='/admin/all-notifications'>NOTIFICATIONS</Link>
         </div>
       </div>
     </div>

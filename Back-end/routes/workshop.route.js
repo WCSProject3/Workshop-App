@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT w.id, w.title, w.date, w.starting_hour, w.ending_hour, MONTHNAME(w.date) AS workshop_month, w.description, w.room, w.room_manager, w.room_capacity, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, w.status_open FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id', (err, results) => {
+    connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, count(u_w.workshop_id) as enrolled_ateendees FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id left join user_workshops u_w on w.id=u_w.workshop_id group by w.id;', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -47,6 +47,88 @@ router.get('/:id', (req, res) => {
           res.json(results);
         }
   })
+});
+
+router.get('/user-workshops/:id', (req, res) => {
+
+  const userId = req.params.id;
+
+  connection.query('SELECT * FROM user_workshops WHERE user_id=?', [userId], (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
+});
+
+router.post('/user-workshops', (req, res) => {
+
+  const formData = req.body;
+
+  const { user_id } = formData
+
+  return connection.query('INSERT INTO user_workshops SET ?' , [formData], (err, results) => {
+      if(err) {
+          return res.status(500).json({
+              error: err.message,
+              sql: err.sql,
+          });
+      }
+      return connection.query('SELECT * FROM user_workshops WHERE user_id = ?', [user_id], (err2, records) => {
+          if(err2){
+            console.log(err2)
+              return res.status(500).json({
+                  error: err2.message,
+                  sql: err2.sql,
+              });
+          }
+          const UserWorkshops = records;
+          return res.status(201)
+          .json(UserWorkshops)
+      });
+  });
+});
+
+router.delete('/user-workshops', (req, res) => {
+
+  const formData = req.body;
+
+  console.log(formData)
+
+ const workshop_id = formData[0];
+ const user_id = formData[1];
+
+ connection.query('DELETE FROM user_workshops WHERE workshop_id = ? AND user_id = ?', [workshop_id,user_id ], (err, results) => {
+     if(err) {
+       console.log(err)
+         return res.status(500).json({
+                  error: err.message,
+                  sql: err.sql,
+                 });
+     }
+     if(results.affectedRows === 0){
+       console.log("not found")
+
+       return res
+       .status(404)
+       .json({msg: 'user does not exist'})
+     }
+     return connection.query('SELECT * FROM user_workshops WHERE user_id = ?', user_id, (err2, records) => {
+      if(err2){
+          return res.status(500).json({
+              error: err2.message,
+              sql: err2.sql,
+          });
+      }
+      const UserWorkshops = records;
+      return res.status(201)
+      .json(UserWorkshops)
+  });
+ })
 });
 
 router.get('/:id/attendees', (req, res) => {

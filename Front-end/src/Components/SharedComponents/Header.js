@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../Context/UserContext'; //context to add state
 import './Header.scss';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className='header'>
       {/* Tranform into useForm // Can be called as separate component? */}
@@ -16,7 +16,7 @@ const Header = () => {
       {/* To be generated dynamicaly, connected to login state */}
       <div className="user">
         <p>John Doe</p>
-        <Link to='/Profile'>
+        <Link to={`/ateendee/profile`}>
           <img src='avatar5.jpeg' alt='user avatar' />
         </Link>
       </div>

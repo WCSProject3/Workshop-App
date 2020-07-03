@@ -8,7 +8,8 @@ const WorkshopContextProvider = (props) => {
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [months, setMonths] = useState([]);
-  const [searchValue, setsearchValue] = useState("");
+  const [searchValue, setsearchValue] = useState('')
+  const [userWorkshops, setUserWorkshops] = useState([])
 
   useEffect(() => {
     getWorkshops();
@@ -25,6 +26,44 @@ const WorkshopContextProvider = (props) => {
       });
   };
 
+
+  const getUserWorkshops = (id) => {
+    axios
+      .get(`/workshops/user-workshops/${id}`)
+      .then((response) => response.data)
+      .then((userWorkshops) => {
+        setUserWorkshops(userWorkshops);
+      });
+  }
+
+  const addUserWorkshop = (workshopId, userId) => {
+
+    const user_workshop = {workshop_id: workshopId , user_id: userId}
+    axios
+      .post('/workshops/user-workshops', user_workshop)
+      .then((response) => response.data)
+      .then((userWorkshops) => {
+        setUserWorkshops(userWorkshops);
+      });
+    getWorkshops()
+  }
+
+
+  const deleteUserWorkshop = (workshopId, userId) => {
+
+    const user_workshop = [workshopId, userId]
+    console.log("user_workshop",user_workshop)
+    axios
+      .delete('/workshops/user-workshops', { data: user_workshop } )
+      .then((response) => response.data)
+      .then((userWorkshops) => {
+        setUserWorkshops(userWorkshops);
+    });
+    getWorkshops()
+  }
+
+  console.log(allWorkshops)
+  
   const getMonth = () => {
     axios
       .get("/workshops/months")
@@ -118,9 +157,14 @@ const WorkshopContextProvider = (props) => {
           months,
           setTempWorkshop,
           handleChangeSearch,
+          getUserWorkshops,
+          userWorkshops,
+          addUserWorkshop,
+          deleteUserWorkshop,
+          getWorkshops,
           confirmEditedWorkshop
-        }}
-      >
+        }}>
+
         {props.children}
       </WorkshopContext.Provider>
     </div>

@@ -9,6 +9,8 @@ const WorkshopForm = () => {
   const { speakers } = useContext(UserContext);
   const { register, handleSubmit, reset, errors } = useForm();
 
+  console.log("speakers",speakers)
+
   const onSubmit = (data) => {
     console.log(data);
     const newObject = {

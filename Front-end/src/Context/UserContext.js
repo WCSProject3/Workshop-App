@@ -9,6 +9,7 @@ const UserContextProvider = (props) => {
   const [allAttendeesCopy, setAllattendeesCopy] = useState([]);
   const [speakers, setSpeakers] = useState([]);
   const [searchValue, setsearchValue] = useState('')
+  const [user, setUser] = useState([])
 
   useEffect(() => {
     getSpeakers();
@@ -41,6 +42,15 @@ const UserContextProvider = (props) => {
       .then((allUsersList) => {
         setAllattendees(allUsersList)
         setAllattendeesCopy(allUsersList)
+      })
+  };
+
+  const getUser = (id) => {
+    axios
+      .get(`/users/${id}`)
+      .then((response) => response.data)
+      .then((user) => {
+        setUser(user[0])
       })
   };
 
@@ -98,7 +108,7 @@ const UserContextProvider = (props) => {
   return (
     <div>
       <UserContext.Provider
-        value={{ allAttendees, attendees, handleFilterAttendee, speakers, allAttendeesCopy,searchValue, handleChangeSearch, deleteUser }}>
+        value={{ allAttendees, attendees, handleFilterAttendee, speakers, allAttendeesCopy,searchValue, handleChangeSearch, deleteUser, user, getUser }}>
         {props.children}
       </UserContext.Provider>
     </div>
