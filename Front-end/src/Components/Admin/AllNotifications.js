@@ -9,7 +9,7 @@ const AllNotifications = () => {
         <div>
             <div className="all-notifications-header">
                 <h1>All Notifications</h1>
-                <button className="admin/new-notification-btn"><Link to='/new-notification'>New Notification</Link></button>
+                <button className="admin/new-notification-btn"><Link to='/admin/new-notification'>New Notification</Link></button>
             </div>
             <div className="all-notifications-body">
                 <NotificationsList />

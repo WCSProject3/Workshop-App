@@ -21,6 +21,7 @@ const NewWorkshop = () => {
   };
 
   const { speakers } = useContext(UserContext);
+  console.log("speakers",speakers)
 
   const handleConfirmAllWorkshops = () => {
     tempWorkshops.map((tempWorkshop) => {

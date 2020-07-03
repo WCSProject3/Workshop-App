@@ -13,7 +13,7 @@ const WorkshopList = () => {
 
     const toggleDisplayModal = (id) => {
         setDisplayModal(!displayModal)
-        const editingWorkshop = allWorkshopsCopy.filter(workshop => (workshop.id === id))
+        const editingWorkshop = workshops.filter(workshop => (workshop.id === id))
         setWorkshopInEdit(editingWorkshop[0])
     }
 

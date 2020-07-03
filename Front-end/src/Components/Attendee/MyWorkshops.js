@@ -27,7 +27,14 @@ const MyWorkshops = () => {
             monthlyWorkshops(months[0].months)
             setActive(months[0].months)
         }
-    },[months, workshops])
+    },[months])
+
+    useEffect(() => {
+        if(months.length > 0){
+            monthlyWorkshops(active)
+            setActive(active)
+        }
+    },[workshops])
 
     const monthlyWorkshops = (month) => {
         const monthlyWorkshopList = workshops.filter(workshop => {

@@ -23,6 +23,7 @@ const UserContextProvider = (props) => {
       .then((response) => response.data)
       .then((speakersList) => {
         setSpeakers(speakersList)
+        console.log("speakers",speakersList)
       })
   };
 
@@ -32,6 +33,8 @@ const UserContextProvider = (props) => {
       .then((response) => response.data)
       .then((attendeesList) => {
         setAttendees(attendeesList)
+        console.log("ateendees",attendeesList)
+        
       })
   };
 
@@ -42,12 +45,14 @@ const UserContextProvider = (props) => {
       .then((allUsersList) => {
         setAllattendees(allUsersList)
         setAllattendeesCopy(allUsersList)
+        console.log("allUsers",allUsersList)
+
       })
   };
 
   const getUser = (id) => {
     axios
-      .get(`/users/${id}`)
+      .get(`/users/getuser/${id}`)
       .then((response) => response.data)
       .then((user) => {
         setUser(user[0])

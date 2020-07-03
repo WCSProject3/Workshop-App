@@ -91,7 +91,7 @@ const WorkshopForm = () => {
           {errors.title && <p>please add title</p>}
           <select name='speaker' ref={register({ required: true })}>
             <option value="">Speaker</option>
-            {speakers.map((speaker) => {
+            {speakers.length > 0 && speakers.map((speaker) => {
               return (
                 <option
                   value={`${speaker.firstname} ${speaker.lastname}`}>{`${speaker.firstname} ${speaker.lastname}`}</option>

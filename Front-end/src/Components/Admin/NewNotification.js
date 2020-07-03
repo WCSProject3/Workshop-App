@@ -18,7 +18,7 @@ const NewNotification = () => {
 
   const toggleMessageModal = () => {
     setMessageModalVisibility(true);
-    setTimeout(() => setMessageModalVisibility(false), 5000);
+    setTimeout(() => setMessageModalVisibility(false), 1500);
     console.log("ITS WORKING");
   };
 

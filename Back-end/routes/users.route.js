@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 //GET ONE USER http://localhost:5000/:id
 
 
-router.get('/:id', (req, res) => {
+router.get('/getuser/:id', (req, res) => {
 
   const id = req.params.id
 
@@ -45,11 +45,13 @@ router.get('/speakers', (req, res) => {
 
     connection.query('SELECT * FROM user WHERE role_id = 2', (err, results) => {
         if (err) {
+          console.log("not working")
             res.status(500).json({
               error: err.message,
               sql: err.sql,
             });
           } else {
+          console.log("working")
             res.json(results);
           }
     })
