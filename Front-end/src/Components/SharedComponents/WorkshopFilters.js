@@ -7,8 +7,6 @@ const WorkshopFilters = () => {
     const { allWorkshops, handleFilterDate, months, handleChangeSearch, searchValue } = useContext(WorkshopContext);
 
 
-    console.log(months)
-
         return (  
             <div className="workshop-filters">
                 <div className="filter-select">
