@@ -45,7 +45,7 @@ const NewWorkshop = () => {
       <div className='new-workshops-header'>
         <h1>New Workshops</h1>
         <button className='all-workshops-btn'>
-          <Link to='/'>All Workshops</Link>
+          <Link to='/admin'>All Workshops</Link>
         </button>
         <button className='confirm-all-btn' onClick={handleConfirmAllWorkshops}>
           Confirm All

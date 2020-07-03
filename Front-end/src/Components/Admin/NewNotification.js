@@ -46,7 +46,7 @@ const NewNotification = () => {
       <div className='new-notifications-header'>
         <h1>New Notification</h1>
         <button className='all-notifications-btn'>
-          <Link to='/all-notifications'>All Notifications</Link>
+          <Link to='/admin/all-notifications'>All Notifications</Link>
         </button>
         <button
           className='confirm-all-btn'

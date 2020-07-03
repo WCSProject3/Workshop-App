@@ -57,6 +57,8 @@ const TempWorkshopInfo = ({ tempWorkshop }) => {
     deleteTempWorkshop(tempWorkshop.id);
   };
 
+  console.log(tempWorkshop.date)
+
   const date_errors = errors.date || errors.starting_hour || errors.ending_hour
 
   return (
