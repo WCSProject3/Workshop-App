@@ -1,15 +1,25 @@
-import React, { useContext } from 'react';
-import WorkshopForm from './NewWorkshopSubComponents/WorkshopForm';
-import { WorkshopContext } from '../../Context/WorkshopContext';
-import { UserContext } from '../../Context/UserContext';
-import TempWorkshopInfo from './NewWorkshopSubComponents/TempWorkshopInfo';
-import { Link } from 'react-router-dom';
-import './NewWorkshop.scss';
+import React, { useContext, useState } from "react";
+import WorkshopForm from "./NewWorkshopSubComponents/WorkshopForm";
+import { WorkshopContext } from "../../Context/WorkshopContext";
+import { UserContext } from "../../Context/UserContext";
+import TempWorkshopInfo from "./NewWorkshopSubComponents/TempWorkshopInfo";
+import { Link } from "react-router-dom";
+import "./NewWorkshop.scss";
+import MessageModal from "./Modals/MessageModal";
 
 const NewWorkshop = () => {
   const { tempWorkshops, setTempWorkshop, confirmWorkshop } = useContext(
     WorkshopContext
   );
+
+  const [isMessageModalDisplayed, setMessageModalVisibility] = useState(false);
+
+  const toggleMessageModal = () => {
+    setMessageModalVisibility(true);
+    setTimeout(() => setMessageModalVisibility(false), 1500);
+    console.log("ITS WORKING");
+  };
+
   const { speakers } = useContext(UserContext);
 
   const handleConfirmAllWorkshops = () => {
@@ -19,7 +29,7 @@ const NewWorkshop = () => {
           `${speaker.firstname} ${speaker.lastname}` === tempWorkshop.speaker
         );
       });
-      const room_type_id = tempWorkshop.room_type === 'Banquet' ? 1 : 2;
+      const room_type_id = tempWorkshop.room_type === "Banquet" ? 1 : 2;
 
       const newObject = {
         title: tempWorkshop.title,
@@ -41,13 +51,18 @@ const NewWorkshop = () => {
   };
 
   return (
-    <div className='new-workshops-body'>
-      <div className='new-workshops-header'>
+    <div className="new-workshops-body">
+      <div className="new-workshops-header">
         <h1>New Workshops</h1>
-        <button className='all-workshops-btn'>
-          <Link to='/'>All Workshops</Link>
+        <button className="all-workshops-btn">
+          <Link to="/">All Workshops</Link>
         </button>
-        <button className='confirm-all-btn' onClick={handleConfirmAllWorkshops}>
+        <div>
+          {isMessageModalDisplayed && (
+            <MessageModal content="Your Workshop was successfully added" />
+          )}
+        </div>
+        <button className="confirm-all-btn" onClick={handleConfirmAllWorkshops}>
           Confirm All
         </button>
       </div>
@@ -56,6 +71,7 @@ const NewWorkshop = () => {
           <TempWorkshopInfo
             tempWorkshop={tempWorkshop}
             key={tempWorkshop.title}
+            toggleMessageModal={toggleMessageModal}
           />
         );
       })}

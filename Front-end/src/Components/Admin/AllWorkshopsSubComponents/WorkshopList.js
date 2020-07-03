@@ -7,7 +7,7 @@ import ModalForm from './ModalForm';
 
 const WorkshopList = () => {
 
-    const { allWorkshopsCopy } = useContext(WorkshopContext);
+    const { workshops } = useContext(WorkshopContext);
     const [ displayModal, setDisplayModal ] = useState(false);
     const [ workshopInEdit, setWorkshopInEdit ] = useState([]);
 
@@ -44,7 +44,7 @@ const WorkshopList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allWorkshopsCopy.map(workshop => {
+                    {workshops.map(workshop => {
                         return <WorkshopDetails 
                             key={workshop.id} 
                             workshop={workshop} 
