@@ -9,9 +9,9 @@ import AllNotifications from "./AllNotifications";
 import AllWorkshops from "./AllWorkshops";
 import AllRegistrations from "./AllRegistrations";
 import NewNotification from "./NewNotification";
-import NavBar from '../SharedComponents/NavBar';
-import Header from '../SharedComponents/Header';
-import './Admin.scss'
+import NavBar from "../SharedComponents/NavBar";
+import Header from "../SharedComponents/Header";
+import "./Admin.scss";
 import Profile from "../SharedComponents/Profile";
 
 const Admin = () => {
@@ -27,8 +27,14 @@ const Admin = () => {
                 <Switch>
                   <Route path="/" exact component={AllWorkshops} />
                   <Route path="/new-workshop" component={NewWorkshop} />
-                  <Route path="/workshop-attendees/:id" component={WorkshopAttendees} />
-                  <Route path="/all-notifications" component={AllNotifications} />
+                  <Route
+                    path="/workshop-attendees/:id"
+                    component={WorkshopAttendees}
+                  />
+                  <Route
+                    path="/all-notifications"
+                    component={AllNotifications}
+                  />
                   <Route path="/new-notification" component={NewNotification} />
                   <Route path="/profile" component={Profile} />
                   {/*<Route path="/notifications-list" component={NotificationsList} />*/}
@@ -39,7 +45,7 @@ const Admin = () => {
           </NotificationContextProvider>
         </WorkshopContextProvider>
       </UserContextProvider>
-   </BrowserRouter>
+    </BrowserRouter>
   );
 };
 
