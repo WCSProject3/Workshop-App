@@ -2,27 +2,13 @@ import React, { useContext, useState } from 'react';
 import { WorkshopContext } from '../../../Context/WorkshopContext';
 import WorkshopDetails from './WorkshopDetails';
 import './WorkshopList.scss'
-import ModalForm from './ModalForm';
+import ModalForm from '../../SharedComponents/ModalForm';
 
 
-const WorkshopList = () => {
-
-    const { workshops } = useContext(WorkshopContext);
-    const [ displayModal, setDisplayModal ] = useState(false);
-    const [ workshopInEdit, setWorkshopInEdit ] = useState([]);
-
-    const toggleDisplayModal = (id) => {
-        setDisplayModal(!displayModal)
-        const editingWorkshop = workshops.filter(workshop => (workshop.id === id))
-        setWorkshopInEdit(editingWorkshop[0])
-    }
+const WorkshopList = ({toggleDisplayModal, workshops}) => {
 
         return (
             <div>
-                {displayModal && 
-                <ModalForm 
-                workshopInEdit={workshopInEdit}
-                toggleDisplayModal={toggleDisplayModal}/>}
             <table className="workshops-table">
                 <colgroup>
                     <col className="date-col" />

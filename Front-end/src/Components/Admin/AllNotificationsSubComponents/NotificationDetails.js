@@ -11,7 +11,7 @@ const NotificationDetails = (notification) => {
         <tr>
             <td>{`${notificationDate} ${notificationHour} `}</td>
             <td>{notification.content}</td>
-            <td>{notification.role}</td>
+            <td>{notification.send_to}</td>
             <td>{notification.state}</td>
         </tr>
      );

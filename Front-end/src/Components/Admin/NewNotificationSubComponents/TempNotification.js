@@ -58,6 +58,18 @@ const TempNotification = ({ tempNotification, toggleMessageModal }) => {
   const handleConfirmNotification = () => {
     let to_id = null;
 
+    switch(tempNotification.to){
+      case "All":
+        to_id = 1;
+        break;
+      case "All Attendees":
+        to_id = 2;
+        break;
+      case "All Speakers":
+        to_id = 3;
+        break;
+    }
+
     const newObject = {
       subject: tempNotification.subject,
       content: tempNotification.content,

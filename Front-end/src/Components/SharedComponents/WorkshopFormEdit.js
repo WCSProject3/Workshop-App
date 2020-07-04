@@ -1,7 +1,7 @@
 import React, { useContext }from 'react';
 import { useForm } from 'react-hook-form';
-import { UserContext } from '../../../Context/UserContext';
-import { WorkshopContext } from '../../../Context/WorkshopContext';
+import { UserContext } from '../../Context/UserContext';
+import { WorkshopContext } from '../../Context/WorkshopContext';
 
 
 const WorkshopFormEdit = ({workshopInEdit, toggleDisplayModal}) => {
@@ -29,7 +29,7 @@ const WorkshopFormEdit = ({workshopInEdit, toggleDisplayModal}) => {
             room: data.room,
             room_capacity: data.room_capacity,
             room_manager: data.room_manager,
-            room_type_id: data.room_type,
+            room_type: data.room_type,
             };
 
         confirmEditedWorkshop(newWorkshop);
@@ -140,9 +140,9 @@ const WorkshopFormEdit = ({workshopInEdit, toggleDisplayModal}) => {
             {errors.room_manager && <p>please add a room manager</p>}
             <div className='new-workshop-form-selects'>
                 <select name='room_type' ref={register({ required: true })} defaultValue={workshopInEdit.room_type}>
-                <option value='1'>Banquet</option>
-                <option value='2'>Classroom</option>
-                <option value='3'>Online</option>
+                <option value='Banquet'>Banquet</option>
+                <option value='Classroom'>Classroom</option>
+                <option value='Online'>Online</option>
                 </select>
                 <select name='room_capacity' ref={register({ required: true })} defaultValue={workshopInEdit.room_capacity}>
                 <option value='10'>10 pax</option>
@@ -161,6 +161,7 @@ const WorkshopFormEdit = ({workshopInEdit, toggleDisplayModal}) => {
         </div>
         <div className='new-workshop-form-footer'>
             <button type='submit'>Confirm</button>
+            <button className="edit-workshop-cancel" onClick={toggleDisplayModal}>Cancel</button>
         </div>
         </form>
      );

@@ -1,30 +1,59 @@
 @import '../../../styles/variables.scss';
 
+/***** TABLE *****/
+
 .workshops-table{
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    margin: auto;
-    width: 97%;
+    @include table;
 
     td, th{
-        border-bottom: 1px solid #ddd;
-        padding: 8px;
-        color: $darkgrey;
+        @include td-and-th;
     }
 
     td{
-        background-color: white;
+        @include td;
     }
 
     th{
-        border-top: 1px solid #ddd;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: white;
+       @include th;
     }
 
     .title-col{
         width: 30%;
     }
 }
+
+/***** DROPDOWN *****/
+
+.options-icon{
+    @include options-btn;
+}
+
+.btns-dropdown{
+    @include dropdown;
+
+    .delete-workshop-btn:hover{
+       @include dropdown-delete-btn-hover;
+    }
+
+    button{
+        @include dropdown-item;
+        
+
+        &:hover{
+            @include dropdown-item-hover;
+
+            a{
+                color: white; 
+            }
+        }
+
+        a{
+            text-decoration: none;
+            color: $darkgrey;
+        }
+    }
+}
+
+  .dropdown:hover .btns-dropdown {
+    @include open-dropdown-hover;
+  }

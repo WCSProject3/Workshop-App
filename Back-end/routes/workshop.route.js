@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, t.type AS room_type, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, count(u_w.workshop_id) as enrolled_ateendees FROM workshops w JOIN room_type t ON w.room_type_id = t.id JOIN user u ON w.speaker_id = u.id left join user_workshops u_w on w.id=u_w.workshop_id group by w.id;', (err, results) => {
+    connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, count(u_w.workshop_id) as enrolled_ateendees FROM workshops w JOIN user u ON w.speaker_id = u.id left join user_workshops u_w on w.id=u_w.workshop_id group by w.id;', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 
   const workshopId = req.params.id;
 
-  connection.query('SELECT * FROM workshops WHERE id=?', [workshopId], (err, results) => {
+  connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, CONCAT(u.firstname," ",u.lastname) AS workshop_speaker FROM workshops w JOIN user u ON w.speaker_id = u.id WHERE w.id = ?', [workshopId], (err, results) => {
       if (err) {
           res.status(500).json({
             error: err.message,
