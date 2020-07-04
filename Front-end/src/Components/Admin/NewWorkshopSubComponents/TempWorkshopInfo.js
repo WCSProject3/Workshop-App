@@ -3,6 +3,8 @@ import { WorkshopContext } from "../../../Context/WorkshopContext";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../Context/UserContext";
 import Modal from "../Modals/Modal";
+import { MdDelete, MdEdit } from 'react-icons/md';
+
 
 const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
   const { confirmWorkshop, editTempWorkshop, deleteTempWorkshop } = useContext(
@@ -45,7 +47,6 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
         `${speaker.firstname} ${speaker.lastname}` === tempWorkshop.speaker
       );
     });
-    const room_type_id = tempWorkshop.room_type === "Banquet" ? 1 : 2;
 
     const newObject = {
       title: tempWorkshop.title,
@@ -58,12 +59,19 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
       room: tempWorkshop.room,
       room_capacity: tempWorkshop.room_capacity,
       room_manager: tempWorkshop.room_manager,
-      room_type_id: room_type_id,
+      room_type: tempWorkshop.room_type,
     };
     confirmWorkshop(newObject);
     deleteTempWorkshop(tempWorkshop.id);
     toggleMessageModal();
   };
+ 
+  const year = Number(tempWorkshop.date.substring(0,4));
+  const month = Number(tempWorkshop.date.substring(5,7));
+  const day = Number(tempWorkshop.date.substring(8,10));
+
+  const date = new Date(year, month, day);  // 2009-11-10
+  const workshop_month = date.toLocaleString('default', { month: 'long' });
 
   const date_errors = errors.date || errors.starting_hour || errors.ending_hour;
 
@@ -81,14 +89,11 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
         <div className="temp-workshop-info">
           <div className="temp-workshop-info-header">
             <div className="temp-workshop-date">
-              <div className="temp-date">{tempWorkshop.date}</div>
-              <div>{`${tempWorkshop.starting_hour}-${tempWorkshop.ending_hour}`}</div>
+              <div className="temp-date">{`${day} ${workshop_month} - ${tempWorkshop.starting_hour}-${tempWorkshop.ending_hour}`}</div>
             </div>
             <div className="temp-workshop-info-header-btns">
-              <button onClick={() => setEditMode(!editMode)}>
-                Edit Workshop
-              </button>
-              <button onClick={toggleModal}>Delete Workshop</button>
+              <button className="workshop-icons" onClick={() => setEditMode(!editMode)}><MdEdit /></button>
+              <button onClick={toggleModal} className="workshop-icons"><MdDelete /></button>
             </div>
           </div>
           <div className="temp-workshop-info-body">
@@ -98,7 +103,7 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
               <p>{tempWorkshop.description}</p>
             </div>
             <div className="temp-workshop-info-right">
-              <div className="room-room-manager">
+              <div className="room-manager">
                 <p className="room">
                   <span>Room:</span> {tempWorkshop.room}
                 </p>
