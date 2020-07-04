@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import AttendeeDetails from './AttendeeDetails';
-import axios from 'axios';
 import SearchBar from '../../SharedComponents/SearchBar';
+import { WorkshopContext } from '../../../Context/WorkshopContext';
 
 
-const AttendeeList = ( { attendees, handleChangeSearch, searchValue } ) => {
+const AttendeeList = ({attendees} ) => {
+
+    const { handleAttendeeSearch, searchAttendeeValue } = useContext(WorkshopContext)
 
         return (
             <div>
                 <div className="search-attendee">
-                    <SearchBar handleChange={handleChangeSearch} searchValue={searchValue}/>
+                    <SearchBar handleChange={handleAttendeeSearch} searchValue={searchAttendeeValue}/>
                 </div>
                 <table className="attendees-table">
                 <colgroup>
