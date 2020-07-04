@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
-import './RegistrationDetails.scss'
 import { UserContext } from '../../../Context/UserContext';
+import { MdDelete, MdEdit, MdMessage } from 'react-icons/md';
 
-const RegistrationDetails = (user) => {
+
+const RegistrationDetails = ({user, handleSetUser, toggleDisplayModal}) => {
 
     const { deleteUser } = useContext(UserContext)
+
+    const handleModal = (user) => {
+        handleSetUser(user)
+        toggleDisplayModal()
+    }
 
     const name = `${user.firstname} ${user.lastname}`
 
@@ -22,7 +28,8 @@ const RegistrationDetails = (user) => {
                 <td>{user.country}</td>
                 <td>{user.role}</td>
                 <td>
-                    <button onClick={() => deleteUser(user.id, user.role )}>delete</button>
+                    <button className="registrations-notification-btn" onClick={() => handleModal(user)}><MdMessage /></button>
+                    <button className="registrations-delete-btn" onClick={() => deleteUser(user.id, user.role )}><MdDelete /></button>
                 </td>
                 
                 {/* edit button */}

@@ -198,31 +198,11 @@
 
 
 .temp-workshop-info{
-    background-color: white;
-    border-radius: 5px;
-    width: 95%;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
+    @include workshop-info-card;
 }
 
 .temp-workshop-info-header{
-    width: 100%;
-    height: 50px;
-    background-color: $grey;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-    padding-left: 10px;
-    border-bottom: 1px solid $darkgrey;
-    border-radius: 5px 5px 0 0;
-    font-family: roboto;
-    font-weight: 450;
-    font-size: 16px;
-    color: $blue;
+    @include workshop-info-card-header;
 
     .temp-workshop-date{
         display: flex;
@@ -232,24 +212,23 @@
         }
     }
 
-    button{
+    .temp-workshop-info-header-btns {
         margin-right: 10px;
+        
+        .workshop-icons{
+            @include workshop-info-card-header-btns;
+        }
     }
+    
+        
 }
 
 .temp-workshop-info-body{
-    display:flex;
-    justify-content: space-evenly;
+    @include workshop-info-card-body;
 }
 
 .temp-workshop-info-left{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: start;
-    width: 50%;
-    border-right: 1px solid $darkgrey;
-    padding: 10px 20px;
+    @include workshop-info-card-body-half(start);
 
     h2,
     h4,
@@ -260,15 +239,10 @@
 }
 
 .temp-workshop-info-right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: end;
-    width: 50%;
-    border-right: 1px solid $darkgrey;
-    padding: 10px 20px;
+    @include workshop-info-card-body-half(end);
 
-    .room-room-manager{
+
+    .room-manager{
         display: flex;
         justify-content: flex-end;
 
@@ -296,13 +270,7 @@
 }
 
 .temp-workshop-info-footer{
-    background-color: $grey;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid $darkgrey ;
-    border-radius: 0 0 5px 5px;
+    @include workshop-info-card-footer;
 
     button{
         @include button(30px,$blue);
