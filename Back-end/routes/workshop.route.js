@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, count(u_w.workshop_id) as enrolled_ateendees FROM workshops w JOIN user u ON w.speaker_id = u.id left join user_workshops u_w on w.id=u_w.workshop_id group by w.id;', (err, results) => {
+    connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, CONCAT(u.firstname, " ", u.lastname) AS workshop_speaker, COUNT(u_w.workshop_id) as enrolled_ateendees FROM workshops w JOIN user u ON w.speaker_id = u.id left join user_workshops u_w on w.id=u_w.workshop_id group by w.id;', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
 router.get('/months', (req, res) => {
 
-    connection.query('SELECT DISTINCT MONTHNAME(date) AS months FROM workshops ORDER BY months DESC', (err, results) => {
+    connection.query('SELECT DISTINCT MONTHNAME(date) AS month FROM workshops ORDER BY month DESC', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,

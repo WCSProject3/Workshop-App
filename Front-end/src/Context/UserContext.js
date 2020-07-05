@@ -5,8 +5,11 @@ export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
   const [attendees, setAttendees] = useState([]);
-  const [allAttendees, setAllattendees] = useState([]);
   const [allAttendeesCopy, setAllattendeesCopy] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [allAttendees, setAllattendees] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [filterUser, setFilterUser] = useState("All users");
   const [speakers, setSpeakers] = useState([]);
   const [searchValue, setsearchValue] = useState('')
   const [user, setUser] = useState([])
@@ -43,10 +46,8 @@ const UserContextProvider = (props) => {
       .get('/users')
       .then((response) => response.data)
       .then((allUsersList) => {
-        setAllattendees(allUsersList)
-        setAllattendeesCopy(allUsersList)
-        console.log("allUsers",allUsersList)
-
+        setUsers(allUsersList)
+        setAllUsers(allUsersList)
       })
   };
 
@@ -59,52 +60,52 @@ const UserContextProvider = (props) => {
       })
   };
 
-  function handleFilterAttendee(role) {
-    axios.get('/users').then((response) => {
-      if (role === 'All attendees') {
-        setAttendees(response.data);
-        return attendees;
-      } else {
-        const filterdResult = allAttendees.filter((attendee) => {
-          return attendee.role_id === role;
-        });
-        setAttendees(filterdResult);
-        setAllattendees(response.data);
-      }
-    });
+  const handleFilterUser = (event) => {
+
+    const role = event.target.value
+
+    switch(role){
+      case "All users":
+        setFilterUser(role)
+        setUsers(allUsers);
+        break;
+      case "Attendees":
+        setFilterUser(role)
+        setUsers(attendees);
+        break;
+      case "Speakers":
+        setFilterUser(role)
+        setUsers(speakers);
+        break;
+    }
   }
 
   const handleChangeSearch = (event) => {
     const { value } = event.target;
-    console.log(value)
     if(value.length){
-      const filteredUsers = allAttendees.filter((attendee) => {
-        const name = `${attendee.firstname} ${attendee.lastname}`
+      const filteredUsers = allUsers.filter((user) => {
+        const name = `${user.firstname} ${user.lastname}`
         return name.toLowerCase().includes(value.toLowerCase());
       });
       setsearchValue(value)
-      setAllattendeesCopy(filteredUsers);
+      setUsers(filteredUsers);
     } else {
       setsearchValue(value)
-      setAllattendeesCopy(allAttendees)
+      setUsers(allUsers)
     }
   }
 
   const deleteUser = (id, role) => {
-    console.log("id", id)
     if(role === "speaker"){
       axios
         .delete(`/workshops/${id}`)
-        .then((response) => console.log(response))
         .then(() => {
           axios
           .delete(`/users/${id}`)
-          .then((response) => console.log(response))
         })
     }
     axios
       .delete(`/users/${id}`)
-      .then((response) => console.log(response))
 
       getAllUsers()
   }
@@ -113,7 +114,19 @@ const UserContextProvider = (props) => {
   return (
     <div>
       <UserContext.Provider
-        value={{ allAttendees, attendees, handleFilterAttendee, speakers, allAttendeesCopy,searchValue, handleChangeSearch, deleteUser, user, getUser }}>
+        value={{ 
+          users, 
+          attendees, 
+          handleFilterUser, 
+          filterUser,
+          speakers, 
+          allUsers,
+          searchValue, 
+          handleChangeSearch, 
+          deleteUser, 
+          user, 
+          getUser 
+        }}>
         {props.children}
       </UserContext.Provider>
     </div>

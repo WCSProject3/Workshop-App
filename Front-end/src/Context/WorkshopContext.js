@@ -90,6 +90,7 @@ const getAttendees = (workshopId) => {
       .get("/workshops/months")
       .then((response) => response.data)
       .then((monthsList) => {
+        console.log("monthsList", monthsList)
         setMonths(monthsList);
       });
   };
@@ -133,7 +134,8 @@ const getAttendees = (workshopId) => {
 
     const { value } = event.target;
 
-      if (value === "All workshops") {
+      if (value === "All Workshops") {
+        setdDateFilter(value)
         setWorkshops(allWorkshops);
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {

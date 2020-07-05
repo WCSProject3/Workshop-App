@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import WorkshopFormEdit from './WorkshopFormEdit';
 import NewNotificationForm from './NewNotificationForm';
+import NotificationInfo from '../Admin/AllNotificationsSubComponents/NotificationInfo'
 
-const ModalForm = ( { workshopInEdit, toggleDisplayModal, active , attendees} ) => {
+const ModalForm = ( { workshopInEdit, toggleDisplayModal, active , attendees, notification} ) => {
 
     const [isActive, setIsActive] = useState("");
 
@@ -13,6 +14,10 @@ const ModalForm = ( { workshopInEdit, toggleDisplayModal, active , attendees} ) 
                 break;
             case "notification":
                 setIsActive("notification")
+                break;
+            case "notificationInfo":
+                setIsActive("notificationInfo")
+            break;
         }
     },[active])
 
@@ -24,6 +29,8 @@ const ModalForm = ( { workshopInEdit, toggleDisplayModal, active , attendees} ) 
             toggleDisplayModal={toggleDisplayModal}/>}
             {isActive !== "" && isActive === "notification" &&
             <NewNotificationForm send_to={workshopInEdit !== undefined ? workshopInEdit.title: `${attendees[0].firstname} ${attendees[0].lastname}`} attendees={attendees} toggleDisplayModal={toggleDisplayModal}/> }
+            {isActive !== "" && isActive === "notificationInfo" &&
+            <NotificationInfo notification={notification} toggleDisplayModal={toggleDisplayModal}/>}
         </div>
     );
 }
