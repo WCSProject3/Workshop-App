@@ -36,6 +36,9 @@ const WorkshopFormEdit = ({workshopInEdit, toggleDisplayModal}) => {
         toggleDisplayModal();
         };
 
+        console.log("speakers", speakers)
+        console.log("workshopInEdit", workshopInEdit)
+
         const currentSpeaker = speakers.filter(speaker => `${speaker.firstname} ${speaker.lastname}` === workshopInEdit.workshop_speaker)
 
         const currentSpeakerId = currentSpeaker[0].id;

@@ -1,29 +1,25 @@
-import React, { useContext } from 'react';
-import { NotificationContext } from '../../../Context/NotificationContext';
+import React from 'react';
 import NotificationDetails from './NotificationDetails';
 import './NotificationsList.scss'
 
 
-const NotificationsList = () => {
-
-    const { notifications } = useContext(NotificationContext);
-
-    console.log(notifications)
+const NotificationsList = ({notifications, handleSelectedNotification, toggleDisplayModal}) => {
 
         return ( 
             <table className="notifications-table">
                 <colgroup>
                     <col className="date-col" />
-                    <col className="content-col" />
+                    <col className="subject-col" />
                     <col className="to-col" />
                     <col className="state-col" />
                 </colgroup>
             <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Content</th>
+                    <th>Subject</th>
                     <th>To</th>
                     <th>State</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +27,9 @@ const NotificationsList = () => {
                 return <NotificationDetails 
                     notification={notification}
                     key={notification.id} 
-                    {...notification} /> 
+                    handleSelectedNotification={handleSelectedNotification}
+                    toggleDisplayModal={toggleDisplayModal}
+                    /> 
             })} 
             </tbody>
         </table>

@@ -11,9 +11,6 @@ const AttendeeDetails = (attendee) => {
                     <p>{attendee.email}</p>
                 </td>
                 <td>
-                    <p>{attendee.company}</p>
-                </td>
-                <td>
                     <p>{attendee.position}</p>
                 </td>
                 <td>

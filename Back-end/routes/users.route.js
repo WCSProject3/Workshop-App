@@ -7,7 +7,7 @@ const connection = require('../config');
 
 router.get('/', (req, res) => {
 
-    connection.query('SELECT u.*, r.role FROM user u JOIN role r ON u.role_id=r.id', (err, results) => {
+    connection.query('SELECT u.*, r.role, COUNT(u_w.user_id) AS workshop_count FROM user u JOIN role r ON u.role_id=r.id LEFT JOIN user_workshops u_w ON u.id=u_w.user_id GROUP BY u.id', (err, results) => {
         if (err) {
             res.status(500).json({
               error: err.message,
@@ -43,7 +43,7 @@ router.get('/getuser/:id', (req, res) => {
 
 router.get('/speakers', (req, res) => {
 
-    connection.query('SELECT * FROM user WHERE role_id = 2', (err, results) => {
+    connection.query('SELECT u.*, r.role, COUNT(u_w.user_id) AS workshop_count FROM user u JOIN role r ON u.role_id=r.id LEFT JOIN user_workshops u_w ON u.id=u_w.user_id  WHERE role_id = 2 GROUP BY u.id', (err, results) => {
         if (err) {
           console.log("not working")
             res.status(500).json({
@@ -89,8 +89,9 @@ router.delete('/:id', (req, res) => {
 
 router.get('/attendees', (req, res) => {
 
-    connection.query('SELECT * FROM user WHERE role_id = 3', (err, results) => {
+    connection.query('SELECT u.*, r.role, COUNT(u_w.user_id) AS workshop_count FROM user u JOIN role r ON u.role_id=r.id LEFT JOIN user_workshops u_w ON u.id=u_w.user_id  WHERE role_id = 3 GROUP BY u.id', (err, results) => {
         if (err) {
+          console.log(err)
             res.status(500).json({
               error: err.message,
               sql: err.sql,
