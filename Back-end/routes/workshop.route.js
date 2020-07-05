@@ -19,6 +19,26 @@ router.get('/', (req, res) => {
     })
 });
 
+router.delete('/:id', (req, res) => {
+
+const workshop_id = req.params.id;
+
+console.log(workshop_id)
+
+  connection.query('DELETE FROM workshops WHERE id = ?', [workshop_id], (err, results) => {
+      if(err) {
+        console.log('delete err', err)
+          return res.status(500).json({
+                    error: err.message,
+                    sql: err.sql,
+                  });
+      } 
+      res.status(201).json(results)
+    })
+});
+
+
+
 router.get('/months', (req, res) => {
 
     connection.query('SELECT DISTINCT MONTHNAME(date) AS month FROM workshops ORDER BY month DESC', (err, results) => {

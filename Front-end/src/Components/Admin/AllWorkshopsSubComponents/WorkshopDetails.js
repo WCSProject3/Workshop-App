@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { FaListUl } from 'react-icons/fa';
 
-const WorkshopDetails = ({workshop, toggleDisplayModal}) => {
+const WorkshopDetails = ({workshop, toggleDisplayModal, deleteWorkshop}) => {
 
 
     const workshopDate = workshop.date.substring(0, 10);
@@ -29,7 +29,7 @@ const WorkshopDetails = ({workshop, toggleDisplayModal}) => {
                         <button><Link to={`/admin/workshop-attendees/${workshop.id}`}>more</Link></button>
                         <button>export</button>
                         <button onClick={() => toggleDisplayModal(workshop.id)}>edit</button>
-                        <button className="delete-workshop-btn">delete</button>
+                        <button className="delete-workshop-btn" onClick={() => deleteWorkshop(workshop.id)}>delete</button>
                     </div>
                 </td>
             </tr>

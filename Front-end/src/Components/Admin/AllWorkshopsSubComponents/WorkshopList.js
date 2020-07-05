@@ -5,7 +5,7 @@ import './WorkshopList.scss'
 import ModalForm from '../../SharedComponents/ModalForm';
 
 
-const WorkshopList = ({toggleDisplayModal, workshops}) => {
+const WorkshopList = ({toggleDisplayModal, workshops, deleteWorkshop}) => {
 
         return (
             <div>
@@ -34,7 +34,8 @@ const WorkshopList = ({toggleDisplayModal, workshops}) => {
                         return <WorkshopDetails 
                             key={workshop.id} 
                             workshop={workshop} 
-                            toggleDisplayModal={toggleDisplayModal}/> 
+                            toggleDisplayModal={toggleDisplayModal}
+                            deleteWorkshop={deleteWorkshop}/> 
                     })} 
                 </tbody>
             </table>

@@ -130,6 +130,14 @@ const getAttendees = (workshopId) => {
     setTempWorkshop(workshopList);
   };
 
+  const deleteWorkshop = (id) => {
+    
+    axios
+      .delete(`/workshops/${id}`)
+
+      getWorkshops()
+    };
+
   const handleFilterDate = (event) => {
 
     const { value } = event.target;
@@ -212,7 +220,8 @@ const getAttendees = (workshopId) => {
           attendees,
           searchAttendeeValue,
           handleAttendeeSearch,
-          dateFilter
+          dateFilter,
+          deleteWorkshop
         }}>
 
         {props.children}
