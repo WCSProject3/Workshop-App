@@ -7,14 +7,12 @@ const NotificationContextProvider = (props) => {
   const [notifications, setNotifications] = useState([]);
   const [tempNotifications, setTempNotifications] = useState([]);
   const [allNotifications, setAllNotifications] = useState([]);
+  const [searchNotificationValue, setSearchNotificationValue] = useState([]);
+  const [stateFilter, setStateFilter] = useState("All notifications");
 
   useEffect(() => {
     getNotifications();
   }, []);
-
-  useEffect(() => {
-    console.log(tempNotifications);
-  }, [tempNotifications]);
 
   const getNotifications = () => {
     axios
@@ -33,7 +31,6 @@ const NotificationContextProvider = (props) => {
   const confirmNotification = (newObject) => {
     axios
       .post('/notifications', newObject)
-      .then((response) => console.log(response));
 
     getNotifications();
   };
@@ -44,7 +41,6 @@ const NotificationContextProvider = (props) => {
       (notification) => notification.id === newObject.id
     );
     notificationsList.splice(i, 1, newObject);
-    console.log('workshops list before', notificationsList);
     setTempNotifications(notificationsList);
 };
 
@@ -53,6 +49,48 @@ const NotificationContextProvider = (props) => {
       (notification) => notification.id !== id
     );
     setTempNotifications(notificationList);
+  };
+
+  const deleteNotification = (id) => {
+    axios
+      .delete(`/notifications/${id}`)
+
+      getNotifications()
+  }
+
+  const handleFilterState = (event) => {
+
+    const { value } = event.target;
+
+      if (value === "All notifications") {
+        setStateFilter(value)
+        setNotifications(allNotifications);
+      } else {
+        const filterdNotifications = allNotifications.filter((notification) => {
+          const notificationState = notification.state;
+          return notificationState === value;
+        });
+        setStateFilter(value)
+        setNotifications(filterdNotifications);
+        setSearchNotificationValue("")
+      };
+  };
+
+  const handleNotificationSearch = (event) => {
+    const { value } = event.target;
+    if (value.length) {
+      const filteredNotifications = allNotifications.filter((notification) => {
+        return (
+          notification.subject.toLowerCase().includes(value.toLowerCase())
+        );
+      });
+      setSearchNotificationValue(value);
+      setNotifications(filteredNotifications);
+      setStateFilter("All notifications")
+    } else {
+      setSearchNotificationValue(value);
+      setNotifications(allNotifications);
+    }
   };
 
   return (
@@ -67,6 +105,11 @@ const NotificationContextProvider = (props) => {
           deleteTempNotification,
           editNotification,
           setTempNotifications,
+          handleFilterState,
+          stateFilter,
+          handleNotificationSearch,
+          searchNotificationValue,
+          deleteNotification
         }}>
         {props.children}
       </NotificationContext.Provider>

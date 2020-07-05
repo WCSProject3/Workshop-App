@@ -31,14 +31,14 @@ const NavBar = () => {
               return(
               <li>
                 <div className='sub-item'>
-                  <input type='checkbox' id={month.months} />
-                  <label htmlFor={month.months}>
-                    {month.months}
+                  <input type='checkbox' id={month.month} />
+                  <label htmlFor={month.month}>
+                    {month.month}
                     {/* add animation */}
                     <img src='chevron-right-1.png' className='arrow' />
                  </label>
                  <ul>
-                  <MonthlySpeakers month={month.months}/>
+                  <MonthlySpeakers month={month.month}/>
                  </ul>
                 </div>
               </li>

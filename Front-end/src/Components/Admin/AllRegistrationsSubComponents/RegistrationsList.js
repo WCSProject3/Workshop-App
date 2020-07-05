@@ -4,9 +4,7 @@ import RegistrationDetails from './RegistrationDetails'
 import './RegistrationList.scss'
 
 
-const RegistrationsList = ({handleSetUser, toggleDisplayModal}) => {
-
-    const { allAttendeesCopy } = useContext(UserContext);
+const RegistrationsList = ({ users, handleSetUser, toggleDisplayModal}) => {
 
         return (
             <table className="registrations-table">
@@ -32,7 +30,7 @@ const RegistrationsList = ({handleSetUser, toggleDisplayModal}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allAttendeesCopy.map(user => {
+                    {users.map(user => {
                         return <RegistrationDetails 
                             key={user.id} 
                             user={user} 

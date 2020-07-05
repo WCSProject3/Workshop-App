@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NotificationContext } from "../../../Context/NotificationContext";
+import { WorkshopContext } from "../../../Context/WorkshopContext";
 import uuid from "react-uuid";
 
 const NotificationForm = () => {
     const { addTempNotification } = useContext(NotificationContext);
+    const { allWorkshops, getAttendees, attendees } = useContext(WorkshopContext);
 
     const [checkboxCheck, setCheckboxCheck] = useState(false);
+    const [selectWorkshop, setSelectWorkshop] = useState(false);
 
     const toggleSchedule = () => {
         setCheckboxCheck(!checkboxCheck);
@@ -15,6 +18,14 @@ const NotificationForm = () => {
     const { register, handleSubmit, reset, errors } = useForm();
 
     const onSubmit = (data) => {
+        
+
+        let workshopTitle = "";
+
+        if(data.workshop){
+            const workshop = data.workshop.split(",")
+            workshopTitle = workshop[0]
+        }
 
         const now = new Date();
 
@@ -27,6 +38,7 @@ const NotificationForm = () => {
         const newObject = {
             id: uuid(),
             to: data.to,
+            workshop: data.workshop ,
             subject: data.subject,
             content: data.content,
             state: state,
@@ -44,19 +56,51 @@ const NotificationForm = () => {
         if(data.checkbox){
             toggleSchedule()
         }
+        if(data.workshop){
+            setSelectWorkshop(false)
+        }
     };
+
+    const onChangeSelect = (event) => {
+
+        const {value} = event.target;
+
+        if(value === "Workshop"){
+            setSelectWorkshop(true)
+        } else {
+            setSelectWorkshop(false)
+        }
+
+    }
+
+    const handleToWorkshop = (event) => {
+        const { value } = event.target
+        const workshop = value.split(",")
+        const workshopId = Number(workshop[1])
+        getAttendees(workshopId)
+    }
 
     return (
         <form className="new-notification-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="new-notification-form-header" />
             <div className="new-notification-form-body">
-                <select name="to" ref={register({ required: true })}>
+                <select onChange={onChangeSelect} name="to" ref={register({ required: true })}>
                     <option value="">To:</option>
                     <option value="All">All</option>
                     <option value="All Attendees">All Attendees</option>
                     <option value="All Speakers">All Speakers</option>
+                    <option value="Workshop">Workshop</option>
                 </select>
                 {errors.to && <p>please select an addressee</p>}
+                {selectWorkshop && 
+                <select name="workshop" onChange={handleToWorkshop} ref={register({ required: true })}>
+                    <option value="">Select a Workshop</option>
+                    {allWorkshops.map(workshop => {
+                        return <option value={[workshop.title, workshop.id]}>{workshop.title}</option>
+                    })}
+                </select>
+                }
+                {selectWorkshop && errors.workshop && <p>please select a workshop</p>}
                 <input style={errors.subject && ({border: "1px solid #3B65B0"})} type="text" placeholder="Subject" name="subject" ref={register({ required: true })} />
                 {errors.subject && <p>please add a subject</p>}
                 <textarea style={errors.content && ({border: "1px solid #3B65B0"})} className="content" type="text" placeholder="Content" name="content" row="5" cols="50" ref={register({ required: true })} />

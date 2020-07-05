@@ -24,15 +24,13 @@ const RegistrationDetails = ({user, handleSetUser, toggleDisplayModal}) => {
                 <td>{user.email}</td>
                 <td>{user.position}</td>
                 <td>{user.company}</td>
-                <td>{/*user.workshopsNumber*/}</td>
+                <td>{user.workshop_count === 0 ? "N/A" : user.workshop_count}</td>
                 <td>{user.country}</td>
                 <td>{user.role}</td>
                 <td>
                     <button className="registrations-notification-btn" onClick={() => handleModal(user)}><MdMessage /></button>
                     <button className="registrations-delete-btn" onClick={() => deleteUser(user.id, user.role )}><MdDelete /></button>
                 </td>
-                
-                {/* edit button */}
             </tr>
         );
 }
