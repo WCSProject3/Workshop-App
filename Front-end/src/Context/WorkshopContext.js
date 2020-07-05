@@ -8,8 +8,14 @@ const WorkshopContextProvider = (props) => {
   const [tempWorkshops, setTempWorkshop] = useState([]);
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [months, setMonths] = useState([]);
-  const [searchValue, setsearchValue] = useState('')
-  const [userWorkshops, setUserWorkshops] = useState([])
+  const [searchWorkshopValue, setSearchWorkshopValue] = useState('');
+  const [searchAttendeeValue, setSearchAttendeeValue] = useState([]);
+  const [userWorkshops, setUserWorkshops] = useState([]);
+  const [workshop, setWorkshop] = useState([]);
+  const [attendees, setAttendees] = useState([]);
+  const [allAttendees, setAllAttendees] = useState([]);
+  const [dateFilter, setdDateFilter] = useState("All workshops");
+
 
   useEffect(() => {
     getWorkshops();
@@ -26,6 +32,25 @@ const WorkshopContextProvider = (props) => {
       });
   };
 
+  const getWorkshop = (workshopId) => {
+    axios
+        .get(`/workshops/${workshopId}`)
+        .then((response) => response.data[0])
+        .then((workshopInfo) => {
+          setWorkshop(workshopInfo)
+        })
+        
+}
+
+const getAttendees = (workshopId) => {
+  axios
+      .get(`/workshops/${workshopId}/attendees`)
+      .then((response) => response.data)
+      .then((attendeesList) => {
+        setAttendees(attendeesList)
+        setAllAttendees(attendeesList)
+      })
+}
 
   const getUserWorkshops = (id) => {
     axios
@@ -48,11 +73,9 @@ const WorkshopContextProvider = (props) => {
     getWorkshops()
   }
 
-
   const deleteUserWorkshop = (workshopId, userId) => {
 
     const user_workshop = [workshopId, userId]
-    console.log("user_workshop",user_workshop)
     axios
       .delete('/workshops/user-workshops', { data: user_workshop } )
       .then((response) => response.data)
@@ -61,8 +84,6 @@ const WorkshopContextProvider = (props) => {
     });
     getWorkshops()
   }
-
-  console.log(allWorkshops)
   
   const getMonth = () => {
     axios
@@ -83,24 +104,23 @@ const WorkshopContextProvider = (props) => {
 
     axios
       .put(`/workshops/${newWorkshopId}`, newWorkshop)
-      .then((response) => console.log(response));
 
     getWorkshops();
+    getMonth();
   };
 
   const confirmWorkshop = (newObject) => {
     axios
       .post("/workshops", newObject)
-      .then((response) => console.log(response));
 
     getWorkshops();
+    getMonth();
   };
 
   const editTempWorkshop = (newObject) => {
     const workshopsList = [...tempWorkshops];
     const i = workshopsList.findIndex((wrkshop) => wrkshop.id === newObject.id);
     workshopsList.splice(i, 1, newObject);
-    console.log("workshops list before", workshopsList);
     setTempWorkshop(workshopsList);
   };
 
@@ -109,23 +129,24 @@ const WorkshopContextProvider = (props) => {
     setTempWorkshop(workshopList);
   };
 
-  const handleFilterDate = (month) => {
-    axios.get("/workshops").then((response) => {
-      if (month === "All workshops") {
-        setWorkshops(response.data);
-        return workshops;
+  const handleFilterDate = (event) => {
+
+    const { value } = event.target;
+
+      if (value === "All workshops") {
+        setWorkshops(allWorkshops);
       } else {
         const filterdResult = allWorkshops.filter((workshop) => {
           const workshopMonth = workshop.workshop_month;
-          return workshopMonth === month;
+          return workshopMonth === value;
         });
+        setdDateFilter(value)
         setWorkshops(filterdResult);
-        setAllWorkshops(response.data);
-      }
-    });
+        setSearchWorkshopValue("")
+      };
   };
 
-  const handleChangeSearch = (event) => {
+  const handleWorkshopSearch = (event) => {
     const { value } = event.target;
     if (value.length) {
       const filteredWorkshops = allWorkshops.filter((workshop) => {
@@ -134,11 +155,30 @@ const WorkshopContextProvider = (props) => {
           workshop.workshop_speaker.toLowerCase().includes(value.toLowerCase())
         );
       });
-      setsearchValue(value);
+      setSearchWorkshopValue(value);
       setWorkshops(filteredWorkshops);
+      setdDateFilter("All workshops")
     } else {
-      setsearchValue(value);
+      setSearchWorkshopValue(value);
       setWorkshops(allWorkshops);
+    }
+  };
+
+  const handleAttendeeSearch = (event) => {
+    const { value } = event.target;
+    
+    if (value.length) {
+      const filteredAttendees = allAttendees.filter((attendee) => {
+        const attendeeName = `${attendee.firstname} ${attendee.lastname}`
+        return (
+            attendeeName.toLowerCase().includes(value.toLowerCase()) 
+        );
+      });
+      setSearchAttendeeValue(value);
+      setAttendees(filteredAttendees);
+    } else {
+      setSearchAttendeeValue(value);
+      setAttendees(allAttendees);
     }
   };
 
@@ -156,13 +196,21 @@ const WorkshopContextProvider = (props) => {
           deleteTempWorkshop,
           months,
           setTempWorkshop,
-          handleChangeSearch,
+          handleWorkshopSearch,
+          searchWorkshopValue,
           getUserWorkshops,
           userWorkshops,
           addUserWorkshop,
           deleteUserWorkshop,
           getWorkshops,
-          confirmEditedWorkshop
+          confirmEditedWorkshop,
+          getWorkshop,
+          workshop,
+          getAttendees,
+          attendees,
+          searchAttendeeValue,
+          handleAttendeeSearch,
+          dateFilter
         }}>
 
         {props.children}
