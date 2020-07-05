@@ -11,65 +11,28 @@ const WorkshopAttendees = ( props ) => {
 
     const workshopId = props.match.params.id;
 
-    const { workshops } = useContext(WorkshopContext);
-    const [workshop, setWorkshop] = useState([]);
+    const { workshop, getWorkshop, getAttendees, attendees } = useContext(WorkshopContext);
     const [displayModal, setDisplayModal] = useState(false);
     const [workshopInEdit, setWorkshopInEdit] = useState([]);
-    const [attendees, setAttendees] = useState([]);
-    const [allAttendees, setAllAttendees] = useState([]);
-    const [searchValue, setSearchValue] = useState([]);
     const [modal, setModal] = useState("");
 
     useEffect(() => {
-        getWorkshop();
-        getAttendees()
+        getWorkshop(workshopId);
+        getAttendees(workshopId)
     }, [workshopId]);
-
-    const getWorkshop = () => {
-        axios
-            .get(`/workshops/${workshopId}`)
-            .then((response) => setWorkshop(response.data[0]))
-    }
-
-    const getAttendees = () => {
-        axios
-            .get(`/workshops/${workshopId}/attendees/`)
-            .then((response) => { 
-                setAttendees(response.data)
-                setAllAttendees(response.data)
-            }) 
-    }
 
     const toggleDisplayModal = () => {
         setDisplayModal(!displayModal)
-        const editingWorkshop = workshops.filter(workshop => (workshop.id == workshopId))
-        setWorkshopInEdit(editingWorkshop[0])
-        getWorkshop()
+        setWorkshopInEdit(workshop)
+        getWorkshop(workshopId)
     }
 
-    const handleChangeSearch = (event) => {
-        const { value } = event.target;
-        
-        if (value.length) {
-          const filteredAttendees = allAttendees.filter((attendee) => {
-            const attendeeName = `${attendee.firstname} ${attendee.lastname}`
-            return (
-                attendeeName.toLowerCase().includes(value.toLowerCase()) 
-            );
-          });
-          setSearchValue(value);
-          setAttendees(filteredAttendees);
-        } else {
-          setSearchValue(value);
-          setAttendees(allAttendees);
-        }
-      };
-
-      const selectModal = (modal) => {
+    const selectModal = (modal) => {
         setModal(modal);
-      }
+    }
 
     return ( 
+        workshop !== [] &&
         <div>
             {displayModal && <ModalForm workshopInEdit={workshopInEdit} toggleDisplayModal={toggleDisplayModal} active={modal} attendees={attendees}/>}
              <div className="workshop-attendees-header">
@@ -77,9 +40,8 @@ const WorkshopAttendees = ( props ) => {
             </div>
             <div className="workshop-attendees-body">
                 <WorkshopInfo workshop={workshop} toggleDisplayModal={toggleDisplayModal} selectModal={selectModal}/>
-                <AttendeesList attendees={attendees} handleChangeSearch={handleChangeSearch} searchValue={searchValue}/>
+                <AttendeesList attendees={attendees}/>
             </div>
-            
         </div>
     );
 }

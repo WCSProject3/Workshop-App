@@ -7,7 +7,6 @@ const WorkshopInfo = ( { workshop, toggleDisplayModal, selectModal } ) => {
         toggleDisplayModal()
         selectModal(modal)
     }
-    console.log(workshop)
 
         return (
             <div>

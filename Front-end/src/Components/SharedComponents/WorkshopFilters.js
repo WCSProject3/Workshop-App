@@ -4,17 +4,17 @@ import SearchBar from './SearchBar'
 
 const WorkshopFilters = () => {
 
-    const { allWorkshops, handleFilterDate, months, handleChangeSearch, searchValue } = useContext(WorkshopContext);
+    const { handleFilterDate, months, handleWorkshopSearch, searchWorkshopValue, dateFilter } = useContext(WorkshopContext);
 
 
         return (  
             <div className="workshop-filters">
                 <div className="filter-select">
-                    <SearchBar handleChange={handleChangeSearch} searchValue={searchValue} />
+                    <SearchBar handleChange={handleWorkshopSearch} searchValue={searchWorkshopValue} />
                 </div>
                 <div className="filter-select">
                   <label>Filter by Date </label>
-                  <select onChange={(event) => handleFilterDate(event.target.value)  }>
+                  <select value={dateFilter} onChange={handleFilterDate}>
                       <option
                           value={'All workshops'}>
                           All workshops
