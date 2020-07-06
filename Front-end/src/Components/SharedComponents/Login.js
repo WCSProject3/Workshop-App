@@ -4,7 +4,7 @@ import './Login.scss';
 import axios from 'axios';
 
 const Login = () => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -12,6 +12,7 @@ const Login = () => {
     axios
       .post('/auth/login', data)
       .then((response) => console.log(response.data));
+    reset();
     //redirect to role-based view
   };
 
