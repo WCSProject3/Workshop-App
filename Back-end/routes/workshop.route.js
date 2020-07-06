@@ -19,6 +19,23 @@ router.get('/', (req, res) => {
     })
 });
 
+router.delete('/:id', (req, res) => {
+
+  const workshop_id = req.params.id;
+  
+    connection.query('DELETE FROM workshops WHERE id = ?', [workshop_id], (err, results) => {
+        if(err) {
+          console.log('delete err', err)
+            return res.status(500).json({
+                      error: err.message,
+                      sql: err.sql,
+                    });
+        } 
+        console.log("nice")
+        res.status(201).json(results)
+      })
+  });
+
 router.delete('/speaker/:id', (req, res) => {
 
 const workshop_id = req.params.id;
