@@ -6,9 +6,9 @@ import Registration from './Components/SharedComponents/Registration';
 function App() {
   return (
     <div className='App'>
-      <Registration />
+      {/* <Registration /> */}
       {/* <Login /> */}
-      {/* <Admin /> */}
+      <Admin />
     </div>
   );
 }
