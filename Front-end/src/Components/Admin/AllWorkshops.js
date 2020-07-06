@@ -9,7 +9,7 @@ import ModalForm from '../SharedComponents/ModalForm';
 
 const AllWorkshops = () => {
 
-    const { workshops, handleFilterDate, months, dateFilter, handleWorkshopSearch, searchWorkshopValue } = useContext(WorkshopContext);
+    const { workshops, handleFilterDate, months, dateFilter, handleWorkshopSearch, searchWorkshopValue, deleteWorkshop } = useContext(WorkshopContext);
     const [ displayModal, setDisplayModal ] = useState(false);
     const [ workshopInEdit, setWorkshopInEdit ] = useState([]);
 
@@ -29,7 +29,7 @@ const AllWorkshops = () => {
             {displayModal && <ModalForm toggleDisplayModal={toggleDisplayModal} workshopInEdit={workshopInEdit} active="workshop"/>}
             <div className="all-workshops-body">
                 <Filters handleSearch={handleWorkshopSearch} seachValue={searchWorkshopValue} handleOption={handleFilterDate} optionsList={months} defaultOption="All Workshops" optionValue={dateFilter} optionKey="month" />
-                <WorkshopList workshops={workshops} toggleDisplayModal={toggleDisplayModal}/> 
+                <WorkshopList workshops={workshops} toggleDisplayModal={toggleDisplayModal} deleteWorkshop={deleteWorkshop}/> 
             </div>
            
         </div>
