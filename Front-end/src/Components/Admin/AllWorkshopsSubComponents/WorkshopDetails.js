@@ -9,8 +9,15 @@ const WorkshopDetails = ({workshop, toggleDisplayModal, deleteWorkshop}) => {
     const starting_at = workshop.starting_hour.substring(0, 5);
     const ending_at = workshop.ending_hour.substring(0, 5);
 
-    console.log(workshop)
+    console.log("workshop", workshop)
+    
+    const handleDelete = () => {
+        toggleDisplayModal("confirm", "are you sure you want to delete this workshop?", workshop.id, workshop.enrolled_ateendees)
+    }
 
+    const handleEdit = () => {
+        toggleDisplayModal("workshop", "", workshop.id)
+    }
 
         return (
             <tr>
@@ -28,8 +35,8 @@ const WorkshopDetails = ({workshop, toggleDisplayModal, deleteWorkshop}) => {
                     <div className="btns-dropdown">
                         <button><Link to={`/admin/workshop-attendees/${workshop.id}`}>more</Link></button>
                         <button>export</button>
-                        <button onClick={() => toggleDisplayModal(workshop.id)}>edit</button>
-                        <button className="delete-workshop-btn" onClick={() => deleteWorkshop(workshop.id)}>delete</button>
+                        <button onClick={handleEdit}>edit</button>
+                        <button className="delete-workshop-btn" onClick={handleDelete}>delete</button>
                     </div>
                 </td>
             </tr>

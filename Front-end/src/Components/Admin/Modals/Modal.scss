@@ -2,55 +2,40 @@
 
 //$modal-height:(100% - 80px);
 
-.modal-bg{
-    position: absolute;
-    top: 10vh;
-    left: 20%;
-    width: 80%;
-    height: 90vh;
-    background-color: rgba(0,0,0,.4);
+.modal{
+    width: fit-content;
+    height: fit-content;
+    padding: 30px;
+    background-color: white;
+    border-radius: 5px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .modal{
+    flex-direction: column;
+    .close-modal{
+        background-color:white;
         width: fit-content;
-        height: fit-content;
-        padding: 30px;
-        background-color: white;
+        padding: 3px;
+        color: $darkgrey;
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        outline: none;
+        align-self: flex-end;
+    }
+    .confirm-modal{
+        background-color: $darkgrey;
+        color: white;
+        padding: 8px 10px;
+        font-family: roboto;
+        font-weight: 400;
+        font-size: 16px;
         border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-
-        .close-modal{
-            background-color:white;
-            width: fit-content;
-            padding: 3px;
-            color: $darkgrey;
-            font-size: 18px;
-            font-weight: 400;
-            border: none;
-            outline: none;
-            align-self: flex-end;
-        }
-
-        .confirm-modal{
-            background-color: $darkgrey;
-            color: white;
-            padding: 8px 10px;
-            font-family: roboto;
-            font-weight: 400;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-            align-self: center;
-        }
-
-        p{
-            font-family: roboto;
-            font-weight: 400;
-            color: $darkgrey;
-        }
+        border: none;
+        outline: none;
+        align-self: center;
+    }
+    p{
+        font-family: roboto;
+        font-weight: 400;
+        color: $darkgrey;
     }
 }

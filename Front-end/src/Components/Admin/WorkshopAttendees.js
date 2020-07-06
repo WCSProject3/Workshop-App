@@ -3,7 +3,7 @@ import AttendeesList from './WorkshopAttendeesSubComponents/AttendeesList';
 import WorkshopInfo from './WorkshopAttendeesSubComponents/WorkshopInfo';
 import './WorkshopAttendees.scss';
 import { WorkshopContext } from '../../Context/WorkshopContext';
-import ModalForm from '../SharedComponents/ModalForm';
+import ModalForm from './Modals/ModalForm';
 import axios from 'axios';
 
 

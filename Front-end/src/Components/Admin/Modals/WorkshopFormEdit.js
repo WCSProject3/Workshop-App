@@ -1,7 +1,7 @@
 import React, { useContext }from 'react';
 import { useForm } from 'react-hook-form';
-import { UserContext } from '../../Context/UserContext';
-import { WorkshopContext } from '../../Context/WorkshopContext';
+import { UserContext } from '../../../Context/UserContext';
+import { WorkshopContext } from '../../../Context/WorkshopContext';
 
 
 const WorkshopFormEdit = ({workshopInEdit, toggleDisplayModal}) => {

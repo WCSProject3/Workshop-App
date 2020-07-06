@@ -96,12 +96,31 @@ const UserContextProvider = (props) => {
   }
 
   const deleteUser = (id, role) => {
-    if(role === "speaker"){
+    if(role == "speaker"){
+    console.log("deleteUser",id, role)
       axios
-        .delete(`/workshops/${id}`)
+        .delete(`/workshops/all-speaker-workshops/${id}`)
         .then(() => {
           axios
-          .delete(`/users/${id}`)
+          .delete(`/workshops/speaker/${id}`)
+          .then(() => {
+            axios
+            .delete(`/users/${id}`)
+            .then(()=>{
+              getAllUsers()
+            })
+          })
+        })
+    }
+    if( role == "attendee"){
+      axios
+        .delete(`/workshops/all-user-workshops/${id}`)
+        .then(() => {
+          axios
+            .delete(`/users/${id}`)
+            .then(() => {
+              getAllUsers()
+            })
         })
     }
     axios

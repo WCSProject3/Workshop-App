@@ -5,17 +5,25 @@ import { WorkshopContext } from '../../Context/WorkshopContext'
 import { Link } from 'react-router-dom';
 import SearchBar from '../SharedComponents/SearchBar';
 import './AllWorkshops.scss'
-import ModalForm from '../SharedComponents/ModalForm';
+import ModalForm from './Modals/ModalForm';
 
 const AllWorkshops = () => {
 
     const { workshops, handleFilterDate, months, dateFilter, handleWorkshopSearch, searchWorkshopValue, deleteWorkshop } = useContext(WorkshopContext);
     const [ displayModal, setDisplayModal ] = useState(false);
     const [ workshopInEdit, setWorkshopInEdit ] = useState([]);
+    const [active, setActive] = useState("");
+    const [content, setContent] = useState("");
+    const [workshopId, setWorkshopId] = useState("");
+    const [workshopEnrolled, setWorkshopEnrolled] = useState("");
 
-    const toggleDisplayModal = (id) => {
+    const toggleDisplayModal = (activeModal, modalContent, workshop_id, enrolled_workshop) => {
+        setWorkshopEnrolled(enrolled_workshop)
+        setWorkshopId(workshop_id)
+        setContent(modalContent)
+        setActive(activeModal)
         setDisplayModal(!displayModal)
-        const editingWorkshop = workshops.filter(workshop => (workshop.id === id))
+        const editingWorkshop = workshops.filter(workshop => (workshop.id === workshop_id))
         setWorkshopInEdit(editingWorkshop[0])
     }
     console.log("months", months)
@@ -26,7 +34,7 @@ const AllWorkshops = () => {
                 <h1>All Workshops</h1>
                 <button className="new-workshop-btn"><Link to='/admin/new-workshop'>New Workshop</Link></button>
             </div>
-            {displayModal && <ModalForm toggleDisplayModal={toggleDisplayModal} workshopInEdit={workshopInEdit} active="workshop"/>}
+            {displayModal && <ModalForm toggleDisplayModal={toggleDisplayModal} workshopInEdit={workshopInEdit} active={active} confirmFunction={deleteWorkshop} workshopEnrolled={workshopEnrolled} id={workshopId} confirmText={"confirm"} content={content}/>}
             <div className="all-workshops-body">
                 <Filters handleSearch={handleWorkshopSearch} seachValue={searchWorkshopValue} handleOption={handleFilterDate} optionsList={months} defaultOption="All Workshops" optionValue={dateFilter} optionKey="month" />
                 <WorkshopList workshops={workshops} toggleDisplayModal={toggleDisplayModal} deleteWorkshop={deleteWorkshop}/> 

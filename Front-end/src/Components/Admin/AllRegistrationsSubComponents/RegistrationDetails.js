@@ -12,6 +12,14 @@ const RegistrationDetails = ({user, handleSetUser, toggleDisplayModal}) => {
         toggleDisplayModal()
     }
 
+    const handleNotification = () => {
+        toggleDisplayModal("notification", user)
+    }
+
+    const handleDelete = () => {
+        toggleDisplayModal("confirm", "", user.id, user.role )
+    }
+
     const name = `${user.firstname} ${user.lastname}`
 
     console.log(user)
@@ -28,8 +36,8 @@ const RegistrationDetails = ({user, handleSetUser, toggleDisplayModal}) => {
                 <td>{user.country}</td>
                 <td>{user.role}</td>
                 <td>
-                    <button className="registrations-notification-btn" onClick={() => handleModal(user)}><MdMessage /></button>
-                    <button className="registrations-delete-btn" onClick={() => deleteUser(user.id, user.role )}><MdDelete /></button>
+                    <button className="registrations-notification-btn" onClick={handleNotification}><MdMessage /></button>
+                    <button className="registrations-delete-btn" onClick={handleDelete}><MdDelete /></button>
                 </td>
             </tr>
         );

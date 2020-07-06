@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { WorkshopContext } from '../../../Context/WorkshopContext';
 import WorkshopDetails from './WorkshopDetails';
 import './WorkshopList.scss'
-import ModalForm from '../../SharedComponents/ModalForm';
+import ModalForm from '../Modals/ModalForm';
 
 
 const WorkshopList = ({toggleDisplayModal, workshops, deleteWorkshop}) => {

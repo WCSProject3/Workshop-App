@@ -5,6 +5,8 @@ import { UserContext } from '../../../Context/UserContext';
 
 const MyWorkshopDetails = ({ workshop, reachedLimit }) => {
 
+    console.log("workshop", workshop)
+
     const { user } = useContext(UserContext)
     const { workshops, userWorkshops, addUserWorkshop, deleteUserWorkshop , getWorkshops} = useContext(WorkshopContext)
 
@@ -25,16 +27,16 @@ const MyWorkshopDetails = ({ workshop, reachedLimit }) => {
     },[workshops])
 
    const calcPercentage = (enrolled, room_capacity) => {
-        const percentage = (enrolled/room_capacity) * 100
+        const percentage = Math.round((enrolled/room_capacity) * 100)
         setPercentage(percentage)
    }
 
     const handleEnrolled = (enroll) => {
         if(enroll){
-            addUserWorkshop(workshop.id, user.id)
+            addUserWorkshop(workshop.id, user.id, workshop.speaker_id)
             getWorkshops()
         } else {
-            deleteUserWorkshop(workshop.id, user.id)
+            deleteUserWorkshop(workshop.id, user.id, workshop.speaker_id)
             getWorkshops()
         }
         setIsEnrolled(!isEnrolled)
@@ -69,10 +71,12 @@ const MyWorkshopDetails = ({ workshop, reachedLimit }) => {
                         </div>
                     </div>
                     <div className="myWorkshop-btn">
+                        <p className={workshop.status_open ? "status-open": "status-closed"}>{workshop.status_open ? "Open": "Closed"}</p>
                     {isEnrolled ? 
-                        <button className="myWorkshop-handle-not-enrolled" onClick={() => handleEnrolled(false)}>uneroll</button>
+                        (<button className="myWorkshop-handle-not-enrolled" onClick={() => handleEnrolled(false)}>uneroll</button>)
                         :
-                        <button className={reachedLimit ? "myWorkshop-handle-enrolled-disabled" : "myWorkshop-handle-enrolled"} onClick={() => handleEnrolled(true)}>enroll</button>
+                        (workshop.status_open !== 0 &&
+                        <button className={reachedLimit ? "myWorkshop-handle-enrolled-disabled" : "myWorkshop-handle-enrolled"} onClick={() => handleEnrolled(true)}>enroll</button>)
                         }
                     {isExpanded ? 
                     <button className="myWorkshop-handle-expanded-closed" onClick={() => handleIsExpanded(false)}>show less</button>

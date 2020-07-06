@@ -6,7 +6,7 @@ import Modal from "../Modals/Modal";
 import { MdDelete, MdEdit } from 'react-icons/md';
 
 
-const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
+const TempWorkshopInfo = ({ tempWorkshop, toggleDisplayModal }) => {
   const { confirmWorkshop, editTempWorkshop, deleteTempWorkshop } = useContext(
     WorkshopContext
   );
@@ -14,12 +14,6 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
   const { speakers } = useContext(UserContext);
 
   const [editMode, setEditMode] = useState(false);
-
-  const [isModalDisplayed, setModalVisibility] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisibility(!isModalDisplayed);
-  };
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -63,8 +57,12 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
     };
     confirmWorkshop(newObject);
     deleteTempWorkshop(tempWorkshop.id);
-    toggleMessageModal();
+    toggleDisplayModal("message", "Workshop successfully added");
   };
+
+  const handleDelete = () => {
+    toggleDisplayModal("confirm","Do you want to delete this Workshop?", tempWorkshop.id)
+  }
  
   const year = Number(tempWorkshop.date.substring(0,4));
   const month = Number(tempWorkshop.date.substring(5,7));
@@ -77,14 +75,6 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
 
   return (
     <div>
-      {isModalDisplayed && (
-        <Modal
-          closeModal={toggleModal}
-          content="Do you want to delete this Workshop?"
-          confirmText="Confirm"
-          confirmFunction={() => deleteTempWorkshop(tempWorkshop.id)}
-        />
-      )}
       {!editMode && (
         <div className="temp-workshop-info">
           <div className="temp-workshop-info-header">
@@ -93,7 +83,7 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleMessageModal }) => {
             </div>
             <div className="temp-workshop-info-header-btns">
               <button className="workshop-icons" onClick={() => setEditMode(!editMode)}><MdEdit /></button>
-              <button onClick={toggleModal} className="workshop-icons"><MdDelete /></button>
+              <button onClick={handleDelete} className="workshop-icons"><MdDelete /></button>
             </div>
           </div>
           <div className="temp-workshop-info-body">

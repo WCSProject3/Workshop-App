@@ -5,19 +5,26 @@ import { UserContext } from "../../Context/UserContext";
 import TempWorkshopInfo from "./NewWorkshopSubComponents/TempWorkshopInfo";
 import { Link } from "react-router-dom";
 import "./NewWorkshop.scss";
-import MessageModal from "./Modals/MessageModal";
+import ModalForm from "./Modals/ModalForm";
 
 const NewWorkshop = () => {
-  const { tempWorkshops, setTempWorkshop, confirmWorkshop } = useContext(
+  const { tempWorkshops, setTempWorkshop, confirmWorkshop, deleteTempWorkshop } = useContext(
     WorkshopContext
   );
 
-  const [isMessageModalDisplayed, setMessageModalVisibility] = useState(false);
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+  const [active, setActive] = useState("");
+  const [content, setContent] = useState("");
+  const [workshopId, setWorkshopId] = useState("");
 
-  const toggleMessageModal = () => {
-    setMessageModalVisibility(true);
-    setTimeout(() => setMessageModalVisibility(false), 1500);
-    console.log("ITS WORKING");
+  const toggleDisplayModal = (activeModal, modalContent, workshop_id) => {
+    setWorkshopId(workshop_id)
+    setContent(modalContent)
+    setActive(activeModal)
+    setIsModalDisplayed(!isModalDisplayed);
+    if(activeModal === "message"){
+      setTimeout(() => setIsModalDisplayed(false), 1500);
+    }
   };
 
   const { speakers } = useContext(UserContext);
@@ -59,8 +66,8 @@ const NewWorkshop = () => {
           <Link to='/admin'>All Workshops</Link>
         </button>
         <div>
-          {isMessageModalDisplayed && (
-            <MessageModal content="Your Workshop was successfully added" />
+          {isModalDisplayed && (
+            <ModalForm active={active} toggleDisplayModal={toggleDisplayModal} confirmFunction={deleteTempWorkshop} id={workshopId} confirmText={"confirm"} content={content} />
           )}
         </div>
         <button className="confirm-all-btn" onClick={handleConfirmAllWorkshops}>
@@ -72,7 +79,7 @@ const NewWorkshop = () => {
           <TempWorkshopInfo
             tempWorkshop={tempWorkshop}
             key={tempWorkshop.title}
-            toggleMessageModal={toggleMessageModal}
+            toggleDisplayModal={toggleDisplayModal}
           />
         );
       })}

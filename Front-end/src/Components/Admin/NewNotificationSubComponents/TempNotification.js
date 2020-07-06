@@ -4,7 +4,7 @@ import { NotificationContext } from "../../../Context/NotificationContext";
 import Modal from "../Modals/Modal";
 import { WorkshopContext } from "../../../Context/WorkshopContext";
 
-const TempNotification = ({ tempNotification, toggleMessageModal }) => {
+const TempNotification = ({ tempNotification, toggleDisplayModal }) => {
   const {
     editNotification,
     deleteTempNotification,
@@ -14,7 +14,6 @@ const TempNotification = ({ tempNotification, toggleMessageModal }) => {
 
   const [editMode, setEditMode] = useState(false);
   const [selectWorkshop, setSelectWorkshop] = useState(false);
-  const [isModalDisplayed, setModalVisibility] = useState(false);
   const [checkboxCheck, setCheckboxCheck] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
@@ -86,12 +85,12 @@ const TempNotification = ({ tempNotification, toggleMessageModal }) => {
     };
 
     confirmNotification(newObject);
-    toggleMessageModal();
+    toggleDisplayModal("message", "Notification successfully added");
     deleteTempNotification(tempNotification.id);
   };
 
-  const toggleModal = () => {
-    setModalVisibility(!isModalDisplayed);
+  const handleDelete = () => {
+    toggleDisplayModal("confirm","Do you want to delete this Notification?", tempNotification.id)
   };
 
   const toggleSchedule = () => {
@@ -131,21 +130,13 @@ const onChangeSelect = (event) => {
 
   return (
     <div>
-      {isModalDisplayed && (
-        <Modal
-          closeModal={toggleModal}
-          content="Do you want to delete this Notification?"
-          confirmText="Confirm"
-          confirmFunction={() => deleteTempNotification(tempNotification.id)}
-        />
-      )}
       {!editMode && (
         <div className="temp-notification-info">
           <div className="temp-notification-info-header">
             <div>{tempNotification.date}</div>
             <div className="temp-notification-info-header-btns">
               <button onClick={handleEdit}>Edit Notification</button>
-              <button onClick={toggleModal}>Delete Notification</button>
+              <button onClick={handleDelete}>Delete Notification</button>
             </div>
           </div>
           <div className="temp-notification-info-body">

@@ -61,9 +61,9 @@ const getAttendees = (workshopId) => {
       });
   }
 
-  const addUserWorkshop = (workshopId, userId) => {
+  const addUserWorkshop = (workshopId, userId, speakerId) => {
 
-    const user_workshop = {workshop_id: workshopId , user_id: userId}
+    const user_workshop = {workshop_id: workshopId , user_id: userId, speaker_id:speakerId}
     axios
       .post('/workshops/user-workshops', user_workshop)
       .then((response) => response.data)
@@ -130,8 +130,15 @@ const getAttendees = (workshopId) => {
     setTempWorkshop(workshopList);
   };
 
-  const deleteWorkshop = (id) => {
-    
+  const deleteWorkshop = (id, enrolled_ateendees) => {
+    if(enrolled_ateendees > 0){
+      axios
+      .delete(`/workshops/workshop-user-workshops/${id}`)
+      .then(() => {
+        axios
+        .delete(`/workshops/${id}`)
+      })
+    }
     axios
       .delete(`/workshops/${id}`)
 

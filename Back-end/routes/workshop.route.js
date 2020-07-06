@@ -19,13 +19,13 @@ router.get('/', (req, res) => {
     })
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/speaker/:id', (req, res) => {
 
 const workshop_id = req.params.id;
 
-console.log(workshop_id)
+console.log("hereeee")
 
-  connection.query('DELETE FROM workshops WHERE id = ?', [workshop_id], (err, results) => {
+  connection.query('DELETE FROM workshops WHERE speaker_id = ?', [workshop_id], (err, results) => {
       if(err) {
         console.log('delete err', err)
           return res.status(500).json({
@@ -33,9 +33,49 @@ console.log(workshop_id)
                     sql: err.sql,
                   });
       } 
+      console.log("nice")
       res.status(201).json(results)
     })
 });
+
+router.delete('/workshop-user-workshops/:id', (req, res) => {
+
+  const workshop_id = req.params.id;
+  
+  console.log(workshop_id)
+  
+    connection.query('DELETE FROM user_workshops WHERE workshop_id = ?', [workshop_id], (err, results) => {
+        if(err) {
+          console.log('delete err', err)
+            return res.status(500).json({
+                      error: err.message,
+                      sql: err.sql,
+                    });
+        } 
+        console.log("nice")
+        res.status(201).json(results)
+      })
+  });
+
+
+router.delete('/all-speaker-workshops/:id', (req, res) => {
+
+  const speaker_id = req.params.id;
+  
+  console.log("hereee" ,speaker_id)
+  
+    connection.query('DELETE FROM user_workshops WHERE speaker_id = ?', [speaker_id], (err, results) => {
+        if(err) {
+          console.log('delete err', err)
+            return res.status(500).json({
+                      error: err.message,
+                      sql: err.sql,
+                    });
+        } 
+        console.log("nice")
+        res.status(201).json(results)
+      })
+  });
 
 
 
@@ -111,6 +151,24 @@ router.post('/user-workshops', (req, res) => {
           .json(UserWorkshops)
       });
   });
+});
+
+router.delete('/all-user-workshops/:id', (req, res) => {
+
+  const userId = req.params.id;
+
+  console.log("delete userWorkshops")
+
+  connection.query('DELETE FROM user_workshops WHERE user_id=?', [userId], (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
 });
 
 router.delete('/user-workshops', (req, res) => {

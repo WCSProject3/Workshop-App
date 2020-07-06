@@ -9,7 +9,7 @@ const MyWorkshops = () => {
     const { workshops, getWorkshops, months, userWorkshops } = useContext(WorkshopContext);
     const { user } = useContext(UserContext);
 
-    console.log("user", workshops)
+    console.log("user", userWorkshops)
 
     const [workshopList, setWorkshopList] = useState([])
     const [active, setActive] = useState("")
@@ -24,8 +24,8 @@ const MyWorkshops = () => {
 
     useEffect(() => {
         if(months.length > 0){
-            monthlyWorkshops(months[0].months)
-            setActive(months[0].months)
+            monthlyWorkshops(months[0].month)
+            setActive(months[0].month)
         }
     },[months])
 
@@ -58,7 +58,7 @@ const MyWorkshops = () => {
                 <h1>My Workshops</h1>
                 {months.length > 0 && 
                     months.map(month => {
-                        return <button className={active === month.months ?"myWorkshops-month-btn active": "myWorkshops-month-btn" } onClick={() => monthlyWorkshops(month.months)}>{month.months}</button>
+                        return <button className={active === month.month ?"myWorkshops-month-btn active": "myWorkshops-month-btn" } onClick={() => monthlyWorkshops(month.month)}>{month.month}</button>
                 })}
             </div>
             <MyWorkshopList workshops={workshopList} reachedLimit={reachedLimit} />
