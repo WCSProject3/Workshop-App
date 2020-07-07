@@ -9,13 +9,13 @@ const WorkshopContextProvider = (props) => {
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [months, setMonths] = useState([]);
   const [searchWorkshopValue, setSearchWorkshopValue] = useState('');
+
   const [searchAttendeeValue, setSearchAttendeeValue] = useState([]);
   const [userWorkshops, setUserWorkshops] = useState([]);
   const [workshop, setWorkshop] = useState([]);
   const [attendees, setAttendees] = useState([]);
   const [allAttendees, setAllAttendees] = useState([]);
   const [dateFilter, setdDateFilter] = useState("All workshops");
-
 
   useEffect(() => {
     getWorkshops();
@@ -34,6 +34,7 @@ const WorkshopContextProvider = (props) => {
 
   const getWorkshop = (workshopId) => {
     axios
+
         .get(`/workshops/${workshopId}`)
         .then((response) => response.data[0])
         .then((workshopInfo) => {
@@ -59,8 +60,9 @@ const getAttendees = (workshopId) => {
       .then((userWorkshops) => {
         setUserWorkshops(userWorkshops);
       });
-  }
 
+  }
+  
   const addUserWorkshop = (workshopId, userId, speakerId) => {
 
     const user_workshop = {workshop_id: workshopId , user_id: userId, speaker_id:speakerId}
@@ -74,7 +76,6 @@ const getAttendees = (workshopId) => {
   }
 
   const deleteUserWorkshop = (workshopId, userId) => {
-
     const user_workshop = [workshopId, userId]
     axios
       .delete('/workshops/user-workshops', { data: user_workshop } )
@@ -113,6 +114,7 @@ const getAttendees = (workshopId) => {
   const confirmWorkshop = (newObject) => {
     axios
       .post("/workshops", newObject)
+
 
     getWorkshops();
     getMonth();
@@ -230,7 +232,6 @@ const getAttendees = (workshopId) => {
           dateFilter,
           deleteWorkshop
         }}>
-
         {props.children}
       </WorkshopContext.Provider>
     </div>
