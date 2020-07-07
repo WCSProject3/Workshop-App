@@ -84,7 +84,7 @@ const SignUp = () => {
             <input
               name='max_workshops'
               type='hidden'
-              value='0'
+              value='3'
               contentEditable={false}
               ref={register}
             />
