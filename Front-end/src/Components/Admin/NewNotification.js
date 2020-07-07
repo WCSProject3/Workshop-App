@@ -5,21 +5,29 @@ import { useContext, useState } from "react";
 import { NotificationContext } from "../../Context/NotificationContext";
 import { Link } from "react-router-dom";
 import "./NewNotification.scss";
-import MessageModal from "./Modals/MessageModal";
+import ModalForm from "./Modals/ModalForm";
 
 const NewNotification = () => {
   const {
     tempNotifications,
     confirmNotification,
     setTempNotifications,
+    deleteTempNotification
   } = useContext(NotificationContext);
 
-  const [isMessageModalDisplayed, setMessageModalVisibility] = useState(false);
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+  const [active, setActive] = useState("");
+  const [content, setContent] = useState("");
+  const [notificationId, setNotificationId] = useState("");
 
-  const toggleMessageModal = () => {
-    setMessageModalVisibility(true);
-    setTimeout(() => setMessageModalVisibility(false), 5000);
-    console.log("ITS WORKING");
+  const toggleDisplayModal = (activeModal, modalContent, notification_id) => {
+    setNotificationId(notification_id)
+    setContent(modalContent)
+    setActive(activeModal)
+    setIsModalDisplayed(!isModalDisplayed);
+    if(activeModal === "message"){
+      setTimeout(() => setIsModalDisplayed(false), 1500);
+    }
   };
 
   const handleConfirmAllNotifications = () =>
@@ -54,8 +62,9 @@ const NewNotification = () => {
     <div className="new-notifications-body">
       <div className="new-notifications-header">
         <h1>New Notification</h1>
-        <button className="all-notifications-btn">
-          <Link to="/all-notifications">All Notifications</Link>
+        <button className='all-notifications-btn'>
+          <Link to='/admin/all-notifications'>All Notifications</Link>
+
         </button>
         <button
           className="confirm-all-btn"
@@ -64,8 +73,8 @@ const NewNotification = () => {
           Confirm All
         </button>
         <div>
-          {isMessageModalDisplayed && (
-            <MessageModal content="Your Notification was successfully added" />
+        {isModalDisplayed && (
+            <ModalForm active={active} toggleDisplayModal={toggleDisplayModal} confirmFunction={deleteTempNotification} id={notificationId} confirmText={"confirm"} content={content} />
           )}
         </div>
       </div>
@@ -74,7 +83,7 @@ const NewNotification = () => {
           <TempNotification
             key={tempNotification.id}
             tempNotification={tempNotification}
-            toggleMessageModal={toggleMessageModal}
+            toggleDisplayModal={toggleDisplayModal}
           />
         );
       })}

@@ -1,9 +1,12 @@
 import React from "react";
+import './MessageModal.scss';
 
 const MessageModal = ({ content }) => {
   return (
-    <div className="MessageModal">
-      <p>{content}</p>
+    <div className="message-modal-bg">
+      <div className="message-modal">
+        <p>{content}</p>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const NavBar = () => {
           <img src='Logo_productized.png' className='logo' />
         </div>
         <div className='item'>
-          <Link to='/'>ALL WORKSHOPS</Link>
+          <Link to='/admin'>ALL WORKSHOPS</Link>
         </div>
         <div className='item'>
           <input type='checkbox' id='A' />
@@ -31,14 +31,14 @@ const NavBar = () => {
               return(
               <li>
                 <div className='sub-item'>
-                  <input type='checkbox' id={month.months} />
-                  <label htmlFor={month.months}>
-                    {month.months}
+                  <input type='checkbox' id={month.month} />
+                  <label htmlFor={month.month}>
+                    {month.month}
                     {/* add animation */}
                     <img src='chevron-right-1.png' className='arrow' />
                  </label>
                  <ul>
-                  <MonthlySpeakers month={month.months}/>
+                  <MonthlySpeakers month={month.month}/>
                  </ul>
                 </div>
               </li>
@@ -47,10 +47,10 @@ const NavBar = () => {
           </ul>
         </div>
         <div className='item'>
-          <Link to='/all-registrations'>ALL DATA</Link>
+          <Link to='/admin/all-registrations'>ALL DATA</Link>
         </div>
         <div className='item'>
-          <Link to='/all-notifications'>NOTIFICATIONS</Link>
+          <Link to='/admin/all-notifications'>NOTIFICATIONS</Link>
         </div>
       </div>
     </div>

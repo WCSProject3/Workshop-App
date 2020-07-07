@@ -1,6 +1,6 @@
 @import '../../../styles/variables.scss';
 
-.notifications-table{
+.registrations-table{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     margin: auto;
@@ -15,7 +15,7 @@
     td{
         background-color: white;
 
-        .notification-info-btn{
+        .registrations-notification-btn{
             background: none;
             color: $darkgrey;
             font-size: 24px;
@@ -25,7 +25,7 @@
             }
         }
 
-        .delete-notification-btn{
+        .registrations-delete-btn{
             background: none;
             color: $darkgrey;
             font-size: 24px;

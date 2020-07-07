@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../../Context/UserContext';
 import RegistrationDetails from './RegistrationDetails'
+import './RegistrationList.scss'
 
 
-const RegistrationsList = () => {
-
-    const { allAttendeesCopy } = useContext(UserContext);
+const RegistrationsList = ({ users, handleSetUser, toggleDisplayModal}) => {
 
         return (
-            <table className="workshops-table">
+            <table className="registrations-table">
                 <colgroup>
                     <col className="name-col" />
                     <col className="email-col" />
@@ -31,10 +30,13 @@ const RegistrationsList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {allAttendeesCopy.map(user => {
+                    {users.map(user => {
                         return <RegistrationDetails 
                             key={user.id} 
-                            {...user} /> 
+                            user={user} 
+                            handleSetUser={handleSetUser}
+                            toggleDisplayModal={toggleDisplayModal}
+                            /> 
                     })} 
                 </tbody>
             </table>

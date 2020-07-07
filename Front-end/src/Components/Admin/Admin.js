@@ -14,38 +14,28 @@ import Header from "../SharedComponents/Header";
 import "./Admin.scss";
 import Profile from "../SharedComponents/Profile";
 
-const Admin = () => {
+const Admin = (props) => {
   return (
     <BrowserRouter>
-      <UserContextProvider>
-        <WorkshopContextProvider>
           <NotificationContextProvider>
             <div className="page">
               <NavBar />
               <div className="body">
-                <Header />
+                <Header props={props}/>
                 <Switch>
-                  <Route path="/" exact component={AllWorkshops} />
-                  <Route path="/new-workshop" component={NewWorkshop} />
-                  <Route
-                    path="/workshop-attendees/:id"
-                    component={WorkshopAttendees}
-                  />
-                  <Route
-                    path="/all-notifications"
-                    component={AllNotifications}
-                  />
-                  <Route path="/new-notification" component={NewNotification} />
-                  <Route path="/profile" component={Profile} />
+                  <Route path={props.match.path} exact component={AllWorkshops} />
+                  <Route path={`${props.match.path}/new-workshop`} component={NewWorkshop} />
+                  <Route path={`${props.match.path}/workshop-attendees/:id`} component={WorkshopAttendees} />
+                  <Route path={`${props.match.path}/all-notifications`} component={AllNotifications} />
+                  <Route path={`${props.match.path}/new-notification`} component={NewNotification} />
+                  <Route path={`${props.match.path}/profile`} component={Profile} />
                   {/*<Route path="/notifications-list" component={NotificationsList} />*/}
-                  <Route path="/all-registrations" component={AllRegistrations} />
+                  <Route path={`${props.match.path}/all-registrations`} component={AllRegistrations} />
                 </Switch>
               </div>
             </div>
           </NotificationContextProvider>
-        </WorkshopContextProvider>
-      </UserContextProvider>
-    </BrowserRouter>
+   </BrowserRouter>
   );
 };
 

@@ -1,0 +1,338 @@
+@import '../../styles/variables.scss';
+
+.myWorkshops-header{
+    display: flex;
+    align-items: center;
+    margin: 10px 10px 10px 2.5%;
+
+    h1{
+        margin-left: 0;
+    }
+
+    .myWorkshops-month-btn{
+        @include button(40px, $darkgrey);
+        margin: 0 10px 0 0;
+    }
+
+    .active{
+        background-color: $blue;
+    }
+}
+
+.myWorkshops-list{
+    width: 95%;
+    margin: auto;
+    background-color: white;
+    box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
+}
+
+.myWorkshops-list-header{
+    width: 100%;
+    height: 50px;
+    background-color: $grey;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-left: 10px;
+    border-radius: 5px 5px 0 0;
+    font-family: roboto;
+    font-weight: 450;
+    font-size: 16px;
+    color: $blue;
+
+    .reached-max-warning{
+        margin-left: 20px;
+        color: red;
+        font-family: roboto;
+        font-weight: 450;
+        font-size: 16px;
+    }
+}
+
+.myWorkshop-details{
+    margin: auto;
+    width: 100%;
+    background-color: white;
+    transition: all .3s ease-in-out;
+}
+
+.myWorkshop-basic-info{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    border-top: 1px solid $darkgrey;
+
+    input{
+        width: fit-content;
+        margin:0;
+    }
+}
+
+.myWorkshop-basic-info-left{
+    width: 50%;
+    padding: 10px;
+    padding: 10px 10px 10px 40px;
+    height: 100%;
+    box-sizing: border-box;
+
+
+    .myWorkshop-details-title{
+        font-family: roboto;
+        font-weight: 500;
+        font-size: 20px;
+        color: $darkgrey;
+        margin-top: 16px;
+    }
+
+    .myWorkshop-details-title-enroled{
+        font-family: roboto;
+        font-weight: 500;
+        font-size: 20px;
+        color: white;
+        margin-top: 16px;
+
+    }
+
+    .myWorkshop-details-date{
+        display: flex;
+        align-items: center;
+
+        .myWorkshop-details-day{
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .dot{
+            width: 6px;
+            height: 6px;
+            background-color: $darkgrey;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+
+        .dot-enroled{
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+    
+        p{
+            margin-right: 20px;
+            font-family: roboto;
+            font-weight: 400;
+            font-size: 18px;
+            color: $darkgrey;
+        }
+
+        .myWorkshop-details-hour{
+            margin-right: 20px;
+            font-family: roboto;
+            font-weight: 400;
+            font-size: 18px;
+            color: $darkgrey;
+        }
+
+        .enroled{
+            color: white;
+            margin-right: 0;
+            font-family: roboto;
+            font-weight: 400;
+            font-size: 18px;
+        }
+    }
+}
+
+.myWorkshop-basic-info-right{
+    width: 50%;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px 40px 10px 10px;
+    height: 100%;
+    box-sizing: border-box;
+
+
+
+    button{
+        width: fit-content;
+        margin-top: 10px;
+    }
+}
+
+
+
+.myWorkshop-details-bg-enrolled{
+    background-color: #65BB8D;
+    transition: all .3s ease-in-out;
+}
+.enroled{
+    color: white;
+}
+
+.myWorkshops-room-capacity{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+
+    .myWorkshops-room-capacity-info{
+        display: flex;
+        justify-content: space-between;
+
+        p{
+            font-family: roboto;
+            font-weight: 350;
+            font-size: 16px;
+            color: $darkgrey;
+        }
+
+        .enroled{
+            color: white;
+            font-family: roboto;
+            font-weight: 350;
+            font-size: 16px;
+        }
+    }
+}
+
+.progress-bar{
+    background-color: $grey;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+}
+
+.progress-bar-fill{
+    height: 100%;
+    border-radius: 5px 0 0 5px;
+    background-color: greenyellow;
+    transition: all .3s ease-in-out;
+}
+
+.more{
+    text-align: center;
+    margin: 0 ;
+    padding: 10px 0;
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 18px;
+    border-top: 1px solid $darkgrey;
+}
+
+.myWorkshop-btn{
+    display: flex;
+    width: 70%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px 0;
+
+    .status-open{
+        margin:0 20px 0 0;
+        font-size: 18px;
+        font-family: roboto;
+        color: $blue;
+    }
+
+    .status-closed{
+        margin:0 20px 0 0;
+        font-size: 18px;
+        font-family: roboto;
+        color: red;
+    }
+
+    button{
+        margin-top: 0;
+    }
+}
+
+.myWorkshop-hide{
+    opacity: 0;
+    height: 0px;
+    background-color: white;
+    transition: opacity .001s ease-out, height .3s ease-out;
+}
+
+.myWorkshop-show-enroled{
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 40px;
+    height: fit-content;
+    transition: opacity .001s ease-in, height .3s ease-in;
+
+
+
+    h3{
+        font-family: roboto;
+        font-weight: 400;
+        font-size: 18px;
+        color: white;
+        margin: 10px 0 10px 0;
+
+    }
+
+    p{
+        font-family: roboto;
+        font-weight: 300;
+        font-size: 16px;
+        color: white;
+        margin: 10px 0 10px 0;
+
+
+    }
+}
+.myWorkshop-show-not-enroled{
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 40px;
+    height: fit-content;
+    transition:  all .3s ease-in-out;
+
+
+    h3{
+        font-family: roboto;
+        font-weight: 400;
+        font-size: 18px;
+        color: $darkgrey;
+        margin: 10px 0 10px 0;
+
+    }
+
+    p{
+        font-family: roboto;
+        font-weight: 300;
+        font-size: 16px;
+        color: $darkgrey;
+        margin: 10px 0 10px 0;
+
+
+    }
+}
+
+.myWorkshop-handle-expanded-closed,
+.myWorkshop-handle-expanded-open{
+    background-color: $darkgrey;
+}
+
+.myWorkshop-handle-enrolled{
+    background-color: $blue;
+    margin-right: 20px;
+
+}
+
+.myWorkshop-handle-enrolled-disabled{
+    display: none;
+}
+
+.myWorkshop-handle-not-enrolled{
+    background-color: red;
+    margin-right: 20px;
+
+}
