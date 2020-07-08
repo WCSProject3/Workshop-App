@@ -127,7 +127,6 @@ const UserContextProvider = (props) => {
           handleChangeSearch, 
           deleteUser, 
           user, 
-          getUser,
           setUserInformation,
           getSpeakers
         }}>
