@@ -49,14 +49,6 @@ const WorkshopDetails = ({ workshop, toggleDisplayModal, deleteWorkshop }) => {
           <button>
             <Link to={`/admin/workshop-attendees/${workshop.id}`}>more</Link>
           </button>
-          <PDFDownloadLink
-            document={<WorkshopView workshop={workshop} />}
-            fileName="Test.pdf"
-          >
-            {({ blob, url, loading, error }) =>
-              loading ? <button>loading</button> : <button>export</button>
-            }
-          </PDFDownloadLink>
           <button onClick={handleEdit}>edit</button>
           <button className="delete-workshop-btn" onClick={handleDelete}>
             delete
@@ -67,5 +59,4 @@ const WorkshopDetails = ({ workshop, toggleDisplayModal, deleteWorkshop }) => {
   );
 };
 
-ReactDOM.render(<WorkshopView />, document.getElementById("root"));
 export default WorkshopDetails;
