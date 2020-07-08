@@ -10,10 +10,6 @@ import { WorkshopContext } from './Context/WorkshopContext';
 import AuthContextProvider, { AuthContext } from './Context/AuthContext';
 
 function App() {
-  const { user, getUser } = useContext(UserContext);
-  const { userWorkshops, getUserWorkshops } = useContext(WorkshopContext);
-
-  console.log(userWorkshops);
 
   return (
     <div className='App'>

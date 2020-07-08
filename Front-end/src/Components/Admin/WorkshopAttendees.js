@@ -7,7 +7,7 @@ import ModalForm from "./Modals/ModalForm";
 import axios from "axios";
 
 const WorkshopAttendees = (props) => {
-  const workshopId = props.match.params.id;
+  const speakerId = props.match.params.id;
 
   const { workshop, getWorkshop, getAttendees, attendees } = useContext(
     WorkshopContext
@@ -17,14 +17,14 @@ const WorkshopAttendees = (props) => {
   const [modal, setModal] = useState("");
 
   useEffect(() => {
-    getWorkshop(workshopId);
-    getAttendees(workshopId);
-  }, [workshopId]);
+    getWorkshop(speakerId);
+    getAttendees(speakerId);
+  }, [speakerId]);
 
   const toggleDisplayModal = () => {
     setDisplayModal(!displayModal);
     setWorkshopInEdit(workshop);
-    getWorkshop(workshopId);
+    getWorkshop(speakerId);
   };
 
   const selectModal = (modal) => {

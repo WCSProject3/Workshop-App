@@ -5,11 +5,16 @@ import { Link } from 'react-router-dom';
 import './AllNotifications.scss'
 import { NotificationContext } from '../../Context/NotificationContext';
 import ModalForm from './Modals/ModalForm';
+import { UserContext } from '../../Context/UserContext';
 
 
 const AllNotifications = () => {
 
     const { notifications, handleFilterState, stateFilter, handleNotificationSearch, searchNotificationValue, deleteNotification } = useContext(NotificationContext)
+
+    const {user} = useContext(UserContext)
+
+    console.log("USER USER USER",user)
 
     const [displayModal, setDisplayModal] = useState(false);
     const [notification, setNotification] = useState(false);

@@ -9,7 +9,7 @@ const MyWorkshops = () => {
     const { workshops, getWorkshops, months, userWorkshops } = useContext(WorkshopContext);
     const { user } = useContext(UserContext);
 
-    console.log("user", userWorkshops)
+    console.log("USER USER USER WORKSHOPS", userWorkshops)
 
     const [workshopList, setWorkshopList] = useState([])
     const [active, setActive] = useState("")
@@ -29,12 +29,12 @@ const MyWorkshops = () => {
         }
     },[months])
 
-    useEffect(() => {
-        if(months.length > 0){
-            monthlyWorkshops(active)
-            setActive(active)
-        }
-    },[workshops])
+    //useEffect(() => {
+    //    if(months.length > 0){
+    //        monthlyWorkshops(active)
+    //        setActive(active)
+    //    }
+    //},[workshops])
 
     const monthlyWorkshops = (month) => {
         const monthlyWorkshopList = workshops.filter(workshop => {

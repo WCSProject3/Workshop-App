@@ -11,6 +11,8 @@ const MyWorkshopAttendees = ( ) => {
 
     const { workshop, getWorkshop, attendees, getAttendees } = useContext(WorkshopContext);
 
+    console.log("WORKSHOP WORKSHOP WORKSHOP",  )
+
 
     useEffect(() => {
         getWorkshop(speakerId);

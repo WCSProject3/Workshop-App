@@ -74,10 +74,11 @@ const NotificationForm = () => {
     }
 
     const handleToWorkshop = (event) => {
+        event.preventDefault()
         const { value } = event.target
         const workshop = value.split(",")
-        const workshopId = Number(workshop[1])
-        getAttendees(workshopId)
+        const speakerId = Number(workshop[1])
+        getAttendees(speakerId)
     }
 
     return (
@@ -96,7 +97,7 @@ const NotificationForm = () => {
                 <select name="workshop" onChange={handleToWorkshop} ref={register({ required: true })}>
                     <option value="">Select a Workshop</option>
                     {allWorkshops.map(workshop => {
-                        return <option value={[workshop.title, workshop.id]}>{workshop.title}</option>
+                        return <option value={[workshop.title, workshop.speaker_id]}>{workshop.title}</option>
                     })}
                 </select>
                 }

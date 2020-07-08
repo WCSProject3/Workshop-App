@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "../SharedComponents/SearchBar";
 import "./AllWorkshops.scss";
 import ModalForm from "./Modals/ModalForm";
+import { UserContext } from "../../Context/UserContext";
 
 const AllWorkshops = (props) => {
   const {
@@ -20,6 +21,10 @@ const AllWorkshops = (props) => {
     getWorkshop,
     getAttendees,
   } = useContext(WorkshopContext);
+
+  const {user} = useContext(UserContext)
+
+  console.log("USER USER USER", user)
 
   const [displayModal, setDisplayModal] = useState(false);
   const [workshopInEdit, setWorkshopInEdit] = useState([]);

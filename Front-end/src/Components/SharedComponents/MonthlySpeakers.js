@@ -14,7 +14,7 @@ const MonthlySpeakers = ({ month }) => {
 
     return(
             filteredWorkshops.map(workshop => {
-                return <li><Link to={`/admin/workshop-attendees/${workshop.id}`}>{workshop.workshop_speaker}</Link></li>
+                return <li><Link to={`/admin/workshop-attendees/${workshop.speaker_id}`}>{workshop.workshop_speaker}</Link></li>
             })
         
     )

@@ -80,7 +80,7 @@ const TempNotification = ({ tempNotification, toggleDisplayModal }) => {
       subject: tempNotification.subject,
       content: tempNotification.content,
       state: tempNotification.state,
-      send_to_id: to_id,
+      send_to: tempNotification.to,
       date: tempNotification.date,
     };
 

@@ -29,7 +29,7 @@ const MyWorkshopDetails = ({ workshop, reachedLimit }) => {
 
   useEffect(() => {
     calcPercentage(workshop.enrolled_attendees, workshop.room_capacity);
-  }, [workshops]);
+  }, [userWorkshops]);
 
   const calcPercentage = (enrolled, room_capacity) => {
     const percentage = Math.round((enrolled / room_capacity) * 100);

@@ -47,7 +47,7 @@ const WorkshopDetails = ({ workshop, toggleDisplayModal, deleteWorkshop }) => {
         </button>
         <div className='btns-dropdown'>
           <button>
-            <Link to={`/admin/workshop-attendees/${workshop.id}`}>more</Link>
+            <Link to={`/admin/workshop-attendees/${workshop.speaker_id}`}>more</Link>
           </button>
 
           <PDFDownloadLink

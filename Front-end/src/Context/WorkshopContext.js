@@ -9,7 +9,6 @@ const WorkshopContextProvider = (props) => {
   const [allWorkshops, setAllWorkshops] = useState([]);
   const [months, setMonths] = useState([]);
   const [searchWorkshopValue, setSearchWorkshopValue] = useState('');
-
   const [searchAttendeeValue, setSearchAttendeeValue] = useState([]);
   const [userWorkshops, setUserWorkshops] = useState([]);
   const [workshop, setWorkshop] = useState([]);
@@ -38,6 +37,7 @@ const WorkshopContextProvider = (props) => {
         .get(`/workshops/${speakerId}`)
         .then((response) => response.data[0])
         .then((workshopInfo) => {
+          console.log("WORKSHOP CONTEXT",workshopInfo )
           setWorkshop(workshopInfo)
         })
         
@@ -69,7 +69,7 @@ const getAttendees = (speakerId) => {
       speaker_id: speakerId,
     };
     axios
-      .post('/workshops/user-workshops', user_workshop)
+      .post('/workshops/user-workshops/add', user_workshop)
       .then((response) => response.data)
       .then((userWorkshops) => {
         setUserWorkshops(userWorkshops);
@@ -80,7 +80,7 @@ const getAttendees = (speakerId) => {
   const deleteUserWorkshop = (workshopId, userId) => {
     const user_workshop = [workshopId, userId];
     axios
-      .delete('/workshops/user-workshops', { data: user_workshop })
+      .delete('/workshops/user-workshops/delete', { data: user_workshop })
       .then((response) => response.data)
       .then((userWorkshops) => {
         setUserWorkshops(userWorkshops);
@@ -132,8 +132,11 @@ const getAttendees = (speakerId) => {
 
   const deleteWorkshop = (id, enrolled_attendees) => {
     if (enrolled_attendees > 0) {
-      axios.delete(`/workshops/workshop-user-workshops/${id}`).then(() => {
-        axios.delete(`/workshops/${id}`);
+      axios
+      .delete(`/workshops/workshop-user-workshops/${id}`)
+      .then(() => {
+        axios
+        .delete(`/workshops/${id}`);
       });
     }
     axios.delete(`/workshops/${id}`);

@@ -8,7 +8,7 @@ import { AuthContext } from '../../Context/AuthContext';
 
 const Login = () => {
   const { register, handleSubmit, reset, errors } = useForm();
-  const { user, setUserInformation } = useContext(UserContext);
+  const { setUserInformation } = useContext(UserContext);
   const { userWorkshops, getUserWorkshops } = useContext(WorkshopContext);
   const { setAuth } = useContext(AuthContext);
 
@@ -27,7 +27,10 @@ const Login = () => {
     //       .catch(() => console.log('Error logging in'));
     const response = await axios.post('/auth/login', data);
     await setUserInformation(response.data);
-    console.log(user);
+    const { id, role } = response.data.user
+    if(role === "attendee"){
+      getUserWorkshops(id)
+    }
     setAuth(true);
     //redirect to role-based view
   };
