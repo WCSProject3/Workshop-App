@@ -16,10 +16,6 @@ const MyWorkshopAttendees = ( ) => {
         getWorkshop(speakerId);
         getAttendees(speakerId)
     }, []);
-
-    console.log('myAttendeesList', attendees)
-    console.log('workshopspeaker', workshop)
-
     
     return ( 
         <div>

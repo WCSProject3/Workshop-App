@@ -3,6 +3,10 @@ import { MdDelete, MdEdit, MdMessage } from 'react-icons/md';
 
 const WorkshopInfo = ( { workshop, toggleDisplayModal, selectModal } ) => {
 
+    const user = {
+        role_id: 3
+    }
+
     const openModal = (modal) => {
         toggleDisplayModal()
         selectModal(modal)
@@ -15,11 +19,12 @@ const WorkshopInfo = ( { workshop, toggleDisplayModal, selectModal } ) => {
                         <div className="workshop-info-date">
                            {workshop.date && <div className="date">{`${workshop.date.substring(8,10)} ${workshop.workshop_month} - ${workshop.starting_hour.substring(0,5)}-${workshop.ending_hour.substring(0,5)}`}</div>}
                         </div>
+                        {user.role_id != 3 &&
                         <div className="workshop-info-header-btns">
                             <button className="workshop-icons" onClick={() => openModal("notification")}><MdMessage /></button>
                             <button className="workshop-icons" onClick={() => openModal("workshop")}><MdEdit /></button>
                             <button className="workshop-icons"><MdDelete /></button>
-                        </div>
+                        </div>}
                     </div>
                     <div className="workshop-info-body">
                         <div className="workshop-info-left">
