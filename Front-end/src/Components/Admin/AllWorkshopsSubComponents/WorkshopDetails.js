@@ -49,6 +49,7 @@ const WorkshopDetails = ({ workshop, toggleDisplayModal, deleteWorkshop }) => {
           <button>
             <Link to={`/admin/workshop-attendees/${workshop.id}`}>more</Link>
           </button>
+
           <PDFDownloadLink
             document={<WorkshopView workshop={workshop} />}
             fileName='Test.pdf'>
@@ -67,4 +68,5 @@ const WorkshopDetails = ({ workshop, toggleDisplayModal, deleteWorkshop }) => {
 };
 
 ReactDOM.render(<WorkshopView />, document.getElementById('root'));
+
 export default WorkshopDetails;

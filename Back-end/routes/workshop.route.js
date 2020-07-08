@@ -123,12 +123,11 @@ router.get('/months', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const workshopId = req.params.id;
 
-  connection.query(
-    'SELECT w.*, MONTHNAME(w.date) AS workshop_month, CONCAT(u.firstname," ",u.lastname) AS workshop_speaker FROM workshops w JOIN user u ON w.speaker_id = u.id WHERE w.id = ?',
-    [workshopId],
-    (err, results) => {
+  const speakerId = req.params.id;
+
+  connection.query('SELECT w.*, MONTHNAME(w.date) AS workshop_month, CONCAT(u.firstname," ",u.lastname) AS workshop_speaker FROM workshops w JOIN user u ON w.speaker_id = u.id WHERE w.speaker_id = ?', [speakerId], (err, results) => {
+
       if (err) {
         res.status(500).json({
           error: err.message,
@@ -158,6 +157,22 @@ router.get('/user-workshops/:id', (req, res) => {
       }
     }
   );
+});
+
+router.get('/:id/attendees', (req, res) => {
+
+  const speakerId = req.params.id;
+
+  connection.query('SELECT u.firstname, u.lastname, u.email, u.position, u.company, u.country FROM user u JOIN user_workshops u_w ON u_w.user_id = u.id JOIN workshops w ON u_w.workshop_id = w.id WHERE u_w.speaker_id = ?', [speakerId], (err, results) => {
+      if (err) {
+          res.status(500).json({
+            error: err.message,
+            sql: err.sql,
+          });
+        } else {
+          res.json(results);
+        }
+  })
 });
 
 router.post('/user-workshops', (req, res) => {

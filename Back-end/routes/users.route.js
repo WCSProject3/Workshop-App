@@ -51,7 +51,6 @@ router.get('/speakers', (req, res) => {
               sql: err.sql,
             });
           } else {
-          console.log("working")
             res.json(results);
           }
     })

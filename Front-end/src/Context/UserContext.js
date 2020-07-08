@@ -123,11 +123,13 @@ const UserContextProvider = (props) => {
           filterUser,
           speakers,
           allUsers,
-          searchValue,
-          handleChangeSearch,
-          deleteUser,
-          user,
+          searchValue, 
+          handleChangeSearch, 
+          deleteUser, 
+          user, 
+          getUser,
           setUserInformation,
+          getSpeakers
         }}>
         {props.children}
       </UserContext.Provider>
