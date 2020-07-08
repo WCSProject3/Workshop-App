@@ -144,7 +144,8 @@ const UserContextProvider = (props) => {
           handleChangeSearch, 
           deleteUser, 
           user, 
-          getUser 
+          getUser,
+          getSpeakers
         }}>
         {props.children}
       </UserContext.Provider>

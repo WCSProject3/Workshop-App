@@ -16,6 +16,7 @@ const WorkshopContextProvider = (props) => {
   const [attendees, setAttendees] = useState([]);
   const [allAttendees, setAllAttendees] = useState([]);
   const [dateFilter, setdDateFilter] = useState("All workshops");
+  const [myAttendeesList, setMyAttendeesList] = useState([]);
 
   useEffect(() => {
     getWorkshops();
@@ -32,10 +33,10 @@ const WorkshopContextProvider = (props) => {
       });
   };
 
-  const getWorkshop = (workshopId) => {
+  const getWorkshop = (speakerId) => {
     axios
 
-        .get(`/workshops/${workshopId}`)
+        .get(`/workshops/${speakerId}`)
         .then((response) => response.data[0])
         .then((workshopInfo) => {
           setWorkshop(workshopInfo)
@@ -43,9 +44,9 @@ const WorkshopContextProvider = (props) => {
         
 }
 
-const getAttendees = (workshopId) => {
+const getAttendees = (speakerId) => {
   axios
-      .get(`/workshops/${workshopId}/attendees`)
+      .get(`/workshops/${speakerId}/attendees`)
       .then((response) => response.data)
       .then((attendeesList) => {
         setAttendees(attendeesList)
@@ -230,7 +231,7 @@ const getAttendees = (workshopId) => {
           searchAttendeeValue,
           handleAttendeeSearch,
           dateFilter,
-          deleteWorkshop
+          deleteWorkshop,
         }}>
         {props.children}
       </WorkshopContext.Provider>
