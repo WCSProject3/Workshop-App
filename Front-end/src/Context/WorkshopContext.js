@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const WorkshopContext = createContext();
 
@@ -25,7 +25,7 @@ const WorkshopContextProvider = (props) => {
 
   const getWorkshops = () => {
     axios
-      .get("/workshops")
+      .get('/workshops')
       .then((response) => response.data)
       .then((workshopsList) => {
         setWorkshops(workshopsList);
@@ -35,7 +35,6 @@ const WorkshopContextProvider = (props) => {
 
   const getWorkshop = (speakerId) => {
     axios
-
         .get(`/workshops/${speakerId}`)
         .then((response) => response.data[0])
         .then((workshopInfo) => {
@@ -49,10 +48,10 @@ const getAttendees = (speakerId) => {
       .get(`/workshops/${speakerId}/attendees`)
       .then((response) => response.data)
       .then((attendeesList) => {
-        setAttendees(attendeesList)
-        setAllAttendees(attendeesList)
-      })
-}
+        setAttendees(attendeesList);
+        setAllAttendees(attendeesList);
+      });
+  };
 
   const getUserWorkshops = (id) => {
     axios
@@ -61,38 +60,40 @@ const getAttendees = (speakerId) => {
       .then((userWorkshops) => {
         setUserWorkshops(userWorkshops);
       });
+  };
 
-  }
-  
   const addUserWorkshop = (workshopId, userId, speakerId) => {
-
-    const user_workshop = {workshop_id: workshopId , user_id: userId, speaker_id:speakerId}
+    const user_workshop = {
+      workshop_id: workshopId,
+      user_id: userId,
+      speaker_id: speakerId,
+    };
     axios
       .post('/workshops/user-workshops', user_workshop)
       .then((response) => response.data)
       .then((userWorkshops) => {
         setUserWorkshops(userWorkshops);
       });
-    getWorkshops()
-  }
+    getWorkshops();
+  };
 
   const deleteUserWorkshop = (workshopId, userId) => {
-    const user_workshop = [workshopId, userId]
+    const user_workshop = [workshopId, userId];
     axios
-      .delete('/workshops/user-workshops', { data: user_workshop } )
+      .delete('/workshops/user-workshops', { data: user_workshop })
       .then((response) => response.data)
       .then((userWorkshops) => {
         setUserWorkshops(userWorkshops);
-    });
-    getWorkshops()
-  }
-  
+      });
+    getWorkshops();
+  };
+
   const getMonth = () => {
     axios
-      .get("/workshops/months")
+      .get('/workshops/months')
       .then((response) => response.data)
       .then((monthsList) => {
-        console.log("monthsList", monthsList)
+        console.log('monthsList', monthsList);
         setMonths(monthsList);
       });
   };
@@ -102,20 +103,16 @@ const getAttendees = (speakerId) => {
   };
 
   const confirmEditedWorkshop = (newWorkshop) => {
+    const newWorkshopId = newWorkshop.id;
 
-    const newWorkshopId = newWorkshop.id
-
-    axios
-      .put(`/workshops/${newWorkshopId}`, newWorkshop)
+    axios.put(`/workshops/${newWorkshopId}`, newWorkshop);
 
     getWorkshops();
     getMonth();
   };
 
   const confirmWorkshop = (newObject) => {
-    axios
-      .post("/workshops", newObject)
-
+    axios.post('/workshops', newObject);
 
     getWorkshops();
     getMonth();
@@ -133,37 +130,32 @@ const getAttendees = (speakerId) => {
     setTempWorkshop(workshopList);
   };
 
-  const deleteWorkshop = (id, enrolled_ateendees) => {
-    if(enrolled_ateendees > 0){
-      axios
-      .delete(`/workshops/workshop-user-workshops/${id}`)
-      .then(() => {
-        axios
-        .delete(`/workshops/${id}`)
-      })
+  const deleteWorkshop = (id, enrolled_attendees) => {
+    if (enrolled_attendees > 0) {
+      axios.delete(`/workshops/workshop-user-workshops/${id}`).then(() => {
+        axios.delete(`/workshops/${id}`);
+      });
     }
-    axios
-      .delete(`/workshops/${id}`)
+    axios.delete(`/workshops/${id}`);
 
-      getWorkshops()
-    };
+    getWorkshops();
+  };
 
   const handleFilterDate = (event) => {
-
     const { value } = event.target;
 
-      if (value === "All Workshops") {
-        setdDateFilter(value)
-        setWorkshops(allWorkshops);
-      } else {
-        const filterdResult = allWorkshops.filter((workshop) => {
-          const workshopMonth = workshop.workshop_month;
-          return workshopMonth === value;
-        });
-        setdDateFilter(value)
-        setWorkshops(filterdResult);
-        setSearchWorkshopValue("")
-      };
+    if (value === 'All Workshops') {
+      setdDateFilter(value);
+      setWorkshops(allWorkshops);
+    } else {
+      const filterdResult = allWorkshops.filter((workshop) => {
+        const workshopMonth = workshop.workshop_month;
+        return workshopMonth === value;
+      });
+      setdDateFilter(value);
+      setWorkshops(filterdResult);
+      setSearchWorkshopValue('');
+    }
   };
 
   const handleWorkshopSearch = (event) => {
@@ -177,7 +169,7 @@ const getAttendees = (speakerId) => {
       });
       setSearchWorkshopValue(value);
       setWorkshops(filteredWorkshops);
-      setdDateFilter("All workshops")
+      setdDateFilter('All workshops');
     } else {
       setSearchWorkshopValue(value);
       setWorkshops(allWorkshops);
@@ -186,13 +178,11 @@ const getAttendees = (speakerId) => {
 
   const handleAttendeeSearch = (event) => {
     const { value } = event.target;
-    
+
     if (value.length) {
       const filteredAttendees = allAttendees.filter((attendee) => {
-        const attendeeName = `${attendee.firstname} ${attendee.lastname}`
-        return (
-            attendeeName.toLowerCase().includes(value.toLowerCase()) 
-        );
+        const attendeeName = `${attendee.firstname} ${attendee.lastname}`;
+        return attendeeName.toLowerCase().includes(value.toLowerCase());
       });
       setSearchAttendeeValue(value);
       setAttendees(filteredAttendees);
