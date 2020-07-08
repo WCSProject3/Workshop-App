@@ -22,7 +22,7 @@ passport.use(
     },
     (email, password, callback) => {
       connection.query(
-        `SELECT * FROM user WHERE email = ?`,
+        `SELECT u.*, r.role FROM user u JOIN role r ON u.role_id=r.id WHERE email = ?`,
         email,
         (err, foundUser) => {
           if (err) return callback(err);

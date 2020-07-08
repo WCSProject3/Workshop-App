@@ -7,16 +7,15 @@ const Header = (props) => {
   return (
     <div className='header'>
       {/* Tranform into useForm // Can be called as separate component? */}
-      <form className="search-form"> 
-        <input id="searchbar" type='search' placeholder='Search for ...' />
-        <input id="searchbtn" type='submit' value='&#128269;&#xFE0E;' />
+      <form className='search-form'>
+        <input id='searchbar' type='search' placeholder='Search for ...' />
+        <input id='searchbtn' type='submit' value='&#128269;&#xFE0E;' />
       </form>
-      
 
       {/* To be generated dynamicaly, connected to login state */}
-      <div className="user">
+      <div className='user'>
         <p>John Doe</p>
-        <Link to={`/ateendee/profile`}>
+        <Link to={`/attendee/profile`}>
           <img src='avatar5.jpeg' alt='user avatar' />
         </Link>
       </div>
