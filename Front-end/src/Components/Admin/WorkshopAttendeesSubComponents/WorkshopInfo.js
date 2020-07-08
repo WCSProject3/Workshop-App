@@ -15,6 +15,9 @@ const WorkshopInfo = ({
   selectModal,
   attendees,
 }) => {
+  
+  const user = { role_id: 3 }
+  
   const openModal = (modal) => {
     toggleDisplayModal();
     selectModal(modal);
@@ -34,6 +37,7 @@ const WorkshopInfo = ({
               )}-${workshop.ending_hour.substring(0, 5)}`}</div>
             )}
           </div>
+          {user.role_id != 3 &&
           <div className="workshop-info-header-btns">
             <button
               className="workshop-icons"
@@ -60,7 +64,7 @@ const WorkshopInfo = ({
                 loading ? <button>loading</button> : <button>export</button>
               }
             </PDFDownloadLink>
-          </div>
+          </div>}
         </div>
         <div className="workshop-info-body">
           <div className="workshop-info-left">
