@@ -9,32 +9,37 @@ const MyWorkshops = () => {
     const { workshops, getWorkshops, months, userWorkshops } = useContext(WorkshopContext);
     const { user } = useContext(UserContext);
 
-    console.log("USER USER USER WORKSHOPS", userWorkshops)
+    console.log("USER USER USER", user)
 
     const [workshopList, setWorkshopList] = useState([])
     const [active, setActive] = useState("")
     const [reachedLimit, setReachedLimit] = useState(false)
+    const [workshopsLeft, setWorkshopsLeft] = useState("")
 
     useEffect(() => {
         if(userWorkshops.length > 0){
-            checkLimit()
             getWorkshops()
         }
+        checkWorkshopsLeft()
     },[userWorkshops])
 
     useEffect(() => {
         if(months.length > 0){
             monthlyWorkshops(months[0].month)
             setActive(months[0].month)
+            checkWorkshopsLeft()
         }
     },[months])
 
-    //useEffect(() => {
-    //    if(months.length > 0){
-    //        monthlyWorkshops(active)
-    //        setActive(active)
-    //    }
-    //},[workshops])
+    useEffect(() => {
+        if(months.length > 0){
+            if(active !== ""){
+                monthlyWorkshops(active)
+                setActive(active)
+            }
+            
+        }
+    },[workshops])
 
     const monthlyWorkshops = (month) => {
         const monthlyWorkshopList = workshops.filter(workshop => {
@@ -44,10 +49,16 @@ const MyWorkshops = () => {
         setActive(month)
     }
 
-    const checkLimit = () => {
+    const checkWorkshopsLeft = () => {
         if(user.max_workshops > userWorkshops.length){
+            if(userWorkshops.length > 0){
+                setWorkshopsLeft(`you still have ${user.max_workshops - userWorkshops.length} workshops to choose`)
+            } else {
+                setWorkshopsLeft(`you can register in ${user.max_workshops} workshops`)
+            }
             setReachedLimit(false)
         } else {
+            setWorkshopsLeft("no more workshops to register")
             setReachedLimit(true)
         }
     }
@@ -55,11 +66,14 @@ const MyWorkshops = () => {
     return(
         <div>
             <div className="myWorkshops-header">
-                <h1>My Workshops</h1>
-                {months.length > 0 && 
-                    months.map(month => {
-                        return <button className={active === month.month ?"myWorkshops-month-btn active": "myWorkshops-month-btn" } onClick={() => monthlyWorkshops(month.month)}>{month.month}</button>
+                <div className="myWorkshops-header-left">
+                    <h1>My Workshops</h1>
+                    {months.length > 0 && 
+                        months.map(month => {
+                            return <button className={active === month.month ?"myWorkshops-month-btn active": "myWorkshops-month-btn" } onClick={() => monthlyWorkshops(month.month)}>{month.month}</button>
                 })}
+                </div>
+                <p className={reachedLimit ? "myWorkshops-limit-warning-reached" : "myWorkshops-limit-warning"}>{workshopsLeft}</p>
             </div>
             <MyWorkshopList workshops={workshopList} reachedLimit={reachedLimit} />
         </div>

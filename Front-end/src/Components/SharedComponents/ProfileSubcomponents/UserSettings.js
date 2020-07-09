@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const UserSettings = () => {
+const UserSettings = ({ user }) => {
 
     const {register, handleSubmit, errors, watch} = useForm();
 
@@ -28,6 +28,7 @@ const UserSettings = () => {
                 <input
                   name="email"
                   id="email"
+                  defaultValue={user.email}
                   type="text"
                   ref={register} />
               </div>
@@ -38,6 +39,7 @@ const UserSettings = () => {
                 <input
                   name="firstname"
                   id="firstname"
+                  defaultValue={user.firstname}
                   type="text"
                   ref={register} />
               </div>
@@ -46,6 +48,7 @@ const UserSettings = () => {
                 <input
                   name="lastname"
                   id="lastname"
+                  defaultValue={user.lastname}
                   type="text"
                   ref={register} />
               </div>
@@ -59,7 +62,8 @@ const UserSettings = () => {
                 <input
                   name="change-password"
                   id="change-password"
-                  type="text"
+                  defaultValue={user.password}
+                  type="password"
                   ref={register} />
               </div>
                 <div className="label-input">
@@ -67,6 +71,7 @@ const UserSettings = () => {
                   <input
                     name="confirm-password"
                     id="confirm-password"
+                    defaultValue={user.password}
                     type="text"
                     ref={register} />
                 </div>

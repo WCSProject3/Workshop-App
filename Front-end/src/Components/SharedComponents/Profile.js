@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ChangePhoto from './ProfileSubcomponents/ChangePhoto';
 import './Profile.scss'
 import EditMyWorkshops from './ProfileSubcomponents/EditMyWorkshops';
 import UserSettings from './ProfileSubcomponents/UserSettings';
 import ContactSettings from './ProfileSubcomponents/ContactSettings';
+import { UserContext } from '../../Context/UserContext';
 
 const Profile = () => {
+
+  const { user } = useContext(UserContext)
+
     return(
       <div className="profile"> 
         <h1>Profile</h1>
@@ -15,8 +19,8 @@ const Profile = () => {
             <EditMyWorkshops />
           </div>
           <div className="right">
-            <UserSettings />
-            <ContactSettings />
+            <UserSettings user={user} />
+            <ContactSettings user={user} />
           </div>
         </div>
       </div>

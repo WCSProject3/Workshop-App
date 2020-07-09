@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const ContactSettings = () => {
+const ContactSettings = ({ user }) => {
 
     const {register, handleSubmit, errors, watch} = useForm();
 
@@ -21,6 +21,7 @@ const ContactSettings = () => {
                         <input
                           name="country"
                           id="country"
+                        defaultValue={user.country}
                           type="text"
                           ref={register} />
                     </div>
@@ -29,6 +30,7 @@ const ContactSettings = () => {
                         <input
                           name="company"
                           id="company"
+                            defaultValue={user.company}
                           type="text"
                           ref={register} />
                     </div>
@@ -39,6 +41,7 @@ const ContactSettings = () => {
                         <input
                           name="position"
                           id="position"
+                          defaultValue={user.position}
                           type="text"
                           ref={register} />
                     </div>
