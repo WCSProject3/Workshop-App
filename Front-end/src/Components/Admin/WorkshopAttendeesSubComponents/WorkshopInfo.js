@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import { MdDelete, MdEdit, MdMessage } from "react-icons/md";
+import { UserContext } from '../../../Context/UserContext';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ReactPDF, {
   PDFViewer,
   PDFDownloadLink,
@@ -16,7 +18,11 @@ const WorkshopInfo = ({
   selectModal,
   attendees,
 }) => {
-  //const user = { role_id: 3 }
+
+  const { user } = useContext(UserContext);
+  const [ statusClipboard, setStatusClipboard ] = useState(true)
+
+  const listofemail = attendees.map(attendee =>  `${attendee.email}; `).join('')
 
   const openModal = (modal) => {
     toggleDisplayModal();
@@ -33,47 +39,66 @@ const WorkshopInfo = ({
   };
 
   return (
-    workshop !== [] && (
-      <div>
-        <div className="workshop-info">
-          <div className="workshop-info-header">
-            <div className="workshop-info-date">
-              {workshop.date && (
-                <div className="date">{`${workshop.date.substring(8, 10)} ${
-                  workshop.workshop_month
-                } - ${workshop.starting_hour.substring(
-                  0,
-                  5
-                )}-${workshop.ending_hour.substring(0, 5)}`}</div>
-              )}
-            </div>
-            <div className="dropdown">
-              <button className="options-icon">
-                <FaListUl />
-              </button>
-              <div className="btns-dropdown">
-                <button onClick={() => openModal("notification")}>
-                  Notification
-                </button>
-                <button onClick={() => openModal("workshop")}>Edit</button>
-                <PDFDownloadLink
-                  document={
-                    <WorkshopView workshop={workshop} attendees={attendees} />
-                  }
-                  fileName="Test.pdf"
-                >
-                  {({ blob, url, loading, error }) =>
-                    loading ? <button>loading</button> : <button>export</button>
-                  }
-                </PDFDownloadLink>
-              </div>
-            </div>
+    workshop !==[] &&
+    (<div>
+      <div className="workshop-info">
+        <div className="workshop-info-header">
+          <div className="workshop-info-date">
+            {workshop.date && (
+              <div className="date">{`${workshop.date.substring(8, 10)} ${
+                workshop.workshop_month
+              } - ${workshop.starting_hour.substring(
+                0,
+                5
+              )}-${workshop.ending_hour.substring(0, 5)}`}</div>
+            )}
           </div>
-          <div className="workshop-info-body">
-            <div className="workshop-info-left">
-              <h2>{workshop.title}</h2>
-              <h4>{workshop.workshop_speaker}</h4>
-              <p>{workshop.description}</p>
+            {user.role === "speaker" && (
+              <div>
+                Welcome {user.firstname}
+              </div>
+            )}
+          {user.role === "speaker" && (
+              <CopyToClipboard text={listofemail}
+                onCopy={() => setStatusClipboard(!statusClipboard)}
+                >
+              <button>{statusClipboard ? 'Copy' : 'Copied'}</button>
+              </CopyToClipboard>
+          )}
+          {user.role !== "speaker" && (
+          <div className="workshop-info-header-btns">
+            <button
+              className="workshop-icons"
+              onClick={() => openModal("notification")}
+            >
+              <MdMessage />
+            </button>
+            <button
+              className="workshop-icons"
+              onClick={() => openModal("workshop")}
+            >
+              <MdEdit />
+            </button>
+            <button className="workshop-icons">
+              <MdDelete />
+            </button>
+            <PDFDownloadLink
+              document={
+                <WorkshopView workshop={workshop} attendees={attendees} />
+              }
+              fileName="Test.pdf"
+            >
+              {({ blob, url, loading, error }) =>
+                loading ? <button>loading</button> : <button>export</button>
+              }
+            </PDFDownloadLink>
+          </div>)}
+        </div>
+        <div className="workshop-info-body">
+          <div className="workshop-info-left">
+            <h2>{workshop.title}</h2>
+            <h4>{workshop.workshop_speaker}</h4>
+            <p>{workshop.description}</p>
             </div>
             <div className="workshop-info-right">
               <div className="room-manager">
