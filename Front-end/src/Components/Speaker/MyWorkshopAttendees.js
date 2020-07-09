@@ -7,18 +7,18 @@ import '../Admin/WorkshopAttendees.scss';
 
 const MyWorkshopAttendees = ( ) => {
 
-    const speakerId = 2;
+    const speakerId = 6;
 
     const { workshop, getWorkshop, attendees, getAttendees } = useContext(WorkshopContext);
 
     console.log("WORKSHOP WORKSHOP WORKSHOP",  )
 
 
-    useEffect(() => {
-        getWorkshop(speakerId);
-        getAttendees(speakerId)
-    }, []);
-
+   // useEffect(() => {
+   //     getWorkshop(speakerId);
+   //     getAttendees(speakerId)
+   // }, []);
+//
     console.log('myAttendeesList', attendees)
     console.log('workshopspeaker', workshop)
 

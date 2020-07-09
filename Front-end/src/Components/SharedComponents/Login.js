@@ -9,7 +9,7 @@ import { AuthContext } from '../../Context/AuthContext';
 const Login = () => {
   const { register, handleSubmit, reset, errors } = useForm();
   const { setUserInformation } = useContext(UserContext);
-  const { userWorkshops, getUserWorkshops } = useContext(WorkshopContext);
+  const { userWorkshops, getUserWorkshops, getWorkshop, getAttendees } = useContext(WorkshopContext);
   const { setAuth } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
@@ -30,6 +30,10 @@ const Login = () => {
     const { id, role } = response.data.user
     if(role === "attendee"){
       getUserWorkshops(id)
+    }
+    if(role === "speaker"){
+        getWorkshop(id);
+        getAttendees(id)
     }
     setAuth(true);
     //redirect to role-based view

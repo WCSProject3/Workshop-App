@@ -77,7 +77,7 @@ const SignUp = () => {
             <input
               name='role_id'
               type='hidden'
-              value='1'
+              value='2'
               contentEditable={false}
               ref={register}
             />
