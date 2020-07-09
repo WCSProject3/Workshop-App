@@ -3,8 +3,7 @@ import { WorkshopContext } from "../../../Context/WorkshopContext";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../Context/UserContext";
 import Modal from "../Modals/Modal";
-import { MdDelete, MdEdit } from 'react-icons/md';
-
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const TempWorkshopInfo = ({ tempWorkshop, toggleDisplayModal }) => {
   const { confirmWorkshop, editTempWorkshop, deleteTempWorkshop } = useContext(
@@ -61,15 +60,19 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleDisplayModal }) => {
   };
 
   const handleDelete = () => {
-    toggleDisplayModal("confirm","Do you want to delete this Workshop?", tempWorkshop.id)
-  }
- 
-  const year = Number(tempWorkshop.date.substring(0,4));
-  const month = Number(tempWorkshop.date.substring(5,7));
-  const day = Number(tempWorkshop.date.substring(8,10));
+    toggleDisplayModal(
+      "confirm",
+      "Do you want to delete this Workshop?",
+      tempWorkshop.id
+    );
+  };
 
-  const date = new Date(year, month, day);  // 2009-11-10
-  const workshop_month = date.toLocaleString('default', { month: 'long' });
+  const year = Number(tempWorkshop.date.substring(0, 4));
+  const month = Number(tempWorkshop.date.substring(5, 7));
+  const day = Number(tempWorkshop.date.substring(8, 10));
+
+  const date = new Date(year, month - 1, day); // 2009-11-10
+  const workshop_month = date.toLocaleString("default", { month: "long" });
 
   const date_errors = errors.date || errors.starting_hour || errors.ending_hour;
 
@@ -82,8 +85,15 @@ const TempWorkshopInfo = ({ tempWorkshop, toggleDisplayModal }) => {
               <div className="temp-date">{`${day} ${workshop_month} - ${tempWorkshop.starting_hour}-${tempWorkshop.ending_hour}`}</div>
             </div>
             <div className="temp-workshop-info-header-btns">
-              <button className="workshop-icons" onClick={() => setEditMode(!editMode)}><MdEdit /></button>
-              <button onClick={handleDelete} className="workshop-icons"><MdDelete /></button>
+              <button
+                className="workshop-icons"
+                onClick={() => setEditMode(!editMode)}
+              >
+                <MdEdit />
+              </button>
+              <button onClick={handleDelete} className="workshop-icons">
+                <MdDelete />
+              </button>
             </div>
           </div>
           <div className="temp-workshop-info-body">
