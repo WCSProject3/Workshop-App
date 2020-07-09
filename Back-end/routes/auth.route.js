@@ -12,6 +12,8 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const sendNodemailer = require('./../regEmail.js');
 
+// LOCAL STATEGY AUTHENTICATION
+
 passport.use(
   'local',
   new LocalStrategy(
@@ -37,6 +39,8 @@ passport.use(
   )
 );
 
+// JWT STATEGY AUTHORIZATION
+
 passport.use(
   new JWTStrategy(
     {
@@ -48,6 +52,8 @@ passport.use(
     }
   )
 );
+
+// SIGN UP ROUTE http://localhost:5000/auth/signup
 
 router.post('/signup', (req, res) => {
   const password = req.body.password;
@@ -77,7 +83,6 @@ router.post('/signup', (req, res) => {
       formData,
       (err, results) => {
         if (err) {
-          console.log(err);
           res.status(500).json({ flash: 'ERROR ERROR' });
         } else {
           res.status(200).json({ flash: 'User has been registered' });
@@ -88,9 +93,10 @@ router.post('/signup', (req, res) => {
   });
 });
 
+// LOGIN ROUTE http://localhost:5000/auth/login
+
 router.post('/login', function (req, res) {
   passport.authenticate('local', (err, user, info) => {
-    console.log('USER', user);
     if (err) return res.status(500).send(err);
     if (!user) return res.status(400).json({ message: info.message });
     const token = jwt.sign(JSON.stringify(user), 'jwtsecret');

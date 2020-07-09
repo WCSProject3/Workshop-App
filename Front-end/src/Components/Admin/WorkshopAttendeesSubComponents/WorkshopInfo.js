@@ -66,32 +66,28 @@ const WorkshopInfo = ({
               </CopyToClipboard>
           )}
           {user.role !== "speaker" && (
-          <div className="workshop-info-header-btns">
-            <button
-              className="workshop-icons"
-              onClick={() => openModal("notification")}
-            >
-              <MdMessage />
+          <div className="dropdown">
+            <button className="options-icon">
+              <FaListUl />
             </button>
-            <button
-              className="workshop-icons"
-              onClick={() => openModal("workshop")}
-            >
-              <MdEdit />
-            </button>
-            <button className="workshop-icons">
-              <MdDelete />
-            </button>
-            <PDFDownloadLink
-              document={
-                <WorkshopView workshop={workshop} attendees={attendees} />
-              }
-              fileName="Test.pdf"
-            >
-              {({ blob, url, loading, error }) =>
-                loading ? <button>loading</button> : <button>export</button>
-              }
-            </PDFDownloadLink>
+            <div className="workshop-info-dropdown">
+              <button className="workshop-icons" onClick={() => openModal("notification")}>
+                notification
+              </button>
+              <button className="workshop-icons" onClick={() => openModal("workshop")}>
+                edit
+              </button>
+              <PDFDownloadLink
+                document={
+                  <WorkshopView workshop={workshop} attendees={attendees} />
+                }
+                fileName="Test.pdf"
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? <button>loading</button> : <button>export</button>
+                }
+              </PDFDownloadLink>
+            </div>
           </div>)}
         </div>
         <div className="workshop-info-body">

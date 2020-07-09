@@ -26,6 +26,7 @@ const Login = () => {
     //       .then(() => setAuth(true))
     //       .catch(() => console.log('Error logging in'));
     const response = await axios.post('/auth/login', data);
+    console.log("response",response.data.message)
     await setUserInformation(response.data);
     const { id, role } = response.data.user
     if(role === "attendee"){

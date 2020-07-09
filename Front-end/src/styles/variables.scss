@@ -136,14 +136,13 @@ $darkgrey: #8f8f8f;
   padding: 0;
 }
 
-@mixin dropdown{
+@mixin dropdown( $top){
   display: none;
   position: absolute;
   background-color: $grey;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 10;
-  top: 35px;
-  left: 30px;
+  top: $top;
   border-top: 1px solid $darkgrey;
   border-left: 1px solid $darkgrey;
   border-right: 1px solid $darkgrey;
@@ -199,7 +198,7 @@ $darkgrey: #8f8f8f;
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  padding-left: 10px;
+  padding:0 15px 0 15px;
   border-bottom: 1px solid $darkgrey;
   border-radius: 5px 5px 0 0;
   font-family: roboto;

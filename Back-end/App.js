@@ -7,7 +7,6 @@ const port = process.env.PORT;
 const connection = require('./config.js');
 
 const notificationRouter = require('./routes/notifications.route');
-const roomRouter = require('./routes/room.route');
 const userRouter = require('./routes/users.route');
 const workshopRouter = require('./routes/workshop.route');
 const authRouter = require('./routes/auth.route');
@@ -24,7 +23,6 @@ connection.connect((err) => {
 });
 
 app.use('/notifications', notificationRouter);
-app.use('/rooms', roomRouter);
 app.use('/users', userRouter);
 app.use('/workshops', workshopRouter);
 app.use('/auth', authRouter);

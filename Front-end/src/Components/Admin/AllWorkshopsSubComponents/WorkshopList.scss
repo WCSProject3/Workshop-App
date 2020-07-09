@@ -29,7 +29,8 @@
 }
 
 .btns-dropdown{
-    @include dropdown;
+    @include dropdown(35px);
+    left: 30px;
 
     .delete-workshop-btn:hover{
        @include dropdown-delete-btn-hover;

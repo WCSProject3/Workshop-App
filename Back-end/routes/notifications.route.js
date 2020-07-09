@@ -5,6 +5,7 @@ const connection = require('../config');
 
 //GET ALL NOTIFICATIONS http://localhost:5000/notifications
 
+
 router.get('/', (req, res) => {
 
     connection.query('SELECT * FROM notification', (err, results) => {
@@ -20,15 +21,15 @@ router.get('/', (req, res) => {
 });
 
 
+//ADD NEW NOTIFICATIONS http://localhost:5000/notifications
+
+
 router.post('/', (req, res) => {
 
   const formData = req.body;
 
-  console.log(formData)
-
   return connection.query('INSERT INTO notification SET ?' , [formData], (err, results) => {
       if(err) {
-          console.log(err)
           return res.status(500).json({
               error: err.message,
               sql: err.sql,
@@ -36,13 +37,11 @@ router.post('/', (req, res) => {
       }
       return connection.query('SELECT * FROM notification WHERE id = ?', results.insertId, (err2, records) => {
           if(err2){
-            console.log(err2)
               return res.status(500).json({
                   error: err2.message,
                   sql: err2.sql,
               });
           }
-          console.log("working")
           const InsertedNotification = records[0];
           return res.status(201)
           .json(InsertedNotification)
@@ -50,26 +49,26 @@ router.post('/', (req, res) => {
   });
 });
 
+
+//DELETE ONE NOTIFICATION http://localhost:5000/notifications/:id
+
+
 router.delete('/:id', (req, res) => {
 
   const id = req.params.id;
 
   connection.query('DELETE FROM notification WHERE id = ?', [id], (err, results) => {
       if(err) {
-        console.log(err)
-          return res.status(500).json({
+        return res.status(500).json({
                    error: err.message,
                    sql: err.sql,
                   });
       }
       if(results.affectedRows === 0){
-        console.log("not found")
-
         return res
         .status(404)
         .json({msg: 'user does not exist'})
       }
-      console.log("succesful")
 
       return res
       .status(201)

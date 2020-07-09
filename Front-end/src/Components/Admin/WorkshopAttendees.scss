@@ -127,8 +127,9 @@
   @include options-btn;
 }
 
-.btns-dropdown {
-  @include dropdown;
+.workshop-info-dropdown {
+  @include dropdown(28px);
+  right: 25px;
 
   .delete-workshop-btn:hover {
     @include dropdown-delete-btn-hover;
@@ -152,6 +153,6 @@
   }
 }
 
-.dropdown:hover .btns-dropdown {
+.dropdown:hover .workshop-info-dropdown {
   @include open-dropdown-hover;
 }
