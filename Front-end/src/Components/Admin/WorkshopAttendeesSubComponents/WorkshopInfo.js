@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import { MdDelete, MdEdit, MdMessage } from "react-icons/md";
+import { UserContext } from '../../../Context/UserContext';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ReactPDF, {
   PDFViewer,
   PDFDownloadLink,
@@ -15,9 +17,12 @@ const WorkshopInfo = ({
   selectModal,
   attendees,
 }) => {
-  
-  //const user = { role_id: 3 }
-  
+
+  const { user } = useContext(UserContext);
+  const [ statusClipboard, setStatusClipboard ] = useState(true)
+
+  const listofemail = attendees.map(attendee =>  `${attendee.email}; `).join('')
+     
   const openModal = (modal) => {
     toggleDisplayModal();
     selectModal(modal);
@@ -38,6 +43,19 @@ const WorkshopInfo = ({
               )}-${workshop.ending_hour.substring(0, 5)}`}</div>
             )}
           </div>
+            {user.role === "speaker" && (
+              <div>
+                Welcome {user.firstname}
+              </div>
+            )}
+          {user.role === "speaker" && (
+              <CopyToClipboard text={listofemail}
+                onCopy={() => setStatusClipboard(!statusClipboard)}
+                >
+              <button>{statusClipboard ? 'Copy' : 'Copied'}</button>
+              </CopyToClipboard>
+          )}
+          {user.role !== "speaker" && (
           <div className="workshop-info-header-btns">
             <button
               className="workshop-icons"
@@ -64,7 +82,7 @@ const WorkshopInfo = ({
                 loading ? <button>loading</button> : <button>export</button>
               }
             </PDFDownloadLink>
-          </div>
+          </div>)}
         </div>
         <div className="workshop-info-body">
           <div className="workshop-info-left">

@@ -2,36 +2,33 @@ import React, { useState, useContext, useEffect } from 'react';
 import AttendeesList from '../Admin/WorkshopAttendeesSubComponents/AttendeesList';
 import WorkshopInfo from '../Admin/WorkshopAttendeesSubComponents/WorkshopInfo';
 import { WorkshopContext } from '../../Context/WorkshopContext';
+import { UserContext } from '../../Context/UserContext';
 import '../Admin/WorkshopAttendees.scss';
 
 
 const MyWorkshopAttendees = ( ) => {
 
-    const speakerId = 6;
-
-    const { workshop, getWorkshop, attendees, getAttendees } = useContext(WorkshopContext);
-
-    console.log("WORKSHOP WORKSHOP WORKSHOP",  )
+    const { workshop, attendees } = useContext(WorkshopContext);
+    const { user } = useContext(UserContext);
 
 
-   // useEffect(() => {
-   //     getWorkshop(speakerId);
-   //     getAttendees(speakerId)
-   // }, []);
-//
-    console.log('myAttendeesList', attendees)
-    console.log('workshopspeaker', workshop)
+    console.log('attendees', attendees)
 
-    
     return ( 
         <div>
-            <div className="workshop-attendees-header">
-                <h1>Workshop Info</h1>
+            {workshop === undefined ?
+            <h1>No workshop scheduled at the moment {user.firstname}</h1>
+            : 
+            <div>
+                <div className="workshop-attendees-header">
+                    <h1>Workshop Info</h1>
+                </div>
+                <div className="workshop-attendees-body" >
+                    <WorkshopInfo workshop={workshop} attendees={attendees} />
+                    <AttendeesList attendees={attendees} />
+                </div>
             </div>
-            <div className="workshop-attendees-body" >
-                <WorkshopInfo workshop={workshop} />
-                <AttendeesList attendees={attendees} />
-            </div>
+            }
         </div>
     );
 }
