@@ -40,7 +40,6 @@ const WorkshopContextProvider = (props) => {
           console.log("WORKSHOP CONTEXT",workshopInfo )
           setWorkshop(workshopInfo)
         })
-        
 }
 
 const getAttendees = (speakerId) => {
@@ -71,8 +70,9 @@ const getAttendees = (speakerId) => {
     axios
       .post('/workshops/user-workshops/add', user_workshop)
       .then((response) => response.data)
-      .then((userWorkshops) => {
-        setUserWorkshops(userWorkshops);
+      .then((newUserWorkshops) => {
+        console.log("ADD USER",newUserWorkshops )
+        setUserWorkshops(newUserWorkshops);
       });
     getWorkshops();
   };
@@ -82,8 +82,10 @@ const getAttendees = (speakerId) => {
     axios
       .delete('/workshops/user-workshops/delete', { data: user_workshop })
       .then((response) => response.data)
-      .then((userWorkshops) => {
-        setUserWorkshops(userWorkshops);
+      .then((newUserWorkshops) => {
+        console.log("DELETE USER",newUserWorkshops )
+
+        setUserWorkshops(newUserWorkshops);
       });
     getWorkshops();
   };

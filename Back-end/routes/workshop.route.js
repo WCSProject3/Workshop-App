@@ -184,6 +184,8 @@ router.post('/user-workshops/add', (req, res) => {
 
   const { user_id } = formData;
 
+  console.log(user_id)
+
   return connection.query(
     'INSERT INTO user_workshops SET ?',
     [formData],
@@ -205,7 +207,7 @@ router.post('/user-workshops/add', (req, res) => {
               sql: err2.sql,
             });
           }
-          const UserWorkshops = records[0];
+          const UserWorkshops = records;
           return res.status(201).json(UserWorkshops);
         }
       );

@@ -2,31 +2,59 @@
 
 .myWorkshops-header{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 10px 10px 10px 2.5%;
+    margin: 10px 2.5% 10px 2.5%;
 
-    h1{
-        margin-left: 0;
+    .myWorkshops-header-left{
+        display: flex;
+        align-items: center;
+
+        h1{
+            margin-left: 0;
+        }
+    
+        .myWorkshops-month-btn{
+            @include button(40px, $darkgrey);
+            margin: 0 10px 0 0;
+        }
+    
+        .active{
+            background-color: $blue;
+        }
     }
 
-    .myWorkshops-month-btn{
-        @include button(40px, $darkgrey);
-        margin: 0 10px 0 0;
+    .myWorkshops-limit-warning{
+        background-color: $grey;
+        padding: 10px;
+        margin:0;
+        box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
+        color: $darkgrey;
+        font-family: roboto;
+        font-weight: 450;
+        justify-self: flex-end;
     }
 
-    .active{
-        background-color: $blue;
+    .myWorkshops-limit-warning-reached{
+        background-color: $grey;
+        padding: 10px;
+        margin:0;
+        box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
+        color: red;
+        font-family: roboto;
+        font-weight: 450;
+        justify-self: flex-end;
     }
 }
 
 .myWorkshops-list{
     width: 95%;
-    margin: auto;
+    margin: 20px auto 40px auto;
     background-color: white;
     box-shadow: 0 0 20px  rgba(53, 53, 53, .2);
 }
 
-.myWorkshops-list-header{
+.myWorkshop-details-header{
     width: 100%;
     height: 50px;
     background-color: $grey;
@@ -41,35 +69,31 @@
     font-size: 16px;
     color: $blue;
 
-    .reached-max-warning{
-        margin-left: 20px;
-        color: red;
-        font-family: roboto;
-        font-weight: 450;
-        font-size: 16px;
+    .myWorkshop-details-date{
+        display: flex;
+        align-items: center;
     }
-}
-
-.myWorkshop-details{
-    margin: auto;
-    width: 100%;
-    background-color: white;
-    transition: all .3s ease-in-out;
 }
 
 .myWorkshop-basic-info{
     width: 100%;
-    height: 150px;
+    height:200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     border-top: 1px solid $darkgrey;
+}
 
-    input{
-        width: fit-content;
-        margin:0;
-    }
+.myWorkshop-basic-info-left-enrolled{
+    width: 50%;
+    padding: 10px;
+    padding: 10px 10px 10px 40px;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #65BB8D;
+    border-right: 1px solid $darkgrey;
+    transition: all .3s ease-in-out;
 }
 
 .myWorkshop-basic-info-left{
@@ -78,74 +102,63 @@
     padding: 10px 10px 10px 40px;
     height: 100%;
     box-sizing: border-box;
+    border-right: 1px solid $darkgrey;
+    transition: all .3s ease-in-out;
+}
 
+.myWorkshop-details-title{
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 20px;
+    color: $darkgrey;
+    margin-top: 16px;
+    transition: all .3s ease-in-out;
+}
 
-    .myWorkshop-details-title{
-        font-family: roboto;
-        font-weight: 500;
-        font-size: 20px;
-        color: $darkgrey;
-        margin-top: 16px;
-    }
+.myWorkshop-details-title-enroled{
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    margin-top: 16px;
+    transition: all .3s ease-in-out;
 
-    .myWorkshop-details-title-enroled{
-        font-family: roboto;
-        font-weight: 500;
-        font-size: 20px;
-        color: white;
-        margin-top: 16px;
+}
 
-    }
+.myWorkshop-details-speaker{
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 18px;
+    color: $darkgrey;
+    margin-top: 16px;
+    transition: all .3s ease-in-out;
+}
 
-    .myWorkshop-details-date{
-        display: flex;
-        align-items: center;
+.myWorkshop-details-speaker-enroled{
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 18px;
+    color: white;
+    margin-top: 16px;
+    transition: all .3s ease-in-out;
+}
 
-        .myWorkshop-details-day{
-            font-weight: 400;
-            margin: 0;
-        }
+.myWorkshop-details-description{
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 14px;
+    color: $darkgrey;
+    margin-top: 16px;
+    transition: all .3s ease-in-out;
+}
 
-        .dot{
-            width: 6px;
-            height: 6px;
-            background-color: $darkgrey;
-            border-radius: 50%;
-            margin: 0 10px;
-        }
-
-        .dot-enroled{
-            width: 6px;
-            height: 6px;
-            background-color: white;
-            border-radius: 50%;
-            margin: 0 10px;
-        }
-    
-        p{
-            margin-right: 20px;
-            font-family: roboto;
-            font-weight: 400;
-            font-size: 18px;
-            color: $darkgrey;
-        }
-
-        .myWorkshop-details-hour{
-            margin-right: 20px;
-            font-family: roboto;
-            font-weight: 400;
-            font-size: 18px;
-            color: $darkgrey;
-        }
-
-        .enroled{
-            color: white;
-            margin-right: 0;
-            font-family: roboto;
-            font-weight: 400;
-            font-size: 18px;
-        }
-    }
+.myWorkshop-details-description-enroled{
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 14px;
+    color: white;
+    margin-top: 16px;
+    transition: all .3s ease-in-out;
 }
 
 .myWorkshop-basic-info-right{
@@ -154,11 +167,10 @@
     margin: 0 auto;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: flex-end;
     padding: 10px 40px 10px 10px;
     height: 100%;
     box-sizing: border-box;
-
-
 
     button{
         width: fit-content;
@@ -166,37 +178,29 @@
     }
 }
 
-
-
-.myWorkshop-details-bg-enrolled{
-    background-color: #65BB8D;
-    transition: all .3s ease-in-out;
-}
-.enroled{
-    color: white;
-}
-
 .myWorkshops-room-capacity{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
+
 
     .myWorkshops-room-capacity-info{
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
 
-        p{
+        .myWorkshops-room-capacity-title{
             font-family: roboto;
-            font-weight: 350;
-            font-size: 16px;
+            font-weight: 400;
+            font-size: 18px;
             color: $darkgrey;
         }
 
-        .enroled{
-            color: white;
+        .myWorkshops-room-capacity-percentage{
             font-family: roboto;
-            font-weight: 350;
+            font-weight: 400;
             font-size: 16px;
+            color: $darkgrey;
         }
     }
 }
@@ -215,124 +219,35 @@
     transition: all .3s ease-in-out;
 }
 
-.more{
-    text-align: center;
-    margin: 0 ;
-    padding: 10px 0;
-    font-family: roboto;
-    font-weight: 400;
+.status-open{
+    margin:10px 0;
     font-size: 18px;
-    border-top: 1px solid $darkgrey;
+    font-family: roboto;
+    color: #65BB8D;
 }
 
-.myWorkshop-btn{
-    display: flex;
-    width: 70%;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 10px;
-    padding: 10px 0;
-
-    .status-open{
-        margin:0 20px 0 0;
-        font-size: 18px;
-        font-family: roboto;
-        color: $blue;
-    }
-
-    .status-closed{
-        margin:0 20px 0 0;
-        font-size: 18px;
-        font-family: roboto;
-        color: red;
-    }
-
-    button{
-        margin-top: 0;
-    }
-}
-
-.myWorkshop-hide{
-    opacity: 0;
-    height: 0px;
-    background-color: white;
-    transition: opacity .001s ease-out, height .3s ease-out;
-}
-
-.myWorkshop-show-enroled{
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 20px 40px;
-    height: fit-content;
-    transition: opacity .001s ease-in, height .3s ease-in;
-
-
-
-    h3{
-        font-family: roboto;
-        font-weight: 400;
-        font-size: 18px;
-        color: white;
-        margin: 10px 0 10px 0;
-
-    }
-
-    p{
-        font-family: roboto;
-        font-weight: 300;
-        font-size: 16px;
-        color: white;
-        margin: 10px 0 10px 0;
-
-
-    }
-}
-.myWorkshop-show-not-enroled{
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 20px 40px;
-    height: fit-content;
-    transition:  all .3s ease-in-out;
-
-
-    h3{
-        font-family: roboto;
-        font-weight: 400;
-        font-size: 18px;
-        color: $darkgrey;
-        margin: 10px 0 10px 0;
-
-    }
-
-    p{
-        font-family: roboto;
-        font-weight: 300;
-        font-size: 16px;
-        color: $darkgrey;
-        margin: 10px 0 10px 0;
-
-
-    }
-}
-
-.myWorkshop-handle-expanded-closed,
-.myWorkshop-handle-expanded-open{
-    background-color: $darkgrey;
+.status-closed{
+    margin:10px 0;
+    font-size: 18px;
+    font-family: roboto;
+    color: red;
 }
 
 .myWorkshop-handle-enrolled{
     background-color: $blue;
-    margin-right: 20px;
+    transition: all .1s ease-in-out;
+
 
 }
 
 .myWorkshop-handle-enrolled-disabled{
-    display: none;
+    background-color: $darkgrey;
+    transition: all .1s ease-in-out;
+    cursor: default;
 }
 
 .myWorkshop-handle-not-enrolled{
     background-color: red;
-    margin-right: 20px;
+    transition: all .1s ease-in-out;
 
 }

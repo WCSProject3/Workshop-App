@@ -10,6 +10,7 @@ import ReactPDF, {
 } from "@react-pdf/renderer";
 import ReactDOM from "react-dom";
 import WorkshopView from "../Documents/WorkshopView";
+import { FaListUl } from "react-icons/fa";
 
 const WorkshopInfo = ({
   workshop,
@@ -22,10 +23,19 @@ const WorkshopInfo = ({
   const [ statusClipboard, setStatusClipboard ] = useState(true)
 
   const listofemail = attendees.map(attendee =>  `${attendee.email}; `).join('')
-     
+
   const openModal = (modal) => {
     toggleDisplayModal();
     selectModal(modal);
+  };
+
+  const handleDelete = () => {
+    toggleDisplayModal(
+      "confirm",
+      "are you sure you want to delete this workshop?",
+      workshop.id,
+      workshop.enrolled_attendees
+    );
   };
 
   return (
@@ -89,30 +99,31 @@ const WorkshopInfo = ({
             <h2>{workshop.title}</h2>
             <h4>{workshop.workshop_speaker}</h4>
             <p>{workshop.description}</p>
-          </div>
-          <div className="workshop-info-right">
-            <div className="room-manager">
-              <p className="room">
-                <span>Room:</span> {workshop.room}
+            </div>
+            <div className="workshop-info-right">
+              <div className="room-manager">
+                <p className="room">
+                  <span>Room:</span> {workshop.room}
+                </p>
+                <p>
+                  <span>Room manager:</span> {workshop.room_manager}
+                </p>
+              </div>
+              <p>
+                <span>Room setup:</span> {workshop.room_type}
               </p>
               <p>
-                <span>Room manager:</span> {workshop.room_manager}
+                <span>Room capacity:</span> {workshop.room_capacity}
+              </p>
+              <p className={workshop.status_open === "1" ? "open" : "closed"}>
+                <span>Registrations:</span>{" "}
+                {workshop.status_open === "1" ? "OPEN" : "CLOSED"}
               </p>
             </div>
-            <p>
-              <span>Room setup:</span> {workshop.room_type}
-            </p>
-            <p>
-              <span>Room capacity:</span> {workshop.room_capacity}
-            </p>
-            <p className={workshop.status_open === "1" ? "open" : "closed"}>
-              <span>Registrations:</span>{" "}
-              {workshop.status_open === "1" ? "OPEN" : "CLOSED"}
-            </p>
           </div>
         </div>
       </div>
-    </div>)
+    )
   );
 };
 //ReactDOM.render(<WorkshopView />, document.getElementById("root"));
